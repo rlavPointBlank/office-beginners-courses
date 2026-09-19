@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PowerPoint for Beginners — a guided course</title>
+<link rel="stylesheet" href="course-engine.css?v=3">
+<style>
+  :root{
+    --accent:#B7472A; --accent-soft:#F8E6E1; --accent-line:#E0A491;
+    --sel:#9C3A22;
+  }
+</style>
+</head>
+<body>
+<div class="app">
+  <aside id="side">
+    <a class="brand" href="Office for Beginners.html">PowerPoint for Beginners<small>← All courses</small></a>
+    <button id="menuBtn" onclick="document.getElementById('side').classList.toggle('open')">☰ Chapters</button>
+    <div id="chapterList"></div>
+  </aside>
+  <main id="main"></main>
+</div>
+
+<script src="course-engine.js?v=4"></script>
+<script>
+const CH=[
+/* ===================== 1 ===================== */
+{ title:"Finding your way around", pass:3,
+  screens:[
+   {h:"A deck is a stack of slides",
+    body:`<p>A PowerPoint file is called a <b>presentation</b> or a <b>deck</b>. Each page in it is a <b>slide</b>. Open PowerPoint and you'll see, on the left, a thin column of small slide thumbnails — that's the <b>Slides pane</b>. Click any thumbnail and the main area shows that slide full-size for editing.</p>
+    <p>That main editing area is <b>Normal view</b> — the one you'll use almost all the time.</p>`},
+   {h:"Placeholders: boxes waiting for content",
+    body:`<p>Most slides start with dashed-outline boxes that say things like "Click to add title." Those are <b>placeholders</b>. Click inside one and start typing — the dashed outline disappears once it holds real content.</p>
+    <p>Placeholders exist so your slides stay consistent: every title lands in the same spot, at the same size, without you setting it by hand each time.</p>`,
+    tip:`Click <em>once</em> on a placeholder's edge to select the whole box (for moving/resizing); click <em>inside</em> the text to start editing it.`},
+   {h:"The ribbon: Home, Insert, Design, Transitions",
+    body:`<p>Same pattern as the rest of Office. <b>Home</b> has text formatting and the New Slide button. <b>Insert</b> adds pictures, tables, charts. <b>Design</b> controls the overall look (Chapter 5). <b>Transitions</b> and <b>Animations</b> control movement (Chapter 10) — worth knowing they exist, worth using sparingly.</p>
+    <p>Directions here read like <span class="path">Home ▸ Slides ▸ New Slide</span> — tab, group, button.</p>`},
+   {h:"Adding and deleting slides",
+    body:`<p><span class="path">Home ▸ Slides ▸ New Slide</span> adds a slide after the one you have selected, using a layout PowerPoint guesses is sensible. To delete one, right-click its thumbnail in the Slides pane ▸ <b>Delete Slide</b>. To duplicate one exactly as-is, right-click ▸ <b>Duplicate Slide</b> — faster than rebuilding something similar from scratch.</p>`},
+   {h:"Slide Show: seeing it as your audience will",
+    body:`<p><kbd>F5</kbd> starts the presentation from slide 1, full-screen. <kbd>Shift</kbd> + <kbd>F5</kbd> starts from whichever slide you currently have selected — faster when you're only checking one slide. <kbd>Esc</kbd> exits back to Normal view.</p>
+    <p>A deck that looks right in the small editing thumbnails can still look wrong full-screen — text too small, an image cropped oddly. Check it in Slide Show view before you present it for real, not just in Normal view.</p>`}
+  ],
+  tryit:`<ol><li>Open <em>Treasurer Practice.pptx</em>. Save a copy with <span class="path">File ▸ Save As</span> named <em>Treasurer Practice – my copy</em>.</li><li>Click through all 7 slides in the Slides pane and read each one.</li><li>Press <kbd>F5</kbd> to view the whole deck as a slide show; press the spacebar or click to advance; press <kbd>Esc</kbd> to exit.</li><li>Right-click slide 2 (Agenda) ▸ <b>Duplicate Slide</b>, then delete the duplicate you just made.</li></ol>`,
+  quiz:[
+   {q:"A dashed-outline box that says \"Click to add title\" is called a…",o:["A layout","A placeholder","A theme","A transition"],a:1,why:"Placeholders keep title/content position and size consistent across slides."},
+   {q:"To view the whole deck full-screen starting from slide 1:",o:["Ctrl+P","F5","Shift+F5","Esc"],a:1,why:"F5 starts from the beginning; Shift+F5 starts from the currently selected slide."},
+   {q:"The thin column of small slide thumbnails on the left is called…",o:["The ribbon","The Slides pane","Normal view","The Notes pane"],a:1,why:"Click a thumbnail there to jump to that slide in the main editing area."},
+   {q:"To create a slide that's a close copy of an existing one, the fastest method is…",o:["Retype everything from scratch","Right-click ▸ Duplicate Slide","Use Transitions","Print it and rescan it"],a:1,why:"Duplicate Slide copies the slide exactly, ready to edit rather than rebuild."}
+  ]
+},
+/* ===================== 2 ===================== */
+{ title:"Building a slide", pass:3,
+  screens:[
+   {h:"Choosing a layout",
+    body:`<p>Every slide has a <b>layout</b> — a chosen arrangement of placeholders (title only, title + bulleted content, two side-by-side content boxes, a picture with a caption, and so on). <span class="path">Home ▸ Slides ▸ Layout</span> lets you switch a slide's layout without losing what you've already typed, as long as the new layout has a similar placeholder to hold it.</p>`},
+   {h:"Typing and bullet levels",
+    body:`<p>Click a content placeholder and type; press <kbd>Enter</kbd> for a new bullet. Press <kbd>Tab</kbd> at the start of a line to indent it one level deeper (a sub-bullet); <kbd>Shift</kbd> + <kbd>Tab</kbd> to pull it back out.</p>
+    ${slideMock("Agenda", ["Welcome & approval of minutes","Treasurer's report","Budget proposal for next year","Open discussion","Adjournment"])}
+    <p>Keep each bullet to a phrase, not a paragraph — the slide is what the audience glances at; the detail comes from you talking.</p>`,
+    tip:`The 6×6 rule is a reasonable default: aim for around 6 bullets per slide, 6 words per bullet. It's a guideline, not a law — break it when it genuinely reads better broken.`},
+   {h:"Text boxes for anything outside a placeholder",
+    body:`<p>Need text somewhere a layout doesn't provide a placeholder for — a small note in a corner, a label next to a chart? <span class="path">Insert ▸ Text ▸ Text Box</span>, then click-drag on the slide to draw one, and type. Unlike a placeholder, a text box doesn't follow the slide master's formatting automatically — you set its font and size by hand.</p>`},
+   {h:"Resizing and aligning by hand",
+    body:`<p>Click a box once to select it (not to edit text) and small squares — <b>handles</b> — appear at its corners and edges. Drag a corner handle to resize proportionally; drag an edge handle to stretch one direction only. Drag anywhere inside the selected box's border to move it.</p>
+    <p>Selecting two or more boxes (click one, then <kbd>Shift</kbd>+click the others) unlocks <span class="path">Format ▸ Arrange ▸ Align</span> — Align Left, Align Middle, Distribute Vertically — the fast, exact way to line things up instead of eyeballing it.</p>`},
+   {h:"Undo is still your safety net",
+    body:`<p>Same as every other Office app: <kbd>Ctrl</kbd> + <kbd>Z</kbd> undoes your last action, repeatable many steps back. Nothing you do while practicing on a copy of the file is permanent.</p>`}
+  ],
+  tryit:`<p>On slide 3 ("Where the money went") of your practice copy:</p><ol><li>Click the content placeholder (currently says "Click to add text") and type three short bullets about any made-up expenses.</li><li>Indent the second bullet one level deeper with <kbd>Tab</kbd>, then pull it back out with <kbd>Shift</kbd> + <kbd>Tab</kbd>.</li><li>Add a text box anywhere on the slide with your name in it, then delete the text box.</li><li>Undo your bullet changes on slide 3 so it's back to "Click to add text" when you're done (or leave it — your call, it's your copy).</li></ol>`,
+  quiz:[
+   {q:"Pressing Tab at the start of a bullet line…",o:["Deletes the bullet","Indents it one level deeper","Creates a new slide","Bolds the text"],a:1,why:"Tab indents (Shift+Tab outdents) to build a sub-bullet structure."},
+   {q:"A text box, compared to a placeholder…",o:["Automatically follows the slide master's formatting","Doesn't automatically follow the slide master's formatting","Can't be resized","Only appears in Slide Show view"],a:1,why:"Text boxes are freeform — you format them by hand, unlike placeholders."},
+   {q:"To line up several selected boxes exactly, use…",o:["Format ▸ Arrange ▸ Align","Insert ▸ Text Box","Transitions","Slide Show"],a:0,why:"Align (Left/Center/Middle, Distribute) places boxes exactly instead of eyeballing it."},
+   {q:"A rough guideline for bullet-heavy slides is…",o:["As many bullets and words as fit","Around 6 bullets, 6 words each","Exactly 1 bullet per slide, always","No text on any slide"],a:1,why:"The 6×6 rule is a reasonable default, not a strict rule — but it fights slide clutter."}
+  ]
+},
+/* ===================== 3 ===================== */
+{ title:"Organizing a deck", pass:3,
+  screens:[
+   {h:"Slide Sorter: seeing the whole deck at once",
+    body:`<p><span class="path">View ▸ Presentation Views ▸ Slide Sorter</span> shrinks every slide to a thumbnail laid out in a grid, all visible together. Good for checking pacing and flow — does the deck build logically, is there a dead stretch of five similar-looking slides in a row.</p>`},
+   {h:"Reordering slides",
+    body:`<p>In either the Slides pane or Slide Sorter view, click a slide and drag it to a new position — a thin line shows where it'll land. Release to drop it there. Reordering doesn't change any slide's content, just where it falls in the sequence.</p>`,
+    tip:`Cut and paste works too — select a slide's thumbnail, Ctrl+X, click where you want it, Ctrl+V. Useful when the new position is off-screen and dragging would mean a lot of scrolling.`},
+   {h:"Sections: folders for a long deck",
+    body:`<p>Past 15–20 slides, a flat list gets hard to navigate. Right-click between two slide thumbnails ▸ <b>Add Section</b>, name it (e.g., "Financials," "Next Year's Plan"). Sections collapse and expand in the Slides pane, and you can jump straight to one while presenting by right-clicking during a slide show ▸ <b>See All Slides</b>.</p>`},
+   {h:"Hiding a slide without deleting it",
+    body:`<p>Have a slide you might need — a backup chart, a detailed breakdown — but don't want in the main flow? Right-click its thumbnail ▸ <b>Hide Slide</b>. It's skipped automatically during a normal Slide Show but still there if you jump to it directly (type its number and press Enter during the show), and you can Hide Slide again to un-hide it.</p>`},
+   {h:"Consistent naming saves confusion later",
+    body:`<p>File names like <em>Presentation1.pptx</em> or <em>Final_v3_REAL_FINAL.pptx</em> become a problem the moment two people are editing different copies. Something like <em>2026-03 Annual Meeting.pptx</em> — sortable, dated, specific — ages a lot better once it's one of thirty files in a folder.</p>`}
+  ],
+  tryit:`<p>On your practice copy:</p><ol><li>Switch to Slide Sorter view and look at the whole 7-slide deck at a glance.</li><li>Drag slide 7 (Thank you) so it becomes slide 6, then drag it back to the end.</li><li>Add a section that starts at slide 4 named <em>Financials</em>.</li><li>Hide slide 6 (Community Cleanup Day), confirm it's skipped in Slide Show view (F5), then un-hide it.</li><li>Switch back to Normal view.</li></ol>`,
+  quiz:[
+   {q:"Slide Sorter view is most useful for…",o:["Typing detailed bullet text","Seeing the whole deck's order and flow at once","Recording narration","Printing handouts only"],a:1,why:"It's a grid of every slide, ideal for checking pacing and sequence."},
+   {q:"A hidden slide, during a normal Slide Show…",o:["Is deleted","Is skipped automatically, but still reachable if you jump to it directly","Always displays anyway","Can never be un-hidden"],a:1,why:"Hide Slide keeps it in the file, out of the automatic flow, but still reachable on demand."},
+   {q:"Sections in a long deck act like…",o:["A way to delete slides","Folders that group and collapse related slides","A font style","A chart type"],a:1,why:"They organize a long deck into collapsible, named groups."},
+   {q:"A file named 2026-03 Annual Meeting.pptx, versus Final_v3_REAL_FINAL.pptx, is better mainly because it's…",o:["Shorter","Sortable and specific about date/purpose","In all capitals","Impossible to rename"],a:1,why:"Dated, descriptive names stay useful once there are many files in a folder."}
+  ],
+  badge:{name:"Deck builder", msg:"Slides, placeholders, order — the structural basics. Most decks fail on clarity of structure before they fail on design; you've got the structure part covered."}
+},
+/* ===================== 4 (TEST) ===================== */
+{ title:"Test 1", kind:"test", pass:6,
+  screens:[{h:"Chapters 1–3, all together",
+   body:`<p>Eight questions on navigation, building slides, and organizing a deck. Six to pass, no limit on attempts.</p>`}],
+  quiz:[
+   {q:"A dashed box that says \"Click to add title\" is a…",o:["Layout","Placeholder","Theme","Section"],a:1,why:"Placeholders hold consistent, positioned content across slides."},
+   {q:"To start a slide show from the beginning:",o:["F5","Ctrl+P","Shift+F5","Esc"],a:0,why:"F5 starts from slide 1; Shift+F5 starts from the current slide."},
+   {q:"Pressing Tab at the start of a bullet…",o:["Deletes it","Indents it a level deeper","Creates a new slide","Hides the slide"],a:1,why:"Tab indents; Shift+Tab outdents."},
+   {q:"A text box, unlike a placeholder…",o:["Follows the slide master automatically","Needs its formatting set by hand","Can't hold text","Only works in Slide Sorter"],a:1,why:"Text boxes are freeform and don't inherit placeholder formatting automatically."},
+   {q:"Slide Sorter view is best for…",o:["Typing long paragraphs","Seeing the whole deck's flow and order at once","Recording narration","Setting fonts"],a:1,why:"It's a grid overview, ideal for pacing and sequence checks."},
+   {q:"A hidden slide is…",o:["Deleted permanently","Skipped in a normal show but still reachable directly","Always shown regardless","Locked from editing"],a:1,why:"It's kept in the file, just out of the automatic flow unless jumped to."},
+   {q:"Sections in a deck are used to…",o:["Delete unused slides","Group and collapse related slides in a long deck","Change the theme","Add narration"],a:1,why:"They're organizational groupings, especially useful past 15-20 slides."},
+   {q:"To line up several selected boxes exactly, use…",o:["Format ▸ Arrange ▸ Align","Insert ▸ Text Box","View ▸ Notes","Transitions"],a:0,why:"Align places boxes precisely instead of eyeballing their position."}
+  ],
+  badge:{name:"Deck foundations", msg:"Test 1 passed. From here it's making the deck look intentional, not just correct."}
+},
+/* ===================== 5 ===================== */
+{ title:"A consistent look", pass:3,
+  screens:[
+   {h:"Themes: one click, whole-deck consistency",
+    body:`<p><span class="path">Design ▸ Themes</span> shows a gallery of built-in looks — fonts, colors, and layout styling applied to every slide in the deck at once. Click one and the whole presentation restyles instantly, placeholders and all. Far faster, and far more consistent, than manually re-coloring each slide.</p>`},
+   {h:"Variants: the same theme, different palette",
+    body:`<p>Next to the Themes gallery, <b>Variants</b> offers the same layout structure in a few different color schemes. Useful when a theme's shapes and fonts fit but its exact colors don't match your organization's branding — pick a variant closer to what you need before hand-editing anything.</p>`},
+   {h:"The Slide Master: fix it once, it fixes everywhere",
+    body:`<p><span class="path">View ▸ Master Views ▸ Slide Master</span> opens the actual template every layout in your deck is built from. Change the title placeholder's font here, on the master, and <em>every slide using a layout based on it</em> updates — instead of reformatting fifteen titles by hand.</p>
+    <p>This is the fix for a slide that's drifted from the rest of the deck (wrong font, wrong size, wrong color): either reset that one slide to match the master, or if the whole deck needs a change, edit the master itself.</p>`,
+    tip:`<span class="path">Home ▸ Slides ▸ Reset</span> snaps a selected slide's placeholders back to the master's defined formatting and position — the fast fix for one slide that's drifted, without touching the Slide Master itself.`},
+   {h:"Fonts and colors: pick two, use them everywhere",
+    body:`<p>A theme sets a heading font and a body font — that's usually enough variety. Mixing in a third or fourth font (because it "looked cool" on one slide) is the single fastest way to make a deck look unplanned. Same with color: a theme's palette exists so you're not guessing whether this exact shade of blue matches that one.</p>`},
+   {h:"Contrast: can it actually be read from the back of the room",
+    body:`<p>Light gray text on a white background looks fine up close on your monitor and disappears entirely on a projector from fifteen feet away. Stick to combinations with strong contrast — dark text on light backgrounds or light text on dark backgrounds — and test by squinting at the slide from across the room, or shrinking the window, before you present.</p>`}
+  ],
+  tryit:`<ol><li>On your practice copy, apply any built-in theme from <span class="path">Design ▸ Themes</span> to the whole deck.</li><li>Try two or three Variants and pick one.</li><li>Go to slide 3 ("Where the money went") — its title is deliberately styled differently (wrong font, gray color) from the rest of the deck. Select that slide and use <span class="path">Home ▸ Slides ▸ Reset</span> to snap it back to match the theme.</li><li>Open <span class="path">View ▸ Slide Master</span>, look at the title placeholder's font, then close Master view without changing anything.</li></ol>`,
+  quiz:[
+   {q:"Applying a Theme changes…",o:["Only the currently selected slide","Every slide in the deck at once","Only the speaker notes","Nothing until you restart PowerPoint"],a:1,why:"A theme restyles the whole presentation consistently in one click."},
+   {q:"The Slide Master is best described as…",o:["A random slide you can delete","The template every layout in the deck is built from","A type of transition","A chart style"],a:1,why:"Editing the master updates every slide built from a layout based on it."},
+   {q:"A slide whose title has drifted from the rest of the deck's formatting can be fixed with…",o:["Home ▸ Slides ▸ Reset","Insert ▸ Text Box","Slide Show ▸ F5","Transitions"],a:0,why:"Reset snaps a slide's placeholders back to the master's defined formatting."},
+   {q:"A reasonable font rule for a deck is…",o:["Use as many fonts as look interesting","Stick to the theme's two fonts (heading and body)","Always use Comic Sans","Never use more than one color"],a:1,why:"Two consistent fonts read as intentional; more than that usually reads as unplanned."}
+  ]
+},
+/* ===================== 6 ===================== */
+{ title:"Tables and simple charts", pass:3,
+  screens:[
+   {h:"When a table is the right call",
+    body:`<p>A table is for exact numbers someone might need to read precisely — a full expense breakdown for the record. A chart is for a shape or comparison someone needs to grasp at a glance — which category is obviously the biggest. Don't make the audience do arithmetic in their head to understand your point; that's the chart's job.</p>`},
+   {h:"Inserting a table",
+    body:`<p><span class="path">Insert ▸ Tables ▸ Table</span>, choose how many columns and rows, click to place it. Click into any cell and type; <kbd>Tab</kbd> moves to the next cell (and adds a new row if you Tab past the last cell). A <b>Table Design</b> ribbon tab appears while it's selected, with banded-row and header-row style options — a light header row and alternating shading make a dense table easier to scan.</p>`},
+   {h:"Building a chart from scratch",
+    body:`<p><span class="path">Insert ▸ Charts ▸ Chart</span>, pick a type (Clustered Column is the reliable default for comparing categories), OK. A small spreadsheet-like window opens — type your labels and numbers into it the same way you would in Excel, close that window, and the chart on the slide updates to match.</p>
+    <p>Same chart-type guidance as Excel: columns/bars for comparing categories, lines for change over time, pie only for five or fewer shares of a whole.</p>`,
+    tip:`If your numbers already live in an Excel file, copy the chart from Excel and Paste Special ▸ "Keep Source Formatting & Embed Workbook" (or "Use Destination Theme") into PowerPoint instead of rebuilding it — fewer places for the two to drift out of sync.`},
+   {h:"Keeping a table or chart readable at a distance",
+    body:`<p>A table with nine columns crammed onto a slide is unreadable from row 10 of a meeting room. Cut it down to the columns that matter for the point you're making right now — the full detail can live in a handout (Chapter 9) instead of the slide itself.</p>`},
+   {h:"Titles and labels aren't optional",
+    body:`<p>Click a chart's <b>+</b> button (appears at its top-right when selected) to add Data Labels (the actual number printed on each bar) and a Chart Title. A chart with no title, dropped into a slide with no other context, forces the audience to guess what they're looking at — label it plainly.</p>`}
+  ],
+  tryit:`<p>On your practice copy:</p><ol><li>Look at slide 4's table (Expenses by category) — it's already built; note how the header row is styled.</li><li>On slide 5 (same title, empty body — check its speaker notes for the numbers), insert a Clustered Column chart and type in the five categories and amounts from the notes.</li><li>Add a chart title and turn on Data Labels.</li><li>Compare slide 4 and slide 5 — which one answers "what's the biggest expense" faster?</li></ol>`,
+  quiz:[
+   {q:"A table is the better choice when the audience needs to…",o:["Grasp a comparison at a glance","Read exact numbers precisely","See a trend over time","See nothing at all"],a:1,why:"Tables are for precision; charts are for a shape or comparison read at a glance."},
+   {q:"Inserting a chart opens…",o:["A new PowerPoint file","A small spreadsheet-like window to enter labels and numbers","Only a blank chart with no data entry","The Slide Master"],a:1,why:"You type data into that window; the chart on the slide reflects it."},
+   {q:"The reliable default chart type for comparing categories is…",o:["3-D pie","Clustered Column","Scatter","Radar"],a:1,why:"Columns/bars compare categories cleanly; pies get unreadable past a few slices."},
+   {q:"A chart with no title dropped onto a slide with no other context…",o:["Is always fine, charts are self-explanatory","Forces the audience to guess what it shows","Automatically gets a title from PowerPoint","Should never have data labels"],a:1,why:"Label the chart plainly — don't make the audience guess its subject."}
+  ]
+},
+/* ===================== 7 ===================== */
+{ title:"Images that help, not hurt", pass:3,
+  screens:[
+   {h:"Inserting a picture",
+    body:`<p><span class="path">Insert ▸ Images ▸ Pictures</span>, choose <b>This Device</b>, pick a file. It drops onto the slide at its natural size — drag a corner handle to resize (hold <kbd>Shift</kbd> while dragging to keep its proportions and avoid stretching it out of shape).</p>`},
+   {h:"Cropping",
+    body:`<p>With a picture selected, <span class="path">Picture Format ▸ Size ▸ Crop</span> shows black crop handles at the edges — drag them inward to trim the picture to just the part you want, then click away or press Enter. Cropping doesn't delete the trimmed-off part of the file permanently by default; you can re-crop back out later if needed, within the same session.</p>`},
+   {h:"Alt text: for anyone using a screen reader",
+    body:`<p>Right-click a picture ▸ <b>Edit Alt Text</b>, write a short plain description of what it shows — <em>"Volunteers cleaning up the riverside park"</em>, not <em>"IMG_4021.jpg"</em>. A screen reader announces alt text in place of a picture it can't display; without it, that slide is just silently skipped for anyone using one.</p>`,
+    tip:`Keep it to one plain sentence describing the content, not the fact that it's a picture ("a photo of…" is usually unnecessary — the reader already knows).`},
+   {h:"File size: pictures are usually the biggest thing in a deck",
+    body:`<p>A handful of phone photos, each several megabytes, can bloat a small deck into something too large to email. <span class="path">Picture Format ▸ Adjust ▸ Compress Pictures</span> reduces file size — choose a resolution appropriate for how the deck will be shown (screen-only needs far less than print).</p>`},
+   {h:"Icons and simple shapes for anything that isn't a photo",
+    body:`<p>For a small visual accent — a checkmark, an arrow, a simple symbol — <span class="path">Insert ▸ Illustrations ▸ Icons</span> gives a built-in library that matches your theme's color automatically, instead of hunting for a matching image online.</p>`}
+  ],
+  tryit:`<p>On slide 6 (Community Cleanup Day) of your practice copy:</p><ol><li>Insert any picture from your own computer into the picture placeholder.</li><li>Resize it while holding <kbd>Shift</kbd> so it doesn't stretch.</li><li>Add alt text describing what the picture shows.</li><li>Check <span class="path">Picture Format ▸ Adjust ▸ Compress Pictures</span> and look at the resolution options (cancel without applying if you don't want to change the actual file).</li></ol>`,
+  quiz:[
+   {q:"Holding Shift while dragging a picture's corner handle…",o:["Deletes the picture","Keeps its proportions so it doesn't stretch","Crops it","Adds alt text automatically"],a:1,why:"Shift constrains resizing to the original aspect ratio."},
+   {q:"Alt text is mainly for…",o:["Making the file smaller","Screen readers, so the image's content isn't silently skipped","Adding a caption everyone sees","Changing the picture's color"],a:1,why:"A screen reader announces alt text in place of a picture it can't display."},
+   {q:"A deck has become too large to email after adding several phone photos. Try…",o:["Deleting the whole deck and starting over","Compress Pictures","Changing the theme","Adding more slides"],a:1,why:"Compressing pictures reduces file size, often dramatically, without deleting content."},
+   {q:"For a small visual accent that matches your theme automatically, use…",o:["A random image from the internet","Insert ▸ Icons","Insert ▸ Table","Transitions"],a:1,why:"Built-in icons pick up your theme's color automatically."}
+  ],
+  badge:{name:"Looks intentional", msg:"Theme, tables, charts, images — the deck now looks like it was designed, not assembled in a hurry."}
+},
+/* ===================== 8 (TEST) ===================== */
+{ title:"Test 2", kind:"test", pass:6,
+  screens:[{h:"Chapters 5–7, all together",
+   body:`<p>Eight questions on themes, tables/charts, and images. Six to pass.</p>`}],
+  quiz:[
+   {q:"Applying a Theme restyles…",o:["One slide","The whole deck at once","Only the title slide","Only speaker notes"],a:1,why:"A theme applies consistently across every slide."},
+   {q:"The Slide Master is…",o:["A random extra slide","The template every layout is built from","A chart type","An animation setting"],a:1,why:"Editing it can update every slide built from a layout based on it."},
+   {q:"A slide with formatting that's drifted from the rest of the deck can be fixed with…",o:["Home ▸ Slides ▸ Reset","Compress Pictures","Insert ▸ Icons","Transitions"],a:0,why:"Reset snaps the slide's placeholders back to the master's formatting."},
+   {q:"For exact numbers someone needs to read precisely, use a…",o:["Chart","Table","Transition","Icon"],a:1,why:"Tables suit precision; charts suit at-a-glance comparisons."},
+   {q:"Inserting a chart opens…",o:["A blank chart with no way to enter data","A small spreadsheet-like window for labels and numbers","The Slide Master","A picture browser"],a:1,why:"You enter chart data there, same idea as an Excel range."},
+   {q:"Holding Shift while resizing a picture…",o:["Crops it","Keeps its proportions","Deletes it","Adds alt text"],a:1,why:"It constrains the resize to the original aspect ratio, avoiding stretching."},
+   {q:"Alt text exists mainly for…",o:["File size reduction","Screen reader users","Adding drop shadows","Chart formatting"],a:1,why:"It's announced by screen readers in place of an image they can't display."},
+   {q:"A deck too large to email is usually fixed with…",o:["Compress Pictures","Deleting the Slide Master","Adding more transitions","Hiding slides"],a:0,why:"Pictures are typically the biggest space users in a deck; compressing them shrinks the file."}
+  ],
+  badge:{name:"Polished deck", msg:"Test 2 passed. What's left is delivery — notes, handouts, and actually presenting it well."}
+},
+/* ===================== 9 ===================== */
+{ title:"Notes and handouts", pass:3,
+  screens:[
+   {h:"The Notes pane: your script, not the audience's",
+    body:`<p>Below the slide editing area (or <span class="path">View ▸ Notes</span> if it's hidden) is the <b>Notes</b> pane. Anything typed there is for you — reminders of what to say, numbers you don't want cluttering the slide itself, a cue to pause for questions. It never appears on the actual slide or in a normal Slide Show.</p>`},
+   {h:"Presenter View: notes while you present, without the audience seeing them",
+    body:`<p>When a second screen or projector is connected, <span class="path">Slide Show ▸ Monitors ▸ Use Presenter View</span> (or it may activate automatically) shows you the current slide, the next slide, your notes, and a timer — all on your laptop screen — while the audience's screen shows only the clean slide.</p>
+    <p>Worth testing with the actual projector setup beforehand, not for the first time five minutes before the meeting starts.</p>`,
+    tip:`<kbd>Alt</kbd> + <kbd>F5</kbd> (Windows) forces Presenter View to start on your screen even with only one display connected — handy for rehearsing.`},
+   {h:"Printing handouts",
+    body:`<p><span class="path">File ▸ Print</span>, then under the layout dropdown choose <b>Handouts</b> instead of Full Page Slides — pick how many slides per page (3-per-page includes lined space for notes; good for a board meeting where people want to write on it). This is where the extra table detail you trimmed off a slide (Chapter 6) can still reach people, on paper.</p>`},
+   {h:"Exporting notes pages or a PDF",
+    body:`<p><span class="path">File ▸ Print</span> ▸ <b>Notes Pages</b> layout prints each slide with its speaker notes beneath it — useful for handing off a presentation to a co-treasurer who'll deliver it instead of you. For a version anyone can open without PowerPoint: <span class="path">File ▸ Export ▸ Create PDF/XPS</span>, same as Word or Excel.</p>`},
+   {h:"Rehearse Timings",
+    body:`<p><span class="path">Slide Show ▸ Set Up ▸ Rehearse Timings</span> runs the deck full-screen while quietly recording how long you spend on each slide. Finish (or Esc) and it offers to save those timings — useful for checking whether a 20-minute slot is realistic before you're standing in front of the board finding out live.</p>`}
+  ],
+  tryit:`<p>On your practice copy:</p><ol><li>Open the Notes pane and read slide 1's existing notes.</li><li>Add a one-line note of your own to slide 4.</li><li>Look at <span class="path">File ▸ Print</span> ▸ Handouts, and separately Notes Pages — preview both without printing (Esc to leave).</li><li>Try <span class="path">Slide Show ▸ Rehearse Timings</span>, click through all 7 slides at a normal pace, and choose not to save the timings when it asks (or save them — your call).</li></ol>`,
+  quiz:[
+   {q:"Text in the Notes pane…",o:["Appears on the slide for the audience","Is for the presenter only, not shown in a normal slide show","Is automatically printed as a title","Becomes alt text"],a:1,why:"Notes are a private script for you, invisible to the audience during a normal show."},
+   {q:"Presenter View shows the audience…",o:["Your notes and the next slide too","Only the current slide, clean","A timer they can see","Nothing at all"],a:1,why:"The audience's screen shows just the clean current slide; the extras are for you only."},
+   {q:"For a board member who wants to take written notes on paper, print…",o:["Full Page Slides","Handouts, e.g. 3-per-page with note lines","Notes Pages only","Nothing — decks shouldn't be printed"],a:1,why:"The 3-per-page handout layout includes lined space for notes."},
+   {q:"Rehearse Timings is useful for…",o:["Changing the theme","Checking whether your planned time slot is realistic","Compressing pictures","Adding alt text"],a:1,why:"It records real time spent per slide as you practice, surfacing pacing problems early."}
+  ]
+},
+/* ===================== 10 ===================== */
+{ title:"Transitions and animation, used sparingly", pass:3,
+  screens:[
+   {h:"Transitions: how one slide gives way to the next",
+    body:`<p><span class="path">Transitions</span> tab, click a style (or <b>None</b>), <b>Apply To All</b> if you want it deck-wide. <b>Fade</b> or <b>Push</b> are close to invisible and professional; spinning cubes and flashy wipes read as a distraction, not a design choice, in most rooms.</p>`},
+   {h:"Animations: making one element move on its own slide",
+    body:`<p>Select an object, <span class="path">Animations</span> tab, pick an entrance effect (<b>Appear</b> or <b>Fade</b> are safe defaults). <b>Animation Pane</b> (<span class="path">Animations ▸ Advanced Animation ▸ Animation Pane</span>) lists every animated element on the slide in order, and lets you reorder or retime them.</p>`,
+    tip:`"On Click" (the default trigger) means the animation waits for you to click before it plays — useful for revealing bullets one at a time as you talk through them, instead of dumping the whole list on the audience at once.`},
+   {h:"The case for using almost none of this",
+    body:`<p>A treasurer's report earns trust through clarity, not motion. Every spinning entrance and cartwheeling bullet is a half-second the audience spends watching the effect instead of reading the number. If you use transitions/animation at all, one consistent, subtle choice — the same fade, everywhere — reads as more professional than a different flashy effect on every slide.</p>`},
+   {h:"Removing an animation or transition",
+    body:`<p>Select the object, <span class="path">Animations</span> tab, click <b>None</b>. For a transition, select the slide, <span class="path">Transitions</span> tab, click <b>None</b> (and <b>Apply To All</b> if it should be removed everywhere). Both are as easy to take back off as they were to add.</p>`}
+  ],
+  tryit:`<ol><li>On your practice copy, apply a subtle transition (Fade or Push) to slide 1 only.</li><li>Apply the same transition to the whole deck with Apply To All.</li><li>On slide 2's bulleted list, select the content placeholder and apply an Appear or Fade entrance animation, so the bullets reveal On Click as you present.</li><li>Preview it with F5 — click through slide 2's bullets one at a time.</li><li>Remove the animation from slide 2 (Animations ▸ None) so the deck is back to plain, unless you want to keep it.</li></ol>`,
+  quiz:[
+   {q:"A subtle, professional default for transitions is…",o:["A different flashy effect on every slide","Fade or Push, applied consistently","No transitions and no way to remove them","Always spinning cubes"],a:1,why:"One consistent, understated choice reads as more intentional than variety for its own sake."},
+   {q:"\"On Click\" as an animation trigger means…",o:["It plays automatically the moment the slide appears","It waits for you to click before playing","It never plays","It only works in Presenter View"],a:1,why:"On Click lets you control pacing — reveal a bullet when you're ready to talk about it."},
+   {q:"The Animation Pane is used to…",o:["Change the deck's theme","List and reorder every animated element on a slide","Print handouts","Compress pictures"],a:1,why:"It shows every animation on the slide, in order, and lets you adjust timing/sequence."},
+   {q:"The main risk of heavy animation in a treasurer's report is…",o:["It makes the file smaller","It distracts from the content the audience should focus on","It's required by PowerPoint","It automatically changes the numbers"],a:1,why:"Motion draws attention to itself, at the cost of attention on your actual point."}
+  ]
+},
+/* ===================== 11 ===================== */
+{ title:"Presenting well", pass:3,
+  screens:[
+   {h:"Before the meeting: check the room, not just the file",
+    body:`<p>If you can, connect to the actual projector or screen beforehand — font sizes and colors that look fine on your laptop can wash out or shrink illegibly on a different display. Confirm Presenter View lands on your screen, not the shared one, and that your notes are readable at a glance without squinting.</p>`},
+   {h:"Navigating during the show",
+    body:`<ul><li>Spacebar, right arrow, or click: next slide/animation step.</li><li>Left arrow: back one step.</li><li>Type a slide number + <kbd>Enter</kbd>: jump straight there.</li><li><kbd>B</kbd>: black out the screen (good for a pause in discussion); press again to return.</li><li><kbd>Esc</kbd>: end the show.</li></ul>`,
+    tip:`A blacked-out screen during an unplanned tangent keeps attention on the conversation instead of a static slide nobody's looking at anymore.`},
+   {h:"The pointer and the pen",
+    body:`<p>During a show, right-click ▸ <b>Pointer Options</b> offers a Laser Pointer (a red dot for emphasis) and a Pen (draw directly on the slide — useful to circle a number while explaining it). Press <kbd>E</kbd> to erase pen marks, or <kbd>Esc</kbd> to go back to the normal cursor. Marks made this way don't get saved to the file unless you choose to keep them when the show ends.</p>`},
+   {h:"Recovering when something goes wrong",
+    body:`<p>Projector doesn't recognize your laptop — know your export-to-PDF backup exists on a USB drive or emailed to yourself in advance. Lost your place after a tangent — type the slide number and Enter rather than clicking back through slide by slide while the room waits. A plan for "if the tech fails" beats hoping it won't.</p>`},
+   {h:"After: turning the deck into a record",
+    body:`<p>The version you present from — with speaker notes, before any last-minute pen marks — is the one worth keeping as your organization's record of that meeting. Export it to PDF (Chapter 9) and file it wherever your other meeting minutes and financial records live, named with the date.</p>`}
+  ],
+  tryit:`<ol><li>Start Slide Show (F5) on your practice copy.</li><li>Practice navigating: spacebar forward, left arrow back, type <b>4</b> + Enter to jump to slide 4.</li><li>Press <kbd>B</kbd> to black out the screen, then press it again to return.</li><li>Right-click ▸ Pointer Options ▸ try the Laser Pointer, then switch back to the normal cursor (Esc).</li><li>Exit the show (Esc). Export the deck to PDF via <span class="path">File ▸ Export ▸ Create PDF/XPS</span> and confirm it opens correctly.</li></ol>`,
+  quiz:[
+   {q:"To jump directly to slide 4 during a show without clicking through each one:",o:["Press B","Type 4 and press Enter","Press Esc","Right-click and choose Reset"],a:1,why:"Typing the slide number and Enter jumps straight there."},
+   {q:"Pressing B during a slide show…",o:["Bolds the current text","Blacks out the screen (press again to return)","Ends the show","Starts Rehearse Timings"],a:1,why:"A blacked-out screen redirects attention to the conversation, not a stale slide."},
+   {q:"The safest backup plan if a projector won't recognize your laptop is…",o:["Hoping it resolves itself","Having a PDF export ready on a USB drive or already emailed to yourself","Restarting the whole meeting","Presenting with no slides ever again"],a:1,why:"A PDF opens on almost any machine, sidestepping the compatibility problem entirely."},
+   {q:"The version worth keeping as your organization's record is generally…",o:["A random draft from weeks earlier","The version you actually presented from, exported to PDF","A blank template","The Slide Master file"],a:1,why:"That's the actual record of what the meeting saw and discussed."}
+  ],
+  badge:{name:"Presentation ready", msg:"Built, designed, and deliverable. You can take a deck from blank file to a meeting that goes smoothly."}
+},
+/* ===================== 12 (FINAL) ===================== */
+{ title:"Final test", kind:"test", pass:7,
+  screens:[{h:"Everything, once more",
+   body:`<p>Ten questions from across the course. Seven to pass. Keep the practice file open and check anything you're unsure of.</p>`}],
+  quiz:[
+   {q:"A dashed box that says \"Click to add title\" is a…",o:["Theme","Placeholder","Transition","Section"],a:1,why:"Placeholders hold consistent, positioned content."},
+   {q:"To start a slide show from the beginning:",o:["F5","Ctrl+P","B","E"],a:0,why:"F5 starts from slide 1."},
+   {q:"A hidden slide during a normal show is…",o:["Deleted","Skipped automatically, but still reachable directly","Always shown","Unrecoverable"],a:1,why:"It stays in the file, just out of the automatic flow."},
+   {q:"Applying a Theme restyles…",o:["One slide only","The whole deck","Only notes","Nothing visible"],a:1,why:"Themes apply deck-wide in one click."},
+   {q:"A slide whose formatting has drifted from the rest of the deck can be fixed with…",o:["Home ▸ Slides ▸ Reset","Compress Pictures","Rehearse Timings","Animations ▸ None"],a:0,why:"Reset snaps it back to the Slide Master's formatting."},
+   {q:"For numbers the audience needs to grasp at a glance, use a…",o:["Table","Chart","Text box","Section"],a:1,why:"Charts show shape/comparison quickly; tables are for precise reading."},
+   {q:"Alt text on a picture is mainly for…",o:["File size","Screen reader users","Chart formatting","Transitions"],a:1,why:"It's announced by screen readers in place of an undisplayable image."},
+   {q:"Notes pane content…",o:["Shows to the audience on the slide","Is for the presenter only during a normal show","Becomes the chart title","Prints as a watermark"],a:1,why:"It's a private script, invisible in a normal slide show."},
+   {q:"The main risk of heavy transitions/animation in a treasurer's report is…",o:["Smaller file size","Distraction from the actual content","Faster presenting","Better screen reader support"],a:1,why:"Motion draws attention away from the point you're making."},
+   {q:"To jump straight to slide 4 mid-show:",o:["Press B","Type 4 and press Enter","Press Esc","Right-click ▸ Compress"],a:1,why:"Number + Enter jumps directly to that slide."}
+  ],
+  badge:{name:"PowerPoint capable", msg:"Course complete. From a blank deck to a designed, deliverable, presentable treasurer's report. Keep the practice file — build your real one the same way."}
+}
+];
+
+runCourse({
+  storageKey:'powerpointTreasurerCourse.v1',
+  title:'PowerPoint for Beginners',
+  homeIntro:`<p>This one's about the moment you have to stand in front of a board and explain the numbers — building a deck, making it look intentional, and actually presenting it. Read a little, try it in the practice deck, tick the box, take a short quiz.</p>
+  <p>Chapters open in order. Nothing is timed. You can stop and come back any day; the app remembers where you were.</p>
+  <div class="tip"><b>Before you start:</b> open the file <em>Treasurer Practice.pptx</em> that came with this course, and save a copy of it with <span class="path">File ▸ Save As</span>. Practice in the copy.</div>`,
+  suiteLinks:`<a href="Excel for Beginners.html">Excel for Beginners</a><br><a href="Outlook for Beginners.html">Outlook for Beginners</a><br><a href="OneNote for Beginners.html">OneNote for Beginners →</a>`,
+  practiceLabel:'Try it in the practice deck',
+  CH
+});
+</script>
+</body>
+</html>

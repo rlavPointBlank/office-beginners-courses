@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OneNote for Beginners — a guided course</title>
+<link rel="stylesheet" href="course-engine.css?v=3">
+<style>
+  :root{
+    --accent:#7719AA; --accent-soft:#EFE1F5; --accent-line:#C79EDB;
+    --sel:#5E1487;
+  }
+</style>
+</head>
+<body>
+<div class="app">
+  <aside id="side">
+    <a class="brand" href="Office for Beginners.html">OneNote for Beginners<small>← All courses</small></a>
+    <button id="menuBtn" onclick="document.getElementById('side').classList.toggle('open')">☰ Chapters</button>
+    <div id="chapterList"></div>
+  </aside>
+  <main id="main"></main>
+</div>
+
+<script src="course-engine.js?v=4"></script>
+<script>
+const CH=[
+/* ===================== 1 ===================== */
+{ title:"Finding your way around", pass:3,
+  screens:[
+   {h:"Notebook, section, page",
+    body:`<p>OneNote organizes things in three layers. A <b>notebook</b> is the whole binder — you might have one for this role entirely. Inside it, <b>sections</b> are like tabbed dividers (Board Meetings, Budget, Correspondence). Inside each section, <b>pages</b> are individual sheets you actually write on — one page per meeting, per topic, per whatever makes sense.</p>
+    <p>Notebook ▸ Section ▸ Page. That's the whole structure, and it stays that simple even in a notebook with years of history in it.</p>`},
+   {h:"Where each layer lives on screen",
+    body:`<p>Notebooks you have open are listed down the far left. Sections for the current notebook appear as tabs across the top, just under the ribbon. Pages within the current section are listed in a column on the right. Click any of the three and the view updates — it's a straightforward drill-down, not a maze.</p>`},
+   {h:"The page itself: a blank canvas, not a document",
+    body:`<p>This is the part that surprises people coming from Word: a OneNote page has no fixed margins or page breaks. Click <em>anywhere</em> on it and start typing — that click creates a small text container right there. You can have several of these scattered around one page, each independently movable, which is exactly how a page of meeting notes with a scribbled aside in the corner actually works.</p>`,
+    tip:`If this freedom feels chaotic at first, it's fine to just type top-to-bottom like a normal document for now. The freeform layout becomes useful later, once you're comfortable — nothing forces you to use it right away.`},
+   {h:"The ribbon: Home, Insert, Draw",
+    body:`<p><b>Home</b> has text formatting and tags (Chapter 7). <b>Insert</b> adds tables, files, pictures (Chapter 6). <b>Draw</b> — relevant mainly if you're on a touchscreen or tablet — lets you write or sketch by hand instead of typing.</p>`},
+   {h:"Creating your first notebook",
+    body:`<p><span class="path">File ▸ New</span>, choose where it should live (OneDrive, so it syncs — Chapter 10 covers this in more depth), name it. A brand-new notebook starts with one section and one blank page, ready to go.</p>`}
+  ],
+  tryit:`<ol><li>Create a new notebook named <em>Treasurer Notebook</em>.</li><li>Look at the three layers: the notebook name (far left or top), the one default section tab, and its one default page.</li><li>Click anywhere in the middle of the blank page and type a line of any text, to see a page container get created right there.</li><li>Rename that first default page to <em>Welcome</em> (click its title area at the top of the page and type over it).</li></ol>`,
+  quiz:[
+   {q:"The three layers of OneNote's structure, from largest to smallest, are…",o:["Page ▸ Section ▸ Notebook","Notebook ▸ Section ▸ Page","Section ▸ Notebook ▸ Page","Notebook ▸ Page ▸ Section"],a:1,why:"Notebook is the whole binder; sections are tabbed dividers inside it; pages are the individual sheets inside a section."},
+   {q:"Clicking anywhere on a blank OneNote page and typing…",o:["Does nothing until you insert a text box manually","Creates a small text container right where you clicked","Always starts a new page","Opens a dialog box"],a:1,why:"OneNote pages are a free canvas — a click-and-type action creates a container on the spot."},
+   {q:"Sections in OneNote are most like…",o:["Separate files","Tabbed dividers inside one notebook","A single page","A font style"],a:1,why:"They sit as tabs across the top of the current notebook, grouping related pages."},
+   {q:"A brand-new notebook starts with…",o:["No sections and no pages","One section and one blank page","Ten template pages","A locked default page you can't rename"],a:1,why:"It's ready to use immediately, with one section and one page you can rename or replace."}
+  ]
+},
+/* ===================== 2 ===================== */
+{ title:"Typing and formatting a page", pass:3,
+  screens:[
+   {h:"Titles and the date stamp",
+    body:`<p>The large text at the top of a page is its <b>title</b> — click it and type to set or change it. Just under the title, OneNote automatically stamps the date and time the page was created. That stamp is quietly useful: months later, "Budget Discussion" plus an automatic date beats trying to remember when a conversation happened.</p>`},
+   {h:"Basic formatting",
+    body:`<p>Same as Word: select text, then <span class="path">Home ▸ Basic Text</span> for Bold (<kbd>Ctrl</kbd>+<kbd>B</kbd>), Italic, Underline, highlight color, and a handful of built-in styles (Heading 1, Heading 2, Page Title) in the Styles dropdown for organizing a longer page.</p>`},
+   {h:"Bulleted and numbered lists, and checkboxes",
+    body:`<p><span class="path">Home ▸ Basic Text ▸ Bullets</span> or <b>Numbering</b> work exactly like Word. There's a third option worth knowing early: <b>To Do Tag</b> (<kbd>Ctrl</kbd>+<kbd>1</kbd>) puts a clickable checkbox in front of a line — click it to mark that item done. This is the single most useful formatting option for a treasurer's running action-item list.</p>`,
+    tip:`Ctrl+1 toggles the checkbox on the current line; click the checkbox itself (not the text) to check it off later.`},
+   {h:"Moving and resizing a text container",
+    body:`<p>Hover near the top edge of any text block and a small gray bar appears — click and drag that bar to move the whole container anywhere on the page. Drag the handle that appears on its right edge to change how wide it wraps. This is what makes the freeform layout from Chapter 1 actually usable: type first, arrange later.</p>`},
+   {h:"Undo, same as everywhere else",
+    body:`<p><kbd>Ctrl</kbd> + <kbd>Z</kbd> undoes your last action, same as Word, Excel, and PowerPoint. OneNote also autosaves continuously — there's no "Save" button to remember, which is one less thing to think about while you're in the middle of taking notes during a live meeting.</p>`}
+  ],
+  tryit:`<p>On the <em>Welcome</em> page of your Treasurer Notebook:</p><ol><li>Type a short heading, apply the Heading 1 style to it from the Styles dropdown.</li><li>Below it, type three lines and turn them into a bulleted list.</li><li>Add one more line and press Ctrl+1 to give it a checkbox; click the checkbox to mark it done, then click it again to un-check it.</li><li>Drag that checkbox line's container to a different spot on the page, then drag it back roughly where it was.</li></ol>`,
+  quiz:[
+   {q:"The automatic date/time stamp on a OneNote page shows…",o:["Nothing — it must be typed manually","When the page was created, added automatically","Only the last edit time","The notebook's creation date"],a:1,why:"OneNote timestamps each page automatically, which is quietly useful for finding things later."},
+   {q:"Ctrl+1 on a line does what?",o:["Bolds the text","Adds a clickable checkbox (To Do Tag)","Deletes the line","Creates a new page"],a:1,why:"It's the To Do Tag shortcut — ideal for action-item tracking."},
+   {q:"To move a text container to a different spot on the page…",o:["It can't be moved once created","Drag the small gray bar that appears near its top edge","Cut and paste into a new page","Right-click ▸ Print"],a:1,why:"That gray handle bar is what makes the freeform canvas rearrangeable."},
+   {q:"OneNote's approach to saving is…",o:["You must press Ctrl+S regularly","It autosaves continuously; there's no Save button to remember","It only saves when you close the notebook","It never saves automatically"],a:1,why:"Continuous autosave means one less thing to manage while actively taking notes."}
+  ]
+},
+/* ===================== 3 ===================== */
+{ title:"Organizing with sections and pages", pass:3,
+  screens:[
+   {h:"Planning sections around how you'll actually look things up",
+    body:`<p>The right section structure isn't about being thorough — it's about matching how you'll search for something six months later. For a treasurer, a solid starting set is often: <b>Board Meetings</b>, <b>Budget</b>, <b>Correspondence</b>, and <b>Reference</b> (bylaws, vendor contacts, account numbers — the stuff you look up more than you write).</p>`},
+   {h:"Adding a section",
+    body:`<p>Click the <b>+</b> tab to the right of your existing section tabs, or right-click any existing tab ▸ <b>New Section</b>. Name it immediately — it starts in rename mode. Right-click a tab any time afterward ▸ <b>Rename</b> to change it, or drag tabs left/right to reorder them.</p>`,
+    tip:`Right-click a section tab ▸ Section Color to color-code it. A quick visual scan for "the purple one" is often faster than reading tab labels.`},
+   {h:"Adding pages, and subpages",
+    body:`<p><span class="path">Insert ▸ Pages ▸ Add Page</span>, or click <b>+ Add Page</b> at the bottom of the pages list. To create a <b>subpage</b> — useful for, say, each individual board meeting nested under a "Board Meetings" umbrella — right-click a page in the list ▸ <b>Make Subpage</b>, and it indents under the page above it.</p>`},
+   {h:"Moving and copying pages between sections",
+    body:`<p>Drag a page's entry in the pages list onto a different section tab to move it there. Right-click a page ▸ <b>Move or Copy</b> opens a dialog for the same thing when dragging is awkward (e.g., moving between notebooks, not just sections).</p>`},
+   {h:"Section Groups: folders for sections, when you need them",
+    body:`<p>If Board Meetings alone grows to a section per year, right-click in the section tab area ▸ <b>New Section Group</b> to nest a set of sections inside one folder-like tab. Most treasurer notebooks never need this — don't add structure you don't have a use for yet.</p>`}
+  ],
+  tryit:`<p>On your Treasurer Notebook:</p><ol><li>Add three new sections: <em>Board Meetings</em>, <em>Budget</em>, and <em>Reference</em> (you'll already have your original default section too — rename it to <em>Correspondence</em>, or leave it and just add a fourth).</li><li>Color-code at least one section tab.</li><li>In <em>Board Meetings</em>, add a page titled with today's date, then add a subpage under it titled <em>Action items</em>.</li><li>Move one page from any section into a different section by dragging it onto that section's tab.</li></ol>`,
+  quiz:[
+   {q:"A good OneNote section structure is mainly about…",o:["Having as many sections as possible","Matching how you'll actually search for things later","Using every built-in template","Avoiding all subpages"],a:1,why:"Structure earns its keep by making things findable months later, not by being exhaustive."},
+   {q:"To create a subpage nested under an existing page…",o:["Drag it onto a section tab","Right-click it in the pages list ▸ Make Subpage","Press Ctrl+1","Use Section Color"],a:1,why:"Make Subpage indents a page under the one above it in the list."},
+   {q:"To move a page into a different section…",o:["It can't be done once created","Drag its entry onto a different section tab, or use Move or Copy","Delete it and start over","Change its Section Color"],a:1,why:"Dragging (or the Move or Copy dialog) relocates a page without recreating it."},
+   {q:"A Section Group is best used when…",o:["You have exactly one section","A set of related sections has grown enough to need its own folder-like grouping","You want to delete a notebook","You're formatting text"],a:1,why:"It's for organizing many sections together — not needed in a small notebook."}
+  ],
+  badge:{name:"Notebook builder", msg:"Notebook, sections, pages, formatting. The Treasurer Notebook you're building is already more organized than most people's actual filing."}
+},
+/* ===================== 4 (TEST) ===================== */
+{ title:"Test 1", kind:"test", pass:6,
+  screens:[{h:"Chapters 1–3, all together",
+   body:`<p>Eight questions on OneNote's structure, page basics, and organization. Six correct to pass. No limit on attempts.</p>`}],
+  quiz:[
+   {q:"The three layers of OneNote's structure, largest to smallest:",o:["Section ▸ Page ▸ Notebook","Notebook ▸ Section ▸ Page","Page ▸ Notebook ▸ Section","Notebook ▸ Page ▸ Section"],a:1,why:"Notebook is the whole binder; sections divide it; pages are the individual sheets."},
+   {q:"Clicking a blank spot on a page and typing…",o:["Creates a text container right there","Does nothing","Always creates a new page","Deletes existing content"],a:0,why:"OneNote pages are a free canvas, not a fixed document layout."},
+   {q:"Ctrl+1 on a line adds…",o:["A heading style","A clickable checkbox (To Do Tag)","A new section","A hyperlink"],a:1,why:"It's the quickest way to build an action-item list."},
+   {q:"OneNote's saving approach is…",o:["Manual, via Ctrl+S","Continuous autosave, no Save button needed","Only on closing the notebook","Disabled by default"],a:1,why:"It saves continuously as you work."},
+   {q:"To add a new section…",o:["Right-click a tab ▸ New Section, or click the + tab","Press Ctrl+1","Use Insert ▸ Table","Drag a page onto the notebook name"],a:0,why:"Both the + tab and the right-click menu create a new section."},
+   {q:"A subpage is created by…",o:["Right-click a page ▸ Make Subpage","Section Color","Add Page only","Draw tab"],a:0,why:"Make Subpage nests it under the page above it in the list."},
+   {q:"Good section structure is mainly about…",o:["Maximizing the section count","Matching how you'll search for things later","Avoiding all color-coding","Using only one page per notebook"],a:1,why:"The goal is findability later, not exhaustiveness now."},
+   {q:"A Section Group is useful when…",o:["You only have one page","A related set of sections has grown enough to need its own grouping","You want to disable autosave","You're formatting a heading"],a:1,why:"It nests multiple sections under one folder-like tab."}
+  ],
+  badge:{name:"Notebook foundations", msg:"Test 1 passed. From here it's making the notebook actually useful day-to-day: tables, files, search, sharing."}
+},
+/* ===================== 5 ===================== */
+{ title:"Tables, checklists, and tags", pass:3,
+  screens:[
+   {h:"A quick table without leaving OneNote",
+    body:`<p>Type some text, press <kbd>Tab</kbd>, and OneNote turns what you're typing into a simple table on the spot — each Tab starts a new column, Enter starts a new row. For something you'd otherwise build in Excel just to jot down quickly (a short list of amounts, a small side-by-side comparison), this is often faster than switching apps.</p>
+    ${grid([["Item","Amount"],["Printing","$160.50"],["Room rental","$300.00"]],{head:true})}
+    <p>For anything with real formulas or more than a handful of rows, Excel is still the right tool (Chapter 6 covers inserting an actual Excel file into a page). This quick-table trick is for small, simple, disposable lists.</p>`,
+    tip:`Once a table exists, click into it and a Table ribbon tab appears with options to add/delete rows and columns, similar to Word.`},
+   {h:"Checklists for meeting action items",
+    body:`<p>From Chapter 2: <kbd>Ctrl</kbd>+<kbd>1</kbd> on any line adds a checkbox. Stack several on a page — "call the venue about the deposit," "confirm insurance renewal date" — and you have a running action list tied directly to the meeting notes that produced it, instead of a separate sticky note that gets lost.</p>`},
+   {h:"Tags: more than just checkboxes",
+    body:`<p><span class="path">Home ▸ Tags</span> offers more than the To Do checkbox: <b>Important</b> (a star), <b>Question</b>, <b>Idea</b>, and others — each adds a small icon in front of the line. Type a custom one if none fit: <span class="path">Home ▸ Tags ▸ dropdown ▸ Customize Tags</span>.</p>
+    <p>Tags matter because of Chapter 7's search — you can search for every line tagged Important across the <em>entire notebook</em> at once, not just the current page.</p>`},
+   {h:"Custom tags worth setting up for a treasurer role",
+    body:`<p>A few that earn their keep: <em>Needs board vote</em>, <em>Waiting on vendor</em>, <em>Tax-relevant</em>. Tag consistently as you take notes and, months later, "everything tax-relevant this year" is a search away instead of a re-read of every meeting's notes.</p>`},
+   {h:"Combining a table with tags",
+    body:`<p>These aren't exclusive — a table cell can hold tagged text just like any other line. A budget table with one row's amount tagged <em>Needs board vote</em> keeps the flag attached to the specific number it's about, not floating separately on the page.</p>`}
+  ],
+  tryit:`<p>On a new page in your Treasurer Notebook's <em>Budget</em> section:</p><ol><li>Type a short list of 3 made-up expense categories and amounts, using Tab to build it into a quick table.</li><li>On a separate line below it, add two action items with checkboxes (Ctrl+1), and check one off.</li><li>Tag one line as Important (Home ▸ Tags).</li><li>Set up one custom tag of your own (Customize Tags) that fits your actual use — or reuse one of the suggested ones above.</li></ol>`,
+  quiz:[
+   {q:"Pressing Tab while typing on a OneNote page…",o:["Indents the paragraph only","Can start building a simple table, column by column","Deletes the line","Inserts a picture"],a:1,why:"Tab/Enter while typing plain text builds a quick on-the-spot table."},
+   {q:"Tags in OneNote are searchable…",o:["Only on the current page","Across the entire notebook at once","Only in the Budget section","Only if they're checkboxes"],a:1,why:"That notebook-wide searchability is what makes tagging worth the habit."},
+   {q:"For a small, simple, disposable list, OneNote's quick table is often faster than…",o:["Typing at all","Switching to Excel just for that","Using checkboxes","Adding a section"],a:1,why:"It's meant for quick, small lists — not a replacement for Excel's real capabilities."},
+   {q:"A custom tag is created via…",o:["Ctrl+1 only","Home ▸ Tags ▸ dropdown ▸ Customize Tags","Insert ▸ Table","Section Color"],a:1,why:"Customize Tags lets you define tags that fit your specific workflow."}
+  ]
+},
+/* ===================== 6 ===================== */
+{ title:"Inserting files, images, and printouts", pass:3,
+  screens:[
+   {h:"Attaching a file",
+    body:`<p><span class="path">Insert ▸ Files ▸ File Attachment</span> drops a clickable icon of the file right onto the page — double-click it to open the original file in its own app. Good for a signed contract PDF, a vendor invoice, anything you want to keep alongside the notes about it, not just described in them.</p>`},
+   {h:"File Printout: seeing the content, not just an icon",
+    body:`<p><span class="path">Insert ▸ Files ▸ File Printout</span> does something different — it renders the document's pages as images directly on the OneNote page, like it's been printed onto paper you can then write on. Useful for a PDF invoice you want to annotate directly ("paid 3/15, ref #4471") without opening a separate app.</p>
+    <p>Printout keeps the original file attached too — you get both the visual and a link back to the real file.</p>`,
+    tip:`Attachment for "keep the file, reference it occasionally." Printout for "I want to see and mark up the content right on the page."`},
+   {h:"Inserting pictures",
+    body:`<p><span class="path">Insert ▸ Images ▸ Picture</span>, choose a file — a photo of a receipt, a screenshot of a confirmation email. It drops onto the page like any other container: draggable, resizable by its corner handle.</p>`},
+   {h:"Picture text recognition",
+    body:`<p>Right-click an inserted picture ▸ <b>Copy Text from Picture</b> — OneNote runs basic text recognition on it and lets you paste the text it finds elsewhere. Handy for pulling a phone number or confirmation code off a screenshot without retyping it by hand. Accuracy varies with image quality; always double-check anything that matters, like an account number.</p>`},
+   {h:"Embedding a live Excel spreadsheet",
+    body:`<p><span class="path">Insert ▸ Files ▸ Spreadsheet</span> can embed an actual Excel file so a working, editable mini-spreadsheet sits right on the page — a genuine step up from a quick OneNote table when you actually need formulas. Double-click it to edit in place, or open it fully in Excel for anything more involved.</p>`}
+  ],
+  tryit:`<p>On a new page in your Treasurer Notebook:</p><ol><li>Attach any file from your computer using File Attachment, and confirm double-clicking its icon opens it.</li><li>If you have a PDF handy, try File Printout on it instead and compare how differently it appears on the page.</li><li>Insert any picture from your computer.</li><li>Right-click that picture and try Copy Text from Picture, even if there's no text in it (worth seeing what happens either way).</li></ol>`,
+  quiz:[
+   {q:"File Attachment puts on the page…",o:["A clickable icon that opens the original file","The file's full content, rendered as an image","Nothing until you double-click Insert again","A quick table"],a:0,why:"It's a link-like icon to the original file, opened in its own app."},
+   {q:"File Printout, compared to File Attachment…",o:["Does the exact same thing","Renders the document's pages as images you can write on directly","Deletes the original file","Only works with pictures"],a:1,why:"Printout shows the content on the page itself, like paper you can annotate, while still keeping the file attached."},
+   {q:"Copy Text from Picture is used to…",o:["Delete the picture","Pull recognized text out of an inserted image","Resize the picture","Attach a second file"],a:1,why:"It runs basic text recognition on the picture so you can copy out what it finds."},
+   {q:"Embedding an actual Excel file via Insert ▸ Spreadsheet is worth it mainly when…",o:["You need a quick 2-row list","You actually need real formulas, not just a static table","You want to attach a PDF","You're renaming a section"],a:1,why:"For real spreadsheet functionality, an embedded Excel file beats OneNote's quick table."}
+  ],
+  badge:{name:"Notebook, loaded", msg:"Files, images, and even live spreadsheets living right alongside your notes about them."}
+},
+/* ===================== 7 ===================== */
+{ title:"Search: finding anything, fast", pass:3,
+  screens:[
+   {h:"The search box: your whole notebook history, instantly",
+    body:`<p><kbd>Ctrl</kbd> + <kbd>E</kbd> jumps to the search box. Type a word and results appear as you type, pulled from every page in the current notebook by default. This is the payoff for months of note-taking — "what did we decide about the insurance renewal" is a two-second search instead of paging back through meeting notes by memory.</p>`},
+   {h:"Narrowing where it searches",
+    body:`<p>A dropdown near the search box lets you narrow scope: This Section, This Notebook, All Notebooks. Widen it when you're not sure where something lives; narrow it when a broad search returns too much unrelated noise from other notebooks.</p>`},
+   {h:"Search finds text inside pictures and attached files too",
+    body:`<p>OneNote's search isn't limited to typed text — it also searches recognized text inside inserted pictures (the same recognition behind Copy Text from Picture) and the content of some attached file types. A scanned receipt with an amount printed on it can turn up in a search for that amount, without you ever typing the number yourself.</p>`},
+   {h:"Finding tagged items specifically",
+    body:`<p><span class="path">Home ▸ Tags ▸ Find Tags</span> opens a summary of every tagged item across the notebook (or a scope you choose), grouped by tag. This is the payoff for Chapter 5's tagging habit — "everything marked Needs board vote, from any meeting, all in one list."</p>`},
+   {h:"Recent Edits and Recent Notes",
+    body:`<p><span class="path">View ▸ Recent Edits</span> (or <b>History ▸ Recent Edits</b>, depending on version) lists pages changed recently, across the whole notebook — a fast way to see "what did I touch this week" without hunting section by section.</p>`}
+  ],
+  tryit:`<ol><li>Press Ctrl+E and search for a word you know appears somewhere in your Treasurer Notebook so far.</li><li>Change the search scope dropdown and see how the result count changes.</li><li>Open Find Tags and look at the tagged items you created in Chapter 5.</li><li>Check Recent Edits (or Recent Notes) and confirm the pages you've worked on this session are listed.</li></ol>`,
+  quiz:[
+   {q:"The keyboard shortcut to jump to OneNote's search box is…",o:["Ctrl+F","Ctrl+E","Ctrl+1","Ctrl+S"],a:1,why:"Ctrl+E is the dedicated search shortcut."},
+   {q:"OneNote search can find text…",o:["Only in typed paragraphs","Also inside recognized pictures and some attached files","Only in page titles","Only in the current page"],a:1,why:"It extends to recognized text in images and file content, not just typed text."},
+   {q:"Find Tags is used to…",o:["Delete all tags","See every tagged item across the notebook, grouped by tag","Rename a section","Search only pictures"],a:1,why:"It surfaces everything you've tagged, wherever it lives in the notebook."},
+   {q:"Recent Edits shows…",o:["Only deleted pages","Pages changed recently, across the notebook","Only the current section","Nothing useful for a treasurer"],a:1,why:"It's a fast way to see what's been touched lately without manually checking each section."}
+  ]
+},
+/* ===================== 8 (TEST) ===================== */
+{ title:"Test 2", kind:"test", pass:6,
+  screens:[{h:"Chapters 5–7, all together",
+   body:`<p>Eight questions on tables/tags, files/images, and search. Six to pass.</p>`}],
+  quiz:[
+   {q:"Pressing Tab while typing plain text can…",o:["Delete the line","Start building a quick table","Insert a picture","Open search"],a:1,why:"Tab/Enter while typing builds an on-the-spot table."},
+   {q:"Tags are searchable…",o:["Only on the current page","Across the whole notebook","Only in tables","Only if they're checkboxes"],a:1,why:"That's what makes consistent tagging pay off later."},
+   {q:"File Printout, unlike File Attachment…",o:["Deletes the file","Renders the document as images you can write on, right on the page","Only works with pictures","Can't be searched"],a:1,why:"It shows the content directly on the page while still keeping the file linked."},
+   {q:"Copy Text from Picture is for…",o:["Deleting a picture","Pulling recognized text out of an image","Resizing an image","Attaching a new file"],a:1,why:"It runs text recognition on the picture."},
+   {q:"Ctrl+E does what?",o:["Bolds text","Jumps to the search box","Exports the notebook","Adds a checkbox"],a:1,why:"It's the search shortcut."},
+   {q:"OneNote search can find text inside…",o:["Only typed paragraphs","Recognized pictures and some attached files too","Only page titles","Nothing but the current section"],a:1,why:"Search extends beyond plain typed text."},
+   {q:"Find Tags shows…",o:["Every tagged item across the notebook, grouped by tag","Only checkboxes","Only the current page's tags","Deleted tags"],a:0,why:"It's a notebook-wide summary of tagged items."},
+   {q:"Embedding a real Excel file is worth it mainly when…",o:["You need two rows of text","You need actual working formulas, not a static list","You're renaming a page","You're formatting a heading"],a:1,why:"For genuine spreadsheet functionality, an embedded Excel file beats a quick OneNote table."}
+  ],
+  badge:{name:"Notebook, findable", msg:"Test 2 passed. Everything you put in is now actually easy to get back out. What's left is sharing it and keeping it in sync."}
+},
+/* ===================== 9 ===================== */
+{ title:"Sharing your notebook with the board", pass:3,
+  screens:[
+   {h:"Why share a notebook instead of emailing pages",
+    body:`<p>Emailing a PDF export of your notes is a snapshot — it's already stale the moment you send it. Sharing the actual notebook means a co-treasurer or the board president sees the same live notes you do, updated in real time, without you having to remember to resend anything.</p>`},
+   {h:"Sharing the notebook",
+    body:`<p><span class="path">File ▸ Share</span> (needs the notebook saved to OneDrive — Chapter 10). Enter the person's email, choose <b>Can edit</b> or <b>Can view</b>, and optionally add a short note explaining why you're sharing it. They get an email with a link straight into the notebook.</p>`},
+   {h:"Edit vs. view permissions",
+    body:`<p><b>Can edit</b> — for a co-treasurer who should genuinely be able to add and change notes alongside you. <b>Can view</b> — for a board member who should be able to read the Budget section but shouldn't be able to accidentally overwrite it. Default to View unless someone specifically needs to edit.</p>`},
+   {h:"Sharing just one section, not the whole notebook",
+    body:`<p>Right-click a specific section tab ▸ share options (wording varies by version) to share only that section rather than the entire notebook — useful when the board should see Budget but Correspondence has anything more sensitive you'd rather keep to yourself and a co-treasurer.</p>`,
+    tip:`When in doubt about what a board member should or shouldn't see, sharing at the section level rather than the whole notebook is the safer default.`},
+   {h:"Seeing who changed what",
+    body:`<p>In a shared notebook, <span class="path">History ▸ Recent Edits by Author</span> (naming varies by version) shows which person made which changes and when — useful for a quick "did someone else already fill this in" check before you duplicate the work.</p>`}
+  ],
+  tryit:`<p>This chapter is about the sharing dialog and permission options themselves — you don't need to actually invite anyone real:</p><ol><li>Open <span class="path">File ▸ Share</span> on your Treasurer Notebook and look at the options without sending an invite.</li><li>Note where the Can edit / Can view choice appears.</li><li>Right-click a section tab and look for a way to share just that section, if your version offers it.</li><li>Check whether Recent Edits by Author (or similar) is available and what it shows.</li></ol>`,
+  quiz:[
+   {q:"Sharing a live notebook, versus emailing a PDF export, means the recipient sees…",o:["An outdated snapshot","The same live, updating notes you see","Nothing until you resend it","Only page titles"],a:1,why:"A shared notebook stays current automatically, unlike a one-time export."},
+   {q:"For a board member who should read but not accidentally change notes, use…",o:["Can edit","Can view","No sharing at all","Delete their access"],a:1,why:"View permission lets them read without risking an accidental overwrite."},
+   {q:"To share only the Budget section and not the rest of the notebook…",o:["It's impossible — sharing is always the whole notebook","Right-click that section tab and use its own sharing option","Delete the other sections first","Email a screenshot instead"],a:1,why:"Section-level sharing keeps more sensitive sections private."},
+   {q:"A quick way to see who changed what in a shared notebook is…",o:["Find Tags","Recent Edits by Author (or similar, naming varies)","Section Color","File Printout"],a:1,why:"It attributes changes to the person who made them, useful for avoiding duplicated work."}
+  ]
+},
+/* ===================== 10 ===================== */
+{ title:"Sync, devices, and offline access", pass:3,
+  screens:[
+   {h:"Where a synced notebook actually lives",
+    body:`<p>A notebook saved to OneDrive isn't really "on" any one device — it's stored in the cloud, and every device with OneNote signed into the same account keeps a synced copy. Edit on your laptop, and the same change shows up on your phone's OneNote app within moments, and vice versa.</p>`},
+   {h:"Checking sync status",
+    body:`<p>A small icon near the notebook name (or <span class="path">File ▸ Info</span>, depending on version) shows sync state — a checkmark means fully synced, a spinning icon means it's actively syncing, and a warning icon means something needs your attention (usually a sign-in issue or a conflict).</p>`,
+    tip:`If changes aren't appearing on a second device, check that both are actually signed into the <em>same</em> Microsoft account — the single most common cause of "my notes aren't showing up."`},
+   {h:"Working offline",
+    body:`<p>OneNote keeps a local copy, so you can keep taking notes with no internet connection — during a meeting in a room with bad signal, say. Changes queue up and sync automatically the next time a connection is available. Nothing is lost; it just waits.</p>`},
+   {h:"Sync conflicts: rare, but here's what one looks like",
+    body:`<p>If the same page is edited offline on two devices before they sync, OneNote sometimes creates a second version rather than guessing which edit should win — you'll see something like a page named "Page Name (Conflict)." Open both, manually merge whatever's different, then delete the conflict copy.</p>`},
+   {h:"A notebook that's only ever local (not on OneDrive)",
+    body:`<p>You can keep a notebook stored only on one device with no sync at all — but then it exists on exactly that one device, can't be shared (Chapter 9), and is only as safe as that device's own backups. For anything organizational, not personal-scratchpad, OneDrive storage is worth the two extra setup steps.</p>`}
+  ],
+  tryit:`<ol><li>Check your Treasurer Notebook's sync status icon or File ▸ Info.</li><li>Confirm it's stored on OneDrive (not local-only) — if it's local-only, this is a good moment to move it, since Chapter 9's sharing depends on it.</li><li>If you have OneNote on a phone or second device, open the notebook there and confirm a recent change shows up.</li></ol>`,
+  quiz:[
+   {q:"A notebook synced via OneDrive is best described as…",o:["Stored on exactly one device","Stored in the cloud, with every signed-in device keeping a synced copy","Only accessible from a browser","Deleted automatically after 30 days"],a:1,why:"Cloud storage is what makes multi-device and shared access work."},
+   {q:"The most common cause of \"my notes aren't showing up on my other device\" is…",o:["A corrupted notebook","The two devices being signed into different Microsoft accounts","Too many sections","Using checkboxes"],a:1,why:"Mismatched sign-ins are the usual culprit — check both devices use the same account."},
+   {q:"Editing offline with no internet connection…",o:["Is impossible in OneNote","Works fine; changes queue and sync once you're back online","Deletes your notebook","Requires a special offline mode to enable first"],a:1,why:"OneNote keeps a local copy and syncs automatically once connectivity returns."},
+   {q:"A page named \"Page Name (Conflict)\" appears when…",o:["You mistyped the title","The same page was edited offline on two devices before syncing, so OneNote kept both versions","You shared the notebook","You searched for something"],a:1,why:"Rather than guess which edit should win, OneNote preserves both for you to merge manually."}
+  ]
+},
+/* ===================== 11 ===================== */
+{ title:"Meeting notes, linked to Outlook", pass:3,
+  screens:[
+   {h:"Why link notes to a calendar event at all",
+    body:`<p>A meeting note titled just "March meeting" is ambiguous by June. Linking a OneNote page to the actual Outlook calendar event it came from means the note carries the meeting's real date, time, and attendee list automatically — no retyping, no ambiguity later.</p>`},
+   {h:"Inserting meeting details from Outlook",
+    body:`<p>In OneNote, <span class="path">Home ▸ Meeting Details</span> lists your recent and upcoming Outlook calendar events (this requires OneNote and Outlook on the same signed-in Microsoft/Exchange account). Pick the board meeting, and it inserts the meeting's title, date/time, location, and attendee list directly onto the page — a ready-made header for your notes.</p>`,
+    tip:`This connects to the Outlook course's Chapter 6 — the calendar meeting you create there is exactly the kind of event this feature pulls from.`},
+   {h:"The other direction: starting from Outlook",
+    body:`<p>From within an Outlook calendar event, some versions offer a <b>OneNote</b> button directly on the meeting's ribbon, which does the same linking from that side — opens (or creates) a OneNote page already stamped with that meeting's details, ready for notes during the meeting itself.</p>`},
+   {h:"A simple, repeatable meeting-notes structure",
+    body:`<p>A layout that holds up over many meetings: Meeting Details (inserted automatically) at the top, then a short <b>Decisions</b> section, then <b>Action Items</b> as a checkbox list tagged with names, then <b>Next Meeting</b> if a date's already been set. Consistency here is what makes six months of meeting notes skimmable instead of six different formats to decode.</p>`},
+   {h:"Building this into your Board Meetings section going forward",
+    body:`<p>Once a structure like this exists as a page, right-click it ▸ <b>Copy</b>, paste it as a new page, and clear out the specifics — instant template for the next meeting, without a formal "Template" feature required.</p>`}
+  ],
+  tryit:`<p>In your Treasurer Notebook's <em>Board Meetings</em> section:</p><ol><li>Create a new page. Try Home ▸ Meeting Details — if you have any Outlook calendar events (even a test one from the Outlook course), pick one and confirm it inserts the meeting's details.</li><li>Below the inserted details, build the simple structure from this chapter: Decisions, Action Items (with checkboxes), Next Meeting.</li><li>Copy that page and paste it as a new one, to see how a reusable "template" page works in practice.</li></ol>`,
+  quiz:[
+   {q:"Inserting Meeting Details from Outlook into a OneNote page requires…",o:["Nothing special, it always works","OneNote and Outlook signed into the same account","A shared notebook","A local-only notebook"],a:1,why:"The two apps need to be on the same signed-in account to see each other's data."},
+   {q:"What does Home ▸ Meeting Details insert onto the page?",o:["A blank table","The meeting's title, date/time, location, and attendee list","A picture","A search box"],a:1,why:"It's a ready-made header pulled straight from the calendar event."},
+   {q:"A consistent meeting-notes structure across many meetings mainly helps because…",o:["It looks fancier","It makes months of notes skimmable instead of each one being a different format","It's required by OneNote","It disables autosave"],a:1,why:"Consistency is what makes past notes fast to scan later."},
+   {q:"A simple way to reuse a meeting-notes layout for the next meeting is to…",o:["Retype it from scratch every time","Copy the page, paste it as new, and clear the specifics","Delete the section","Use Find Tags"],a:1,why:"Copying an existing page is a quick, no-frills template workflow."}
+  ],
+  badge:{name:"Fully connected", msg:"Your notebook now ties directly into your calendar, not just standing alone. That's the difference between notes and an actual system."}
+},
+/* ===================== 12 (FINAL) ===================== */
+{ title:"Final test", kind:"test", pass:7,
+  screens:[{h:"Everything, once more",
+   body:`<p>Ten questions from across the course. Seven to pass.</p>`}],
+  quiz:[
+   {q:"The three layers of OneNote's structure are…",o:["Notebook ▸ Section ▸ Page","Page ▸ Section ▸ Notebook","Section ▸ Page ▸ Notebook","Notebook ▸ Page ▸ Section"],a:0,why:"Notebook is the whole binder; sections divide it; pages are individual sheets."},
+   {q:"Ctrl+1 on a line adds…",o:["A heading","A clickable checkbox","A new page","A hyperlink"],a:1,why:"It's the To Do Tag shortcut."},
+   {q:"OneNote saves…",o:["Only when you press Ctrl+S","Continuously, automatically","Only when you close it","Never automatically"],a:1,why:"Continuous autosave means no Save button to remember."},
+   {q:"Tags are searchable…",o:["Only on the current page","Across the whole notebook","Only inside tables","Not searchable at all"],a:1,why:"That notebook-wide reach is what makes tagging useful."},
+   {q:"File Printout, unlike File Attachment…",o:["Deletes the original file","Renders the document as images right on the page, while keeping it linked","Only works on pictures","Can't be searched"],a:1,why:"It shows content directly on the page, unlike a plain clickable icon."},
+   {q:"Ctrl+E does what?",o:["Opens search","Bolds text","Adds a checkbox","Shares the notebook"],a:0,why:"It's the search shortcut."},
+   {q:"For a board member who should read but not edit, share with…",o:["Can edit","Can view","No access","Full admin"],a:1,why:"View permission avoids accidental changes."},
+   {q:"The most common cause of notes not appearing on a second device is…",o:["A corrupted notebook","Different Microsoft accounts signed in on each device","Too many tags","Using checkboxes"],a:1,why:"Both devices need to be on the same account to sync properly."},
+   {q:"Meeting Details in OneNote pulls from…",o:["A random template","The linked Outlook calendar event","A picture you insert","Section Color"],a:1,why:"It inserts the meeting's real date, time, and attendees automatically."},
+   {q:"A reusable meeting-notes layout is easiest to build by…",o:["Retyping it every time","Copying an existing page and clearing the specifics","Deleting all sections","Disabling autosave"],a:1,why:"Copy-and-clear is a fast, no-frills template approach."}
+  ],
+  badge:{name:"OneNote capable", msg:"Course complete. You went from a blank notebook to a searchable, shareable, calendar-linked system for running a role's worth of notes. Keep building on the Treasurer Notebook you made along the way — it's real now, not a throwaway exercise."}
+}
+];
+
+runCourse({
+  storageKey:'onenoteBeginnerCourse.v1',
+  title:'OneNote for Beginners',
+  homeIntro:`<p>This one's about keeping a running record — meeting notes, action items, the things you need to dig back up six months later. Read a little, try it, tick the box, take a short quiz.</p>
+  <p>Chapters open in order. Nothing is timed. You can stop and come back any day; the app remembers where you were.</p>
+  <div class="tip"><b>Before you start:</b> unlike the Excel and PowerPoint courses, there's no separate practice file here. OneNote isn't really a single-file kind of app — instead, Chapter 1 has you create a real <em>Treasurer Notebook</em>, and every chapter after that builds it up a bit further. By the end of the course you'll have an actual, usable notebook, not a throwaway exercise file.</div>`,
+  suiteLinks:`<a href="Excel for Beginners.html">Excel for Beginners</a><br><a href="Outlook for Beginners.html">Outlook for Beginners</a><br><a href="PowerPoint for Beginners.html">PowerPoint for Beginners</a>`,
+  practiceLabel:'Build it in your own OneNote',
+  CH
+});
+</script>
+</body>
+</html>

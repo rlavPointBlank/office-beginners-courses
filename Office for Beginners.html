@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Microsoft Office for Beginners</title>
+<link rel="stylesheet" href="course-engine.css?v=3">
+<style>
+  :root{ --accent:#444B54; --accent-soft:#EEF0F2; --accent-line:#C7CCD2; --sel:#444B54; }
+  body{padding:2.5rem 2.5rem 5rem}
+  .wrap{max-width:60rem;margin:0 auto}
+  h1{font-size:2.1rem}
+  .lede{max-width:44em}
+  .apps{margin:.6rem 0 1.8rem;color:var(--muted);font-size:.95rem}
+  .apps b{color:var(--ink)}
+  .grid-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(15.5rem,1fr));gap:1.1rem;margin:2rem 0}
+  .card{border:1.5px solid var(--line);border-radius:12px;padding:1.3rem 1.4rem;background:#fff;display:flex;flex-direction:column;gap:.5rem;border-top-width:6px}
+  .card h2{font-size:1.25rem;margin:0}
+  .card p{font-size:.92rem;color:var(--muted);margin:0;flex:1}
+  .card .prog{font-size:.82rem;color:var(--muted)}
+  .card .barwrap{background:var(--wash);border-radius:6px;height:.5rem;overflow:hidden;margin:.1rem 0 .2rem}
+  .card .bar{height:100%;border-radius:6px}
+  .card a.btn{align-self:flex-start;margin-top:.3rem;text-decoration:none;display:inline-block;padding:.55rem 1.2rem;font-size:.95rem}
+  .card.soon{opacity:.55}
+  .card.soon .btn{background:#fff;color:var(--muted);border-color:var(--line);pointer-events:none}
+  .badge-soon{font-size:.72rem;font-weight:700;letter-spacing:.03em;text-transform:uppercase;color:var(--muted);background:var(--wash);border-radius:20px;padding:.15rem .6rem;align-self:flex-start}
+  footer{margin-top:3rem;font-size:.85rem;color:var(--muted);max-width:44em}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Microsoft Office for Beginners</h1>
+  <p class="lede">Microsoft Office (now usually sold as Microsoft 365) is a bundle of apps most workplaces, schools, and volunteer organizations run on day to day: <b>Word</b> for documents, <b>Excel</b> for spreadsheets and numbers, <b>PowerPoint</b> for presentations, <b>Outlook</b> for email and calendars, and <b>OneNote</b> for notes. This is a set of short, self-paced courses walking through each one from the ground up — no prior experience assumed.</p>
+
+  <div class="tip"><b>Independent and unofficial.</b> This isn't produced, reviewed, or endorsed by Microsoft — it's a personal project built to teach these tools to someone taking on a treasurer/volunteer-organizer role for the first time. "Microsoft," "Office," "Excel," "Outlook," "PowerPoint," and "OneNote" are trademarks of Microsoft Corporation, used here only to describe the software the course is about.</div>
+
+  <p class="apps">Every course below follows the same format: short lessons, a hands-on exercise, and a short quiz you need to pass to unlock the next chapter. Your progress in each is saved automatically in this browser. Pick any course to start, and jump between them freely — the sidebar in each has a link back here, and to the others.</p>
+
+  <div class="grid-cards" id="cards"></div>
+
+  <footer>Built with an Obsidian-vault, home-lab documentation habit rather than a classroom in mind — each course leans on a running example (a small volunteer organization's dues, donations, and board meetings) so the exercises feel like real work, not busywork.</footer>
+</div>
+
+<script>
+const COURSES=[
+  {file:"Excel for Beginners.html", name:"Excel", tagline:"Dues, donations, expenses, and formulas that don't break.", key:"excelTreasurerCourse.v2", total:13, accent:"#1D6F42"},
+  {file:"Outlook for Beginners.html", name:"Outlook", tagline:"Inbox, calendar, and contacts — the daily correspondence.", key:"outlookTreasurerCourse.v1", total:11, accent:"#0F6CBD"},
+  {file:"PowerPoint for Beginners.html", name:"PowerPoint", tagline:"Build, design, and actually present a board report.", key:"powerpointTreasurerCourse.v1", total:12, accent:"#B7472A"},
+  {file:"OneNote for Beginners.html", name:"OneNote", tagline:"A running notebook: meeting notes, action items, search.", key:"onenoteBeginnerCourse.v1", total:12, accent:"#7719AA"}
+];
+const UPCOMING=[
+  {name:"Word", tagline:"Letters, minutes, and mail-merge-style documents.", accent:"#2B579A"}
+];
+
+function progressFor(c){
+  try{
+    const raw=localStorage.getItem(c.key);
+    if(!raw) return {done:0};
+    const s=JSON.parse(raw);
+    return {done:Object.keys(s.done||{}).length};
+  }catch(e){ return {done:0}; }
+}
+
+function render(){
+  let h='';
+  COURSES.forEach(c=>{
+    const p=progressFor(c);
+    const pct=Math.round(100*p.done/c.total);
+    const label = p.done===0 ? 'Start course' : (p.done>=c.total ? 'Review course' : 'Continue course');
+    h+=`<div class="card" style="border-top-color:${c.accent}">
+      <h2 style="color:${c.accent}">${c.name}</h2>
+      <p>${c.tagline}</p>
+      <div class="prog">${p.done} of ${c.total} chapters complete</div>
+      <div class="barwrap"><div class="bar" style="width:${pct}%;background:${c.accent}"></div></div>
+      <a class="btn" style="background:${c.accent};border-color:${c.accent}" href="${encodeURI(c.file)}">${label}</a>
+    </div>`;
+  });
+  UPCOMING.forEach(c=>{
+    h+=`<div class="card soon" style="border-top-color:${c.accent}">
+      <span class="badge-soon">Coming soon</span>
+      <h2 style="color:${c.accent}">${c.name}</h2>
+      <p>${c.tagline}</p>
+      <a class="btn" href="#">Not yet available</a>
+    </div>`;
+  });
+  document.getElementById('cards').innerHTML=h;
+}
+render();
+</script>
+</body>
+</html>

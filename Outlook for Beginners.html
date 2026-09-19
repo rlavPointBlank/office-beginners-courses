@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Outlook for Beginners — a guided course</title>
+<link rel="stylesheet" href="course-engine.css?v=3">
+<style>
+  :root{
+    --accent:#0F6CBD; --accent-soft:#E3EEF9; --accent-line:#9FC4E6;
+    --sel:#0F5A9E;
+  }
+</style>
+</head>
+<body>
+<div class="app">
+  <aside id="side">
+    <a class="brand" href="Office for Beginners.html">Outlook for Beginners<small>← All courses</small></a>
+    <button id="menuBtn" onclick="document.getElementById('side').classList.toggle('open')">☰ Chapters</button>
+    <div id="chapterList"></div>
+  </aside>
+  <main id="main"></main>
+</div>
+
+<script src="course-engine.js?v=4"></script>
+<script>
+const CH=[
+/* ===================== 1 ===================== */
+{ title:"Finding your way around", pass:3,
+  screens:[
+   {h:"The three panes",
+    body:`<p>Open Outlook and you'll see the window split into pieces. On the left, the <b>Folder Pane</b> — Inbox, Sent Items, Drafts, and any folders you've made. In the middle, the <b>message list</b> — one line per email. On the right (or below, depending on your layout), the <b>Reading Pane</b> — the full text of whatever's selected.</p>
+    <p>Click any message in the middle list and its contents appear in the Reading Pane without opening a separate window. That's the fastest way to skim a full inbox.</p>`,
+    tip:`If the Reading Pane is missing, it's probably switched off: <span class="path">View ▸ Layout ▸ Reading Pane</span>, choose Right or Bottom.`},
+   {h:"The bar at the bottom-left: Mail, Calendar, People",
+    body:`<p>Outlook isn't just mail. Along the bottom-left corner are small icons — <b>Mail</b>, <b>Calendar</b>, <b>People</b>, sometimes <b>Tasks</b>. Click between them and the whole window changes: Calendar shows a month grid, People shows your contact list.</p>
+    <p>For a treasurer, all three matter: Mail for correspondence, Calendar for meeting dates and deadlines, People for the board's contact list and the donor mailing list.</p>`},
+   {h:"The ribbon: Home, Send/Receive, Folder, View",
+    body:`<p>Same idea as other Office apps — a strip of buttons across the top, organized into tabs. <b>Home</b> has New Email, Reply, Delete, and the flag/category tools. <b>Send/Receive</b> forces Outlook to check for new mail right now instead of waiting.</p>
+    <p>Directions in this course are written like <span class="path">Home ▸ Respond ▸ Forward</span> — tab, then group, then button.</p>`},
+   {h:"Unread, flagged, and the bold rule",
+    body:`<p>A <b>bold</b> subject line means unread. Read a message and it un-bolds automatically — no action needed. Click the small flag icon next to a message to mark it for follow-up; it turns into a red flag and the message stays visible as something you still owe a reply to.</p>
+    <p>This one habit — flag anything you can't deal with right now — is most of what keeps a treasurer's inbox from becoming a swamp.</p>`,
+    tip:`Right-click the flag icon for options like "Follow up tomorrow" instead of a plain flag — it adds a due date you'll see in a Tasks list.`},
+   {h:"Search: faster than scrolling",
+    body:`<p>The search box sits above the message list. Type a name, a word from the subject, or part of an email address and press Enter. Outlook searches the currently open folder by default; a button appears offering to search <b>All Mailboxes</b> or <b>All Outlook Items</b> if you don't find it.</p>
+    <p>For "that email from the venue about the deposit," search beats scrolling every time.</p>`}
+  ],
+  tryit:`<p>In your own Outlook:</p><ol><li>Switch between Mail, Calendar, and People using the icons in the bottom-left corner. Come back to Mail.</li><li>Click three different messages in your Inbox and watch the Reading Pane update.</li><li>Flag one message for follow-up.</li><li>Search for one word you know appears in a subject line you've received recently. Confirm it's found.</li></ol>`,
+  quiz:[
+   {q:"Where does the full text of a selected email appear without opening a new window?",o:["The Folder Pane","The Reading Pane","The ribbon","The search box"],a:1,why:"The Reading Pane shows the message you've clicked, in place."},
+   {q:"A bold subject line means…",o:["It's flagged","It's unread","It has an attachment","It's from your boss"],a:1,why:"Bold = unread. It clears automatically once you open/read the message."},
+   {q:"To switch from Mail to your contact list, click…",o:["Send/Receive","The People icon, bottom-left","View ▸ Reset","Search"],a:1,why:"The People icon opens your contact list; Mail, Calendar and People all live in that bottom-left switcher."},
+   {q:"You can't find an old email by scrolling. Best next step:",o:["Give up and ask the sender to resend it","Use the search box","Delete unrelated mail to make room","Restart Outlook"],a:1,why:"Search is faster than scrolling almost every time — type a word you remember and press Enter."}
+  ]
+},
+/* ===================== 2 ===================== */
+{ title:"Writing mail that reads well", pass:3,
+  screens:[
+   {h:"Starting a new message",
+    body:`<p><span class="path">Home ▸ New ▸ New Email</span> opens a blank message window. Four fields matter: <b>To</b>, <b>Cc</b>, <b>Subject</b>, and the body.</p>
+    ${mailMock([["To","board@ourclub.org"],["Cc",""],["Subject","Reminder: dues due March 1"]],"Hi all — a quick reminder that annual dues ($60) are due by March 1. You can pay by check at the meeting or by e-transfer. Let me know if you have any questions.<br><br>Thanks,<br>Ramon")}
+    <p>Press <kbd>Ctrl</kbd> + <kbd>Enter</kbd> to send from the keyboard, or click <b>Send</b>.</p>`},
+   {h:"To vs. Cc vs. Bcc — and why it matters",
+    body:`<p><b>To</b>: the people who need to act. <b>Cc</b> ("carbon copy"): people who should know but don't need to do anything. <b>Bcc</b> ("blind carbon copy"): people who get a copy, but nobody else on the message can see their address.</p>
+    <p>For a treasurer this is not a small detail: emailing a list of forty donors in the <b>To</b> or <b>Cc</b> field exposes every one of their email addresses to every other recipient. Use <b>Bcc</b> for any message going to a list of people who don't already know each other.</p>`,
+    tip:`If you don't see the Bcc field, click <span class="path">Options ▸ Show Fields ▸ Bcc</span> in the new-message window.`},
+   {h:"Subject lines that save everyone time",
+    body:`<p>A treasurer's mail gets searched later — by you, six months from now, looking for "that email about the insurance renewal." Write subjects that would still make sense out of context: <em>"Insurance renewal — due June 1"</em>, not <em>"Question"</em> or <em>"Hi"</em>.</p>
+    <p>If the message needs a reply by a date, put the date in the subject. People triage subject lines before they open anything.</p>`},
+   {h:"Attachments: adding and checking them",
+    body:`<p><span class="path">Insert ▸ Include ▸ Attach File</span>, or drag a file straight into the message window. Outlook shows a filename chip near the subject once it's attached.</p>
+    <p>The single most common email mistake: writing "see attached" and forgetting to attach anything. Attach the file <em>first</em>, before you write the message — then it can't be forgotten.</p>`,
+    tip:`Outlook sometimes catches this for you — if your message body contains the word "attached" and there's no file attached, a yellow reminder bar appears before you send. Don't rely on it; attach first.`},
+   {h:"Reply, Reply All, Forward — picking the right one",
+    body:`<p><b>Reply</b> goes only to the original sender. <b>Reply All</b> goes to the sender and everyone who was on the To/Cc line. <b>Forward</b> sends the whole message on to someone new.</p>
+    <p>Reply All is where most email embarrassments happen — a message meant for one person lands in six inboxes because Reply All was clicked out of habit. Check the To line before you send, every time.</p>`}
+  ],
+  live:true,
+  tryit:`<ol><li>Send yourself a test email: <span class="path">Home ▸ New ▸ New Email</span>, To: your own address, Subject: <em>"Outlook course — test 1"</em>, a short body, Send.</li><li>When it arrives, <b>Reply</b> to it (not Reply All) with one line.</li><li>Open a new message, add your own address to <b>Bcc</b> instead of To, and send it. Notice it still arrives.</li><li>Start one more new message, attach any small file from your computer <em>before</em> writing anything else, then delete the draft without sending (right-click it in Drafts ▸ Delete, or just close the window and choose Don't Save).</li></ol>`,
+  quiz:[
+   {q:"You're emailing 40 donors who don't know each other. Their addresses should go in…",o:["To","Cc","Bcc","The subject line"],a:2,why:"Bcc hides the recipient list from everyone else on the message — the right choice for a mailing list."},
+   {q:"Which recipient field means \"needs to take action\"?",o:["Bcc","Cc","To","Subject"],a:2,why:"To is for people who need to act; Cc is for people who just need to know."},
+   {q:"The most common attachment mistake is…",o:["Attaching too many files","Writing \"see attached\" and forgetting to attach it","Using the wrong file format","Attaching a file that's too small"],a:1,why:"Attach the file first, before writing the message, so it can't be forgotten."},
+   {q:"A message was sent to you and five others. You want to reply to just the sender. Use…",o:["Reply","Reply All","Forward","Bcc"],a:0,why:"Reply All should be a deliberate choice, not a habit — it's the most common source of email mishaps."}
+  ]
+},
+/* ===================== 3 ===================== */
+{ title:"Folders, flags, and categories", pass:3,
+  screens:[
+   {h:"Why a flat Inbox stops working",
+    body:`<p>At ten emails a week, one Inbox is fine. At fifty — dues receipts, vendor quotes, board discussion, meeting notices — everything blurs together. Folders sort it by <em>what it is</em>; flags mark <em>what still needs doing</em>. Both, together, keep an inbox usable.</p>`},
+   {h:"Creating folders",
+    body:`<p>Right-click <b>Inbox</b> in the Folder Pane ▸ <b>New Folder</b>. Name it — <em>Dues</em>, <em>Vendors</em>, <em>Board</em>, whatever splits your actual mail. Drag a message onto a folder name to move it there, or select it and press <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>V</kbd> to move it via a dialog (handy for reaching folders that aren't visible on screen).</p>
+    <p>Folders you create sit under Inbox by default; you can drag them to sit at the top level of your mailbox instead if you'd rather they not be nested.</p>`},
+   {h:"Categories: color labels that cross folders",
+    body:`<p>A folder can only hold a message in one place. A <b>category</b> is a colored label you can put on a message wherever it lives — so an email can be both "in the Vendors folder" and tagged "Urgent," and you can filter or sort by that tag later.</p>
+    <p><span class="path">Home ▸ Tags ▸ Categorize</span>, pick a color, optionally rename it (right-click a color swatch ▸ Rename — "Urgent," "Tax season," "Needs board vote").</p>`,
+    tip:`Categories sync across Mail, Calendar and Tasks — tag a calendar event "Tax season" the same way you'd tag an email.`},
+   {h:"Rules: let Outlook file mail for you",
+    body:`<p>If every dues payment notice arrives from the same payment processor, you don't have to file each one by hand. Right-click a message from that sender ▸ <b>Rules</b> ▸ <b>Create Rule</b>. Tell it "when a message arrives from this address, move it to the Dues folder," OK.</p>
+    <p>From then on, matching mail skips the Inbox and goes straight to that folder. Check the folder occasionally so you don't miss something that landed there automatically.</p>`},
+   {h:"Cleaning up: archive vs. delete",
+    body:`<p><b>Delete</b> is for mail you'll genuinely never need — spam, "meeting moved 10 minutes" notices after the meeting's happened. <b>Archive</b> (a button in the Home ribbon, or drag to an Archive folder) moves a message out of your active view but keeps it searchable forever. For anything with financial or organizational history — dues receipts, vendor invoices, board decisions — archive, don't delete.</p>`}
+  ],
+  live:true,
+  tryit:`<ol><li>Create a folder under your Inbox called <em>Course Practice</em>.</li><li>Move any one message into it by dragging.</li><li>Categorize that same message with a color, and rename the color to something that fits your own mail (e.g., "Follow up").</li><li>Right-click a message from a sender you get regular mail from and look at the Create Rule dialog — read the options, then Cancel without creating anything, unless you want to keep it.</li><li>Delete the Course Practice folder when you're done (right-click ▸ Delete Folder).</li></ol>`,
+  quiz:[
+   {q:"A category, compared to a folder, is…",o:["The same thing with a different name","A color label a message can carry no matter which folder it's in","Only available in Calendar","A way to delete mail automatically"],a:1,why:"Folders are one location; categories are a label that travels with the message anywhere."},
+   {q:"For a dues receipt you might need again in a year, you should…",o:["Delete it","Archive it","Leave it unread forever","Print it and delete the email"],a:1,why:"Archive keeps searchable history; delete is for things you'll truly never need again."},
+   {q:"A rule you create for incoming mail…",o:["Only affects mail you send","Automatically files or acts on matching new mail","Requires you to approve each message","Deletes the sender's future emails"],a:1,why:"A rule runs automatically going forward on mail matching its condition."},
+   {q:"To move a message into a folder that isn't visible on screen, the fastest method is…",o:["Forward it to yourself","Ctrl+Shift+V (Move dialog)","Print it","Change your view settings first"],a:1,why:"Ctrl+Shift+V opens a Move dialog that can reach any folder, visible or not."}
+  ],
+  badge:{name:"Inbox under control", msg:"Reading, writing, filing — the daily-use core of Outlook. Most people never get past this. You're about to."}
+},
+/* ===================== 4 (TEST) ===================== */
+{ title:"Test 1", kind:"test", pass:6,
+  screens:[{h:"Chapters 1–3, all together",
+   body:`<p>Eight questions on navigation, writing mail, and organizing it. Six correct to pass. No limit on attempts — the questions stay the same, so reread the chapter that tripped you up.</p>`}],
+  quiz:[
+   {q:"The Reading Pane shows…",o:["A list of all folders","The full text of the currently selected message","Only unread mail","Your calendar"],a:1,why:"Click a message and its contents appear there without opening a new window."},
+   {q:"A subject line still makes sense six months later if it…",o:["Just says \"Question\"","Includes what it's about and any relevant date","Is left blank","Is in all capitals"],a:1,why:"You (and search) will thank yourself later for a specific subject."},
+   {q:"Mailing a list of people who don't know each other — their addresses go in…",o:["To","Cc","Bcc","The body of the message"],a:2,why:"Bcc keeps the recipient list private from everyone else on the message."},
+   {q:"The most reliable fix for \"forgot the attachment\" is…",o:["Writing \"see attached\" clearly","Attaching the file before writing the message","Sending it twice","Using Reply All"],a:1,why:"Attach first, so it physically can't be forgotten."},
+   {q:"A bold subject line means the message is…",o:["Flagged","Unread","Spam","From a VIP"],a:1,why:"Bold = unread; it clears once opened."},
+   {q:"A category, unlike a folder…",o:["Deletes mail automatically","Can label a message no matter what folder it's in","Only works in Calendar","Can't be renamed"],a:1,why:"It's a portable label, not a location."},
+   {q:"Mail with financial or organizational history should generally be…",o:["Deleted after reading","Archived, not deleted","Printed only","Forwarded to everyone"],a:1,why:"Archive keeps it searchable without cluttering your active Inbox."},
+   {q:"A rule you set up on incoming mail…",o:["Requires manual approval every time","Runs automatically on matching future mail","Only works for Calendar","Deletes mail after 30 days"],a:1,why:"Rules act automatically on mail that matches, going forward."}
+  ],
+  badge:{name:"Inbox foundations", msg:"Test 1 passed. From here it's Calendar, Contacts, and the tools that make Outlook run itself."}
+},
+/* ===================== 5 ===================== */
+{ title:"Contacts and Contact Groups", pass:3,
+  screens:[
+   {h:"Adding a contact",
+    body:`<p>Switch to <b>People</b> (bottom-left). <span class="path">Home ▸ New ▸ New Contact</span>. Fill in name and email at minimum; phone and address if you have them. Save & Close.</p>
+    <p>Contacts you email regularly get added here automatically the first time Outlook offers to, or you can add them by hand — right-click a sender's name in a message ▸ <b>Add to Outlook Contacts</b>.</p>`},
+   {h:"Contact Groups: one name for the whole board",
+    body:`<p>Emailing the treasurer, president, and secretary individually every time gets old. A <b>Contact Group</b> (older versions call it a Distribution List) bundles several addresses under one name you type once.</p>
+    <p><span class="path">People ▸ New ▸ New Contact Group</span>. Name it <em>Board</em>. <span class="path">Contact Group ▸ Members ▸ Add Members</span>, pick from your contacts (or type addresses directly), Save & Close. Now typing <b>Board</b> in the To field fills in everyone.</p>`},
+   {h:"Keeping a group current",
+    body:`<p>Open the Contact Group, <span class="path">Members ▸ Add Members</span> or select a name and <b>Remove Member</b>. Removing someone from the group doesn't delete their contact card — it just takes them off that particular list.</p>
+    <p>Do this the day someone joins or leaves the board. A stale distribution list is how an ex-treasurer keeps getting CC'd on financial discussions eight months after handing off the role.</p>`,
+    tip:`Recipients typically see every name in a Contact Group individually once it's sent — it's a shortcut for typing addresses, not a way to hide who's on the list. Use Bcc separately if that matters.`},
+   {h:"Categories and grouping your contact list",
+    body:`<p>Contacts can carry the same colored categories as mail. Tag donors as <em>Donor</em>, vendors as <em>Vendor</em>, board members as <em>Board</em>. Switch the People view to <b>By Category</b> (<span class="path">View ▸ Arrangement ▸ Categories</span>) and your whole contact list organizes itself into those groups.</p>`}
+  ],
+  live:true,
+  tryit:`<ol><li>Add yourself as a new contact if you're not already one.</li><li>Create a Contact Group called <em>Course Practice Group</em> and add two or three real contacts to it (or your own address a few times if you'd rather not add real people).</li><li>Start a new email, type the group's name in To, and confirm it expands to the members.</li><li>Remove one member from the group, then delete the group entirely (right-click it in the contact list ▸ Delete) when you're done.</li></ol>`,
+  quiz:[
+   {q:"A Contact Group is best described as…",o:["A single new email address","A saved shortcut that expands to several addresses when typed","A folder for storing emails","A calendar feature"],a:1,why:"Type the group name once; it fills in every member's address."},
+   {q:"Removing someone from a Contact Group…",o:["Deletes their contact card","Only removes them from that group","Blocks their email address","Deletes all mail from them"],a:1,why:"Their contact still exists; they're just no longer part of that particular group."},
+   {q:"When you send to a Contact Group, recipients typically see…",o:["Only the group name","Each individual member's address","Nothing — it's anonymous","Only your address"],a:1,why:"A Contact Group is a typing shortcut, not a privacy tool — use Bcc if hiding the list matters."},
+   {q:"The best time to update a board Contact Group is…",o:["Once a year at most","The day someone joins or leaves the role","Never — it updates itself","Only when Outlook prompts you"],a:1,why:"Update it when the roster changes, so former members stop receiving current business."}
+  ]
+},
+/* ===================== 6 ===================== */
+{ title:"Calendar: meetings and deadlines", pass:3,
+  screens:[
+   {h:"Creating an event",
+    body:`<p>Switch to <b>Calendar</b>. Double-click any date/time slot, or <span class="path">Home ▸ New ▸ New Appointment</span>. Fill in a Subject, Location, Start and End time. Save & Close.</p>
+    <p>An <b>Appointment</b> is just for you. A <b>Meeting</b> is the same thing plus invited people — use <span class="path">New Meeting</span> instead when others need to be there.</p>`},
+   {h:"Inviting people and tracking replies",
+    body:`<p>In a New Meeting window, add attendees in the <b>To</b> field the same way you'd address an email. Send. Each invitee gets an email with Accept / Tentative / Decline buttons; their response updates automatically on your calendar event, and you can check <span class="path">Meeting ▸ Tracking</span> to see who's answered.</p>`,
+    tip:`Use <b>Scheduling Assistant</b> (a tab inside the New Meeting window) to see everyone's free/busy time side by side before you pick a slot — saves a round of "does this time work?" emails.`},
+   {h:"Recurring events",
+    body:`<p>For a meeting that happens every month, don't create twelve separate events. In the New Appointment/Meeting window, <span class="path">Recurrence</span> (in the ribbon) — set Monthly, pick the day (e.g., "second Tuesday"), set an end date or "no end date." One entry now appears correctly on every future date.</p>
+    <p>Editing a recurring series later asks whether you mean "just this one" or "the whole series" — read that prompt carefully before choosing.</p>`},
+   {h:"Reminders",
+    body:`<p>Every event has a reminder (default 15 minutes before) that pops up a small window. For anything with a hard deadline — a grant application, an insurance renewal, a tax filing date — set the reminder further out (a day, a week) so there's actually time to act on it, not just time to feel briefly alarmed.</p>`},
+   {h:"Sharing a calendar or sending an invite outside Outlook",
+    body:`<p>To let a co-treasurer see your meeting schedule: <span class="path">Home ▸ Share ▸ Calendar Permissions</span> or <b>Share Calendar</b>, depending on your version — this needs both of you on compatible accounts (same organization, or both on Microsoft 365/Outlook.com) and isn't always available on a personal or free account.</p>
+    <p>To send a single event to someone without a compatible account, open the event and use <span class="path">Meeting ▸ Actions ▸ Forward</span> — this sends a standard calendar invite file (.ics) that opens in almost any calendar app.</p>`}
+  ],
+  live:true,
+  tryit:`<ol><li>Create a one-time Appointment for a made-up "Board meeting" a week from today, 7:00–8:00 PM.</li><li>Turn it into a Meeting by adding your own email address as an attendee (or a second address if you have one), and send it.</li><li>Set it to repeat monthly on the same weekday, then undo that (Recurrence ▸ Remove Recurrence) so it stays a one-time test event.</li><li>Change its reminder from 15 minutes to 1 day.</li><li>Delete the test event when you're done.</li></ol>`,
+  quiz:[
+   {q:"The difference between an Appointment and a Meeting is…",o:["Appointments are longer","Meetings include invited attendees, Appointments don't","Meetings can't repeat","There's no real difference"],a:1,why:"A Meeting is an Appointment plus invitees who get an invite email."},
+   {q:"To see whether a Tuesday 7pm slot works for everyone before sending an invite, use…",o:["Recurrence","Scheduling Assistant","Categories","Reply All"],a:1,why:"It shows attendees' free/busy time side by side so you can pick a slot that actually works."},
+   {q:"For a monthly board meeting, the efficient setup is…",o:["Twelve separate events, one per month","One event set to Monthly recurrence","A new event created fresh each month by hand","A Contact Group"],a:1,why:"Recurrence creates one correctly-repeating series instead of manual duplicates."},
+   {q:"For a hard deadline like a grant application, the reminder should be…",o:["Left at the default 15 minutes","Set further out, like a day or a week ahead","Turned off entirely","Set to repeat every minute"],a:1,why:"A longer lead time actually gives you room to act, not just a last-minute alert."}
+  ]
+},
+/* ===================== 7 ===================== */
+{ title:"Templates, signatures, and Quick Parts", pass:3,
+  screens:[
+   {h:"A signature you don't retype",
+    body:`<p><span class="path">File ▸ Options ▸ Mail ▸ Signatures</span> (or, in a new message window, <span class="path">Insert ▸ Text ▸ Signature ▸ Signatures</span>). New, name it, type your name/role/org — <em>Ramon Lavender, Treasurer, [Organization]</em> — set it as default for New messages and Replies/forwards.</p>
+    <p>Every new email now starts with it already in place. No more typing your title by hand fifty times a year.</p>`},
+   {h:"Quick Parts: reusable blocks of text",
+    body:`<p>For anything longer than a signature that you type often — the standard "here's how to pay your dues" paragraph, a thank-you note template — write it once, select it, <span class="path">Insert ▸ Text ▸ Quick Parts ▸ Save Selection to Quick Part Gallery</span>, give it a name.</p>
+    <p>Next time: <span class="path">Insert ▸ Quick Parts</span>, click its name, the whole block appears. Faster than a template file, and it lives right inside Outlook.</p>`,
+    tip:`Quick Parts can include formatting — bold, bullet points, even a logo image — exactly as you saved it.`},
+   {h:"My Templates and canned responses",
+    body:`<p>Some versions of Outlook offer <b>My Templates</b> (a pane in the new-message window) for the same purpose — saved boilerplate messages you drop in with one click. If you see it, it works like Quick Parts but is scoped specifically to full email bodies. Use whichever your version offers; the idea is the same either way.</p>`},
+   {h:"Out of Office / Automatic Replies",
+    body:`<p>Going to be away and can't answer treasurer questions for a stretch? <span class="path">File ▸ Automatic Replies</span> (only available on Exchange/Microsoft 365 accounts — not all personal accounts have this). Set a start and end date, write the message, turn it on. It answers once per sender automatically and turns itself off on the end date.</p>
+    <p>Worth a line pointing people to who's covering while you're out — a co-treasurer's contact, or "back on [date], will reply then."</p>`}
+  ],
+  live:true,
+  tryit:`<ol><li>Set up a real signature with your name and treasurer role. Open a new message and confirm it's already there.</li><li>Write one short paragraph you'd realistically reuse (e.g., "how to pay dues"), save it as a Quick Part, close the message without sending, open a new one, and insert the Quick Part to confirm it works.</li><li>If your account has Automatic Replies, open the dialog and look at the options — don't turn it on unless you actually want it active right now.</li></ol>`,
+  quiz:[
+   {q:"A signature set as default for New messages…",o:["Must be typed fresh each time","Appears automatically in every new message","Only works for replies","Requires Quick Parts first"],a:1,why:"Once set as default, it's inserted automatically."},
+   {q:"Quick Parts are best used for…",o:["One-off messages you'll never send again","Blocks of text you type often, saved for reuse","Calendar reminders","Contact Groups"],a:1,why:"They save formatted, reusable chunks of text you insert with a couple of clicks."},
+   {q:"Automatic Replies (Out of Office) answer…",o:["Every single incoming email, every time","Each sender once, automatically, during the set date range","Only messages from your Contact Groups","Nothing until you manually trigger it"],a:1,why:"It's automatic within the date range you set, and typically once per sender."},
+   {q:"Where do you create or edit a signature?",o:["Calendar ▸ New Event","File ▸ Options ▸ Mail ▸ Signatures","People ▸ New Contact","Home ▸ Rules"],a:1,why:"Signatures live under Mail options, or via Insert ▸ Signature in a message window."}
+  ],
+  badge:{name:"Runs itself", msg:"Contacts, Calendar, templates. Your inbox now does a chunk of the repetitive work for you."}
+},
+/* ===================== 8 (TEST) ===================== */
+{ title:"Test 2", kind:"test", pass:6,
+  screens:[{h:"Chapters 5–7, all together",
+   body:`<p>Eight questions on Contacts, Calendar, and templates. Six to pass.</p>`}],
+  quiz:[
+   {q:"A Contact Group lets you…",o:["Send anonymously","Type one name that expands to several addresses","Block a sender","Schedule a recurring meeting"],a:1,why:"It's an address shortcut for a group of people."},
+   {q:"Removing a member from a Contact Group…",o:["Deletes their contact card entirely","Only removes them from that specific group","Unsends past emails to them","Blocks future email from them"],a:1,why:"Their contact record is untouched; only their membership in that group changes."},
+   {q:"The difference between an Appointment and a Meeting:",o:["Meetings have invited attendees; Appointments don't","Appointments can't have reminders","Meetings can't repeat","No difference"],a:0,why:"Adding attendees is what turns an Appointment into a Meeting."},
+   {q:"To check who has and hasn't responded to a meeting invite:",o:["Scheduling Assistant","Meeting ▸ Tracking","Quick Parts","Automatic Replies"],a:1,why:"Tracking shows each invitee's Accept/Decline/Tentative status."},
+   {q:"For a deadline you can't miss, set the reminder…",o:["To the default 15 minutes","Further out — a day or more ahead","Off entirely","To repeat every hour"],a:1,why:"Extra lead time gives you room to actually act."},
+   {q:"A signature set as default appears…",o:["Only when you remember to insert it","Automatically in new messages","Only in Calendar invites","Only after Send/Receive"],a:1,why:"That's the point of setting a default — it's there without extra steps."},
+   {q:"Quick Parts save…",o:["Contact Groups","Calendar recurrence settings","Reusable blocks of formatted text","Search filters"],a:2,why:"They're for text (and light formatting) you reuse often."},
+   {q:"Automatic Replies require…",o:["Nothing special — works on any account","An Exchange/Microsoft 365-type account, generally","A Contact Group","A shared calendar"],a:1,why:"Not every personal account offers Automatic Replies — it depends on the account type."}
+  ],
+  badge:{name:"Running smoothly", msg:"Test 2 passed. What's left is keeping the mailbox safe and searchable — the housekeeping that prevents future headaches."}
+},
+/* ===================== 9 ===================== */
+{ title:"Spotting phishing and scams", pass:3,
+  screens:[
+   {h:"Why treasurers are a specific target",
+    body:`<p>A treasurer's inbox routinely discusses money, bank details, and vendor payments — which makes it a more attractive target than most mailboxes. The classic attack: an email that looks like it's from your organization's president, asking you to urgently wire funds or buy gift cards. It isn't from them.</p>`},
+   {h:"The tells",
+    body:`<ul><li><b>Urgency and secrecy</b> — "do this now, don't tell anyone" is a pressure tactic, not a normal request.</li>
+    <li><b>The sender name looks right, the address doesn't</b> — "Board President" might display correctly while the actual address is a string of random characters. Check the real address, not just the display name.</li>
+    <li><b>A request to change payment details</b> — "our bank account changed, send future payments here" — always verify by phone, using a number you already had, not one from the email.</li>
+    <li><b>Links that don't match their text</b> — hover over a link (don't click) and the real destination shows in the bottom-left of the window. If it doesn't match what the text claims, don't click it.</li></ul>`,
+    tip:`Hovering, not clicking, is the habit worth building. It costs nothing and reveals most fakes immediately.`},
+   {h:"Checking the real sender address",
+    body:`<p>Click the sender's display name at the top of a message and Outlook shows the actual email address underneath or in a small popup. "Board President <bp7x99@randomdomain.ru>" is not your board president, whatever the display name says.</p>`},
+   {h:"What to do with a suspicious message",
+    body:`<p>Don't reply, don't click links, don't open attachments. Use <span class="path">Home ▸ Delete ▸ Junk ▸ Report</span> (wording varies by version) or forward it to your organization's IT/security contact if there is one. When in doubt about a request involving money, verify it out-of-band — call the person using a number you already have on file, not one from the suspicious message.</p>`}
+  ],
+  live:true,
+  tryit:`<ol><li>Pick any message in your Inbox and click the sender's display name to see the real underlying address.</li><li>Hover (don't click) over a link in an email and check the real destination shown at the bottom of the window against what the link text says.</li><li>If you have a genuine junk/phishing example in your mailbox, look at what tipped you off (urgency? mismatched address? odd request?) without clicking anything in it.</li></ol>`,
+  quiz:[
+   {q:"An email demanding urgent action and secrecy is…",o:["Always legitimate if it's from a name you recognize","A classic pressure tactic used in scams","Only a concern for large organizations","Safe if it has correct spelling"],a:1,why:"Urgency plus secrecy is a manipulation pattern, independent of who it appears to be from."},
+   {q:"The display name on an email…",o:["Always matches the real address","Can be set to anything, regardless of the real underlying address","Is checked by Outlook automatically","Can't be faked"],a:1,why:"Display names can be spoofed. Check the actual address."},
+   {q:"An email says the org's bank account changed — pay future invoices to a new account. Best move:",o:["Update your records immediately","Verify by phone using a number you already had on file","Reply asking for confirmation","Forward it to the whole board"],a:1,why:"Verify out-of-band, with a number you already trust — not one from the message itself."},
+   {q:"Hovering over a link (without clicking) shows you…",o:["Nothing useful","The real destination URL, usually bottom-left of the window","The sender's phone number","Whether the message is flagged"],a:1,why:"It reveals where the link actually goes, which often doesn't match the visible text in a fake."}
+  ]
+},
+/* ===================== 10 ===================== */
+{ title:"Search, cleanup, and storage", pass:3,
+  screens:[
+   {h:"Search operators: narrowing it down",
+    body:`<p>Beyond a plain word, Outlook's search box accepts operators. Click into the search box and the ribbon switches to <b>Search Tools</b>, offering From, Subject, Has Attachments, and a date range as clickable filters — you don't have to memorize the typed syntax, though power users often type <code>from:</code> or <code>subject:</code> directly.</p>
+    <p>"Emails from the venue, with an attachment, from last year" is a three-filter search, not a scroll-and-hope.</p>`},
+   {h:"Mailbox size and the slowdown it causes",
+    body:`<p>A very full mailbox (thousands of messages, years of attachments) can make Outlook slower to search and sync, especially on a metered or shared-hosting account with a size limit. <span class="path">File ▸ Info</span> (or Account Settings, depending on version) often shows current mailbox size.</p>
+    <p>Archiving old mail (Chapter 3) is the main lever — it removes bulk from your active view without deleting anything.</p>`},
+   {h:"AutoArchive",
+    body:`<p>Rather than archiving by hand, <span class="path">File ▸ Options ▸ Advanced ▸ AutoArchive Settings</span> can move mail older than a chosen age (say, 2 years) into an archive automatically on a schedule. Available mainly on desktop Outlook with a local or Exchange mailbox — not universal across every account type.</p>`,
+    tip:`Whatever your cutoff, keep anything with tax, legal, or audit relevance for as long as your organization's record-retention policy requires — AutoArchive moves mail out of the way, it doesn't decide what's safe to eventually delete.`},
+   {h:"Junk Email folder",
+    body:`<p>Outlook auto-sorts likely spam into <b>Junk Email</b>. Check it occasionally — sort by date takes seconds — because it does misfire sometimes, especially on a first email from a new legitimate vendor. Right-click a wrongly-filed message ▸ <b>Junk ▸ Not Junk</b> to recover it and teach the filter.</p>`},
+   {h:"Backing up what matters",
+    body:`<p>Outlook itself isn't a backup system. For anything you truly cannot lose — a year's worth of dues receipts, a signed contract thread — export it: <span class="path">File ▸ Open & Export ▸ Import/Export ▸ Export to a file ▸ Outlook Data File (.pst)</span>, or save individual critical messages as files (drag a message onto your desktop, or <span class="path">File ▸ Save As</span> from an open message).</p>`}
+  ],
+  tryit:`<p>Not a live-mailbox step this time — no changes needed:</p><ol><li>Click into your search box and look at the Search Tools ribbon that appears; note the From, Subject and Has Attachments filter buttons.</li><li>Check <span class="path">File ▸ Info</span> (or your account settings) for your current mailbox size, if it's shown.</li><li>Open your Junk Email folder and skim it once for anything that was filed there by mistake.</li></ol>`,
+  quiz:[
+   {q:"To narrow search results to messages from one sender with an attachment, you should…",o:["Scroll manually and check each one","Use the Search Tools filters (From, Has Attachments, etc.)","Delete everything else first","Create a new folder"],a:1,why:"The Search Tools ribbon exposes exactly these filters without memorizing typed syntax."},
+   {q:"AutoArchive is available…",o:["On every Outlook account type, always","Mainly on desktop Outlook with a local or Exchange mailbox","Only for Calendar items","Only after 10 years of use"],a:1,why:"It's not universal across every account type — check whether your setup offers it."},
+   {q:"A legitimate new vendor's first email lands in Junk Email by mistake. Fix:",o:["Ignore it — it'll fix itself","Right-click ▸ Junk ▸ Not Junk","Delete the Junk folder entirely","Reply from a different account"],a:1,why:"Not Junk recovers the message and helps the filter learn."},
+   {q:"For messages you truly cannot lose (tax records, signed contracts), the safest approach is…",o:["Trust that Outlook backs itself up","Export or save a copy outside Outlook as well","Leave them in the Inbox forever","Mark them as read"],a:1,why:"Outlook isn't a backup system by itself — export or save critical records separately."}
+  ],
+  badge:{name:"Mailbox under control", msg:"Search, cleanup, backup. The unglamorous habits that keep years of records actually findable."}
+},
+/* ===================== 11 (FINAL) ===================== */
+{ title:"Final test", kind:"test", pass:7,
+  screens:[{h:"Everything, once more",
+   body:`<p>Ten questions from across the course. Seven to pass.</p>`}],
+  quiz:[
+   {q:"The Reading Pane shows…",o:["A folder list","The contents of the selected message","Only flagged mail","Your Contact Groups"],a:1,why:"Select a message and its content appears there in place."},
+   {q:"A mailing list of people who don't know each other belongs in…",o:["To","Cc","Bcc","The subject line"],a:2,why:"Bcc keeps everyone's address private from the other recipients."},
+   {q:"A category, unlike a folder…",o:["Deletes mail","Is a portable label a message keeps regardless of folder","Only works in Calendar","Can't be colored"],a:1,why:"Folders are locations; categories are labels that travel with the message."},
+   {q:"A Contact Group is used to…",o:["Block senders","Type one name that expands to a list of addresses","Schedule recurring meetings","Archive old mail"],a:1,why:"It's an addressing shortcut for a group."},
+   {q:"An Appointment becomes a Meeting when you…",o:["Set a reminder","Add invited attendees","Mark it recurring","Attach a file"],a:1,why:"Attendees are what distinguish the two."},
+   {q:"For a hard deadline, set the reminder…",o:["To the default","Further out, with real lead time","Off","To repeat hourly"],a:1,why:"Extra lead time gives you room to actually act on it."},
+   {q:"A signature set as default…",o:["Must be inserted manually each time","Appears automatically in new messages","Only appears in Calendar invites","Requires Quick Parts"],a:1,why:"That's the purpose of setting it as the default."},
+   {q:"An email demanding urgent, secret action about money is a sign of…",o:["A normal request from leadership","A likely scam — verify out-of-band before acting","Something to forward to everyone immediately","A test from IT, always"],a:1,why:"Urgency plus secrecy is a manipulation pattern worth verifying independently."},
+   {q:"Hovering over a link (without clicking) shows…",o:["Nothing","The real destination it points to","The sender's phone number","Whether it's spam, guaranteed"],a:1,why:"It reveals the actual URL, which a fake link's visible text may not match."},
+   {q:"For records you truly cannot lose, you should…",o:["Trust Outlook's default storage alone","Export or save a copy outside Outlook as well","Mark them unread so you don't forget them","Print every one immediately"],a:1,why:"Outlook isn't a backup system on its own — keep critical records saved elsewhere too."}
+  ],
+  badge:{name:"Outlook capable", msg:"Course complete. Mail, Calendar, Contacts, and the habits that keep a treasurer's mailbox organized and safe. Keep it up — most of this is upkeep, not one-time setup."}
+}
+];
+
+runCourse({
+  storageKey:'outlookTreasurerCourse.v1',
+  title:'Outlook for Beginners',
+  homeIntro:`<p>This one's about the daily correspondence side of the role — the inbox, the calendar, and the contact list you actually touch every week, not just the occasional big report. Read a little, try it in your real mailbox, tick the box, take a short quiz.</p>
+  <p>Chapters open in order. Nothing is timed. You can stop and come back any day; the app remembers where you were.</p>
+  <div class="tip"><b>Before you start:</b> unlike the Excel course, there's no separate practice file here — the "Try it" steps in most chapters act on your real Outlook mailbox (sending yourself test messages, creating a test calendar event, and so on). Each of those steps is labeled clearly, and every exercise tells you how to clean up afterward.</div>`,
+  suiteLinks:`<a href="Excel for Beginners.html">← Excel for Beginners</a><br><a href="PowerPoint for Beginners.html">PowerPoint for Beginners →</a><br><a href="OneNote for Beginners.html">OneNote for Beginners →</a>`,
+  practiceLabel:'Try it in your own Outlook',
+  liveLabel:'Try it — this uses your real mailbox',
+  liveWarning:'These steps act on your actual inbox/calendar, not a practice copy.',
+  CH
+});
+</script>
+</body>
+</html>

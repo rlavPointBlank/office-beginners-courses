@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Excel for Beginners — a guided course</title>
+<link rel="stylesheet" href="course-engine.css?v=3">
+<style>
+  :root{
+    --accent:#1D6F42; --accent-soft:#E3F1E8; --accent-line:#9FCBB0;
+    --sel:#2B7A4B;
+  }
+</style>
+</head>
+<body>
+<div class="app">
+  <aside id="side">
+    <a class="brand" href="Office for Beginners.html">Excel for Beginners<small>← All courses</small></a>
+    <button id="menuBtn" onclick="document.getElementById('side').classList.toggle('open')">☰ Chapters</button>
+    <div id="chapterList"></div>
+  </aside>
+  <main id="main"></main>
+</div>
+
+<script src="course-engine.js?v=4"></script>
+<script>
+/* ---------- content is injected below ---------- */
+const CH=[
+/* ===================== 1 ===================== */
+{ title:"Getting comfortable", pass:3,
+  screens:[
+   {h:"You cannot break Excel",
+    body:`<p>Let's start with the thing that matters most: there is nothing you can do in a practice file that can't be undone or thrown away.</p>
+    <p>Two safety nets are always there:</p>
+    <ul><li><kbd>Ctrl</kbd> + <kbd>Z</kbd> is <b>Undo</b>. Press it and the last thing you did is taken back. Press it again to go back further. You can undo dozens of steps.</li>
+    <li>If a file is a mess, close it <b>without saving</b>. Excel will ask "Want to save your changes?" — click <b>Don't Save</b> and the file is exactly as it was when you opened it.</li></ul>
+    <p>Everything in this course is done in a copy of the practice workbook, so experiment freely.</p>`,
+    tip:`Undo has a partner: <kbd>Ctrl</kbd> + <kbd>Y</kbd> is <b>Redo</b>. If you undo one step too many, Redo brings it back.`},
+   {h:"The grid: cells, rows, columns",
+    body:`<p>A spreadsheet is a grid of boxes. Each box is a <b>cell</b>. Columns have letters across the top; rows have numbers down the side.</p>
+    <p>A cell is named by its column letter and row number. The highlighted cell below is <span class="cell">B3</span>: column B, row 3.</p>
+    ${grid([["Member","Dues owed",""],["Alvarez, Maria","$60.00",""],["Baker, Tom","$60.00",""],["Chen, Wei","$60.00",""]],{sel:"B3",head:true})}
+    <p>When you click a cell, its name appears in the small box at the top-left, above column A. That box is called the <b>Name Box</b>. Glance at it whenever you're unsure where you are.</p>`},
+   {h:"Sheets: the tabs at the bottom",
+    body:`<p>One Excel file can hold several grids. Each grid is a <b>sheet</b> (sometimes called a worksheet or a tab). You switch between them with the tabs along the bottom of the window.</p>
+    <p>The practice workbook has five sheets: <b>Read Me</b>, <b>Dues</b>, <b>Donations</b>, <b>Expenses</b> and <b>Summary</b>. Think of them as pages in one binder.</p>
+    <p>The whole file — all its sheets together — is called a <b>workbook</b>. So: workbook = the file; sheet = a page inside it; cell = a box on a page.</p>`,
+    tip:`Right-click a sheet tab to rename it, change its colour, or add a new sheet. Colouring tabs is a good habit when a workbook grows.`},
+   {h:"The ribbon: where everything lives",
+    body:`<p>The wide strip of buttons across the top is the <b>ribbon</b>. It has tabs of its own — Home, Insert, Page Layout, Formulas, Data, Review, View — and each tab shows a different set of tools.</p>
+    <p>Nearly everything a treasurer needs is on the <b>Home</b> tab. In this course, directions are written like this:</p>
+    <p><span class="path">Home ▸ Font ▸ Bold</span></p>
+    <p>That means: click the <b>Home</b> tab, find the group of buttons labelled <b>Font</b> (the group names are printed in small text along the bottom of the ribbon), then click <b>Bold</b>.</p>
+    <p>If the ribbon ever disappears and you only see the tab names, double-click any tab name to bring it back.</p>`},
+   {h:"Zoom: make it big enough to read",
+    body:`<p>There's no prize for squinting. In the bottom-right corner of the window is a slider with a percentage next to it. Drag it right, or click the <b>+</b> button, to make everything bigger. 120% or 130% is comfortable for most people.</p>
+    <p>Zoom only changes how the sheet looks on your screen. It does not change the file or how it prints.</p>`,
+    tip:`Hold <kbd>Ctrl</kbd> and roll the mouse wheel to zoom quickly.`},
+   {h:"Save a copy before you experiment",
+    body:`<p>Two different commands, easily confused:</p>
+    <ul><li><b>Save</b> (<kbd>Ctrl</kbd> + <kbd>S</kbd>) writes your changes over the file you opened.</li>
+    <li><b>Save As</b> makes a <em>new</em> file with a new name and leaves the original untouched.</li></ul>
+    <p><span class="path">File ▸ Save As</span>, pick a folder you'll remember (Documents is fine), and give it a name like <em>Treasurer Practice – my copy</em>.</p>
+    <p>From now on, work in your copy. Save often with <kbd>Ctrl</kbd> + <kbd>S</kbd> — it takes half a second and costs nothing.</p>`}
+  ],
+  tryit:`<ol><li>Open <em>Treasurer Practice.xlsx</em>.</li><li>Use <span class="path">File ▸ Save As</span> to save a copy called <em>Treasurer Practice – my copy</em>.</li><li>Click the <b>Dues</b> tab at the bottom. Click cell <span class="cell">B3</span> and check that the Name Box says B3.</li><li>Type your own name into cell <span class="cell">A2</span> (over Maria's), then press <kbd>Ctrl</kbd> + <kbd>Z</kbd> to undo it.</li><li>Zoom to 120% or more.</li></ol>`,
+  quiz:[
+   {q:"You just typed over something important by mistake. What's the quickest fix?",o:["Close Excel and reinstall it","Press Ctrl + Z to undo","Delete the whole row","Retype it from memory"],a:1,why:"Ctrl + Z takes back your last action, and you can press it repeatedly to go back further."},
+   {q:"Which cell is in column C, row 5?",o:["5C","C5","CE","Row C"],a:1,why:"Cells are named column letter first, then row number: C5."},
+   {q:"You want to try something risky without touching the original file. What do you use?",o:["Save","Save As","Print","Undo"],a:1,why:"Save As creates a new, separate file. The original stays exactly as it was."},
+   {q:"The tabs along the bottom of the window switch between…",o:["Different files","Different sheets inside the same workbook","Different printers","Different fonts"],a:1,why:"Each tab is a sheet — a separate grid inside the same workbook (file)."}
+  ]
+},
+/* ===================== 2 ===================== */
+{ title:"Typing smart", pass:3,
+  screens:[
+   {h:"Typing into a cell",
+    body:`<p>Click a cell, type, and press <kbd>Enter</kbd>. Enter finishes the entry and moves you down one row. <kbd>Tab</kbd> finishes and moves you right one column — handy when filling in a row.</p>
+    <p>To change what's already in a cell, you have two choices:</p>
+    <ul><li>Click the cell and just start typing. The old contents are replaced entirely.</li>
+    <li>Double-click the cell (or press <kbd>F2</kbd>) to edit inside it — useful for fixing one letter without retyping the whole thing.</li></ul>
+    <p>To empty a cell, click it and press <kbd>Delete</kbd>.</p>`,
+    tip:`If you start typing in the wrong cell, press <kbd>Esc</kbd> before Enter and the cell goes back to what it was.`},
+   {h:"Why text sits left and numbers sit right",
+    body:`<p>Excel quietly tells you what it thinks you typed. Words line up on the <b>left</b> of a cell; numbers line up on the <b>right</b>.</p>
+    ${grid([["Donor","Amount"],["Riverside Bakery","100"],["Anonymous","40"]],{head:true})}
+    <p>This matters more than it looks. If a number sits on the left, Excel is treating it as text, and it won't add up. The usual cause: a stray space, a letter, or a symbol typed in the cell. Retype it as a plain number.</p>`},
+   {h:"Dates that behave",
+    body:`<p>Type a date like <b>3/14/2026</b> or <b>14 Mar 2026</b> and Excel recognises it as a real date — it lines up on the right, and you can later sort by it or count days between dates.</p>
+    <p>Two things catch people out:</p>
+    <ul><li>Typing <b>3-14</b> or <b>March 14</b> without a year gives you the <em>current</em> year. Usually fine; check if it matters.</li>
+    <li>If a date turns into a strange number like <b>46095</b>, the cell has been switched to plain-number display. Select it and choose <span class="path">Home ▸ Number ▸ Short Date</span> from the dropdown in the Number group. The date was never lost — only its costume changed.</li></ul>`,
+    tip:`<kbd>Ctrl</kbd> + <kbd>;</kbd> (semicolon) types today's date. Handy for a "date paid" column.`},
+   {h:"Copy and paste",
+    body:`<p>Click the cell you want to copy, press <kbd>Ctrl</kbd> + <kbd>C</kbd>. Click where it should go, press <kbd>Ctrl</kbd> + <kbd>V</kbd>. That's it — the same as in Word or email.</p>
+    <p>You can copy a whole block: click the first cell, hold the mouse button and drag to the last cell so the block is shaded, then <kbd>Ctrl</kbd> + <kbd>C</kbd>. Click a single cell where the top-left of the block should land, then <kbd>Ctrl</kbd> + <kbd>V</kbd>.</p>
+    <p>To copy a whole row or column, click its number or letter first — that selects everything in it.</p>`},
+   {h:"Autofill: the little square in the corner",
+    body:`<p>Select a cell. Look at its bottom-right corner: there is a tiny square. That is the <b>fill handle</b>. Drag it down and Excel continues the pattern.</p>
+    ${grid([["Jan"],["Feb"],["Mar"],["Apr"]],{sel:"A1"})}
+    <p>Type <b>Jan</b> in one cell, drag the handle down three cells, and you get Feb, Mar, Apr. Type <b>Monday</b> and drag: Tuesday, Wednesday… Type a date and drag: the next days. Type <b>1</b> and <b>2</b> in two cells, select both, drag: 3, 4, 5…</p>
+    <p>This is the single biggest time-saver in Excel, and later it will also copy formulas down a whole column.</p>`,
+    tip:`Double-click the fill handle instead of dragging, and Excel fills down as far as the column next to it has data. Perfect for long lists.`}
+  ],
+  tryit:`<p>On the <b>Donations</b> sheet:</p><ol><li>Click cell <span class="cell">A14</span> and type today's date using <kbd>Ctrl</kbd> + <kbd>;</kbd>. Press Enter.</li><li>In <span class="cell">B14</span> type <b>Test Donor</b>, Tab, <b>Cash</b>, Tab, <b>10</b>, Enter. Notice the number sits on the right.</li><li>Click <span class="cell">A14</span>, drag its fill handle down to row 17. You should get the next three days.</li><li>Select rows 14–17 (click row number 14, drag to 17) and press <kbd>Delete</kbd> to clean up.</li></ol>`,
+  quiz:[
+   {q:"You typed a total into a cell and it sits on the LEFT. What does that tell you?",o:["It's a large number","Excel treats it as text, not a number","The cell is locked","Nothing — that's normal"],a:1,why:"Numbers line up right. A left-sitting 'number' is text, and it won't add up. Retype it plainly."},
+   {q:"A date suddenly shows as 46095. What happened?",o:["The date was deleted","The cell's display format changed; the date is still there","Excel crashed","You typed it wrong"],a:1,why:"Dates are stored as numbers behind the scenes. Set the format back to Short Date and it reappears."},
+   {q:"The tiny square in a cell's bottom-right corner is used to…",o:["Delete the cell","Continue a pattern or copy down (autofill)","Change the font","Lock the cell"],a:1,why:"That's the fill handle. Drag it and Excel continues whatever pattern it sees."},
+   {q:"You want to fix one letter in a long name without retyping it all. What do you press?",o:["Enter","Delete","F2 (or double-click the cell)","Ctrl + S"],a:2,why:"F2 or a double-click lets you edit inside the cell instead of replacing it."}
+  ]
+},
+/* ===================== 3 ===================== */
+{ title:"Making it readable", pass:3,
+  screens:[
+   {h:"Selecting before formatting",
+    body:`<p>Formatting always works the same way: <b>select first, then apply</b>. Excel changes whatever is shaded.</p>
+    <ul><li>One cell: click it.</li><li>A block: click and drag.</li><li>A whole row or column: click its number or letter.</li><li>Everything: click the small blank square above row 1, left of column A.</li></ul>
+    <p>If a format lands in the wrong place, you know what to do — <kbd>Ctrl</kbd> + <kbd>Z</kbd>.</p>`},
+   {h:"Bold headings and bigger text",
+    body:`<p>Select the heading row (click row number <b>1</b>). Then <span class="path">Home ▸ Font ▸ Bold</span>, or <kbd>Ctrl</kbd> + <kbd>B</kbd>.</p>
+    <p>To make text larger, use the font size dropdown in the same Font group. 12 is comfortable; 14 for headings.</p>
+    <p>Keep it simple: bold headings, one font, one or two sizes. A sheet that looks calm is easier to check for mistakes.</p>`},
+   {h:"Money and number formats",
+    body:`<p>Numbers can wear different costumes without changing value. Select the Amount column and look at <span class="path">Home ▸ Number</span>:</p>
+    <ul><li>The <b>$</b> button gives currency with two decimals: <b>$1,250.00</b>.</li>
+    <li>The <b>,</b> button adds thousand separators.</li>
+    <li>The two buttons with <b>.0</b> add or remove decimal places.</li></ul>
+    <p>The dropdown above them offers General, Number, Currency, Short Date, Percentage and more. If a column looks wrong, this dropdown is the first place to look.</p>`,
+    tip:`Never type the dollar sign yourself. Type <b>1250</b> and let the format add the $ — otherwise Excel may treat it as text.`},
+   {h:"Column widths",
+    body:`<p>When a column is too narrow, text gets cut off and numbers show as <b>#####</b>. The number is fine; the column just can't display it.</p>
+    <p>Hover over the line between two column letters at the top (say between A and B) until the pointer becomes a two-headed arrow. Then either drag to resize, or <b>double-click</b> to fit the column to its widest entry automatically.</p>
+    <p>To fit every column at once: select everything (the square above row 1), then double-click any column boundary.</p>`},
+   {h:"Borders and fill colour",
+    body:`<p>Lines and shading help the eye. Select the cells, then:</p>
+    <ul><li><span class="path">Home ▸ Font ▸ Borders</span> (the button that looks like a window pane) — choose <b>All Borders</b> for a printed table look.</li>
+    <li>The <b>paint bucket</b> next to it fills cells with colour. A light colour on the heading row is plenty.</li></ul>
+    <p>Restraint again: one heading colour, thin borders. If it looks like a quilt, it's harder to read.</p>`},
+   {h:"Freeze panes: keep headings in view",
+    body:`<p>Scroll down a long list and the headings disappear off the top — now which column was Amount? <b>Freeze Panes</b> pins the heading row in place.</p>
+    <p>Click any cell in row 2 (the first row of data), then <span class="path">View ▸ Freeze Panes ▸ Freeze Top Row</span>. Row 1 now stays put while everything else scrolls.</p>
+    <p>To undo it: <span class="path">View ▸ Freeze Panes ▸ Unfreeze Panes</span>.</p>
+    <p>The practice sheets already have this switched on. Scroll down on the Dues sheet and watch row 1 stay.</p>`}
+  ],
+  tryit:`<p>On the <b>Expenses</b> sheet:</p><ol><li>Click column letter <b>D</b> to select the Amount column, then click the <b>$</b> button. Now click the <b>.0</b> button that <em>removes</em> a decimal, then <kbd>Ctrl</kbd> + <kbd>Z</kbd>.</li><li>Drag column B narrower until you see text cut off, then double-click its right boundary to fix it.</li><li>Select A1 to F1 and give them a light fill colour.</li><li>Select A1 to F11 and apply All Borders.</li><li>Save with <kbd>Ctrl</kbd> + <kbd>S</kbd>.</li></ol>`,
+  quiz:[
+   {q:"A cell shows ##### instead of a number. What's wrong?",o:["The number was deleted","The formula is broken","The column is too narrow to display it","The file is corrupt"],a:2,why:"The value is intact. Widen the column (double-click its right edge) and the number appears."},
+   {q:"What's the golden rule for formatting?",o:["Format first, then select","Select first, then apply the format","Always format the whole sheet","Use the Insert tab"],a:1,why:"Excel formats whatever is selected. Select, then apply."},
+   {q:"You want the heading row to stay visible while scrolling. Which tool?",o:["Bold","Freeze Panes","Borders","Zoom"],a:1,why:"View ▸ Freeze Panes ▸ Freeze Top Row pins row 1 in place."},
+   {q:"The fastest way to make a column exactly wide enough:",o:["Type the width in a box","Double-click the boundary to the right of its letter","Press Enter","Zoom out"],a:1,why:"Double-clicking the column boundary auto-fits it to the widest entry."}
+  ],
+  badge:{name:"First steps", msg:"You can now move around, type, and tidy a sheet. Most people who use Excel at work stop here — you won't."}
+},
+/* ===================== 4 (TEST) ===================== */
+{ title:"Test 1", kind:"test", pass:6,
+  screens:[{h:"Chapters 1–3, all together",
+   body:`<p>Eight questions covering the first three chapters. Nothing new — if you've done the exercises, you've already met every one of these.</p>
+   <p>Six correct to pass. If you miss, the questions stay the same; reread the chapter that tripped you and come back. There is no limit on attempts.</p>`}],
+  quiz:[
+   {q:"Ctrl + Z does what?",o:["Zooms in","Undoes the last action","Saves the file","Closes the sheet"],a:1,why:"Undo. Your most important key."},
+   {q:"The Name Box (top-left, above column A) shows…",o:["The file name","The name of the selected cell, like D7","The sheet name","The font name"],a:1,why:"It always shows which cell is selected."},
+   {q:"To keep the original file untouched while you experiment, use…",o:["Save","Save As","Print","Freeze Panes"],a:1,why:"Save As creates a separate copy."},
+   {q:"Enter moves you down; which key moves you right after typing?",o:["Shift","Tab","Esc","Delete"],a:1,why:"Tab finishes the entry and moves one column right."},
+   {q:"A number sitting on the LEFT of its cell means…",o:["It's negative","Excel treats it as text","It's a date","It's bold"],a:1,why:"Left-aligned = text. It won't add up until retyped as a plain number."},
+   {q:"Dragging the small square at a cell's corner…",o:["Moves the cell","Continues a pattern into the cells below","Deletes the cell","Selects the column"],a:1,why:"That's autofill with the fill handle."},
+   {q:"To show $1,250.00 you should…",o:["Type the $ sign yourself","Type 1250 and apply the currency format","Type it in Word","Use bold"],a:1,why:"Let the format add the symbol; typing it can turn the number into text."},
+   {q:"Which ribbon tab holds Freeze Panes?",o:["Home","Insert","View","Data"],a:2,why:"View ▸ Freeze Panes."}
+  ],
+  badge:{name:"Foundations", msg:"Test 1 passed. Everything from here builds on what you just proved you know."}
+},
+/* ===================== 5 ===================== */
+{ title:"Sorting and filtering", pass:3,
+  screens:[
+   {h:"Why lists need a heading row",
+    body:`<p>Sorting and filtering both depend on one habit: the top row holds headings, every row below is one record, and there are no blank rows in between.</p>
+    ${grid([["Date","Donor","Type","Amount"],["1/5/2026","Alvarez, Maria","Cash","$25.00"],["1/12/2026","Riverside Bakery","Check","$100.00"],["1/20/2026","Anonymous","Cash","$40.00"]],{head:true})}
+    <p>Excel looks at this shape and understands it as a list. Keep totals a couple of rows below the list, or on another sheet, so they don't get sorted into the middle of the data.</p>`},
+   {h:"Sorting one column",
+    body:`<p>Click <b>one cell</b> inside the column you want to sort by — say any donor name. Then <span class="path">Data ▸ Sort &amp; Filter ▸ A→Z</span> (or Z→A).</p>
+    <p>Excel sorts the <em>whole list</em> by that column and keeps each row together. Maria's amount stays on Maria's row. This is the part people fear, and it's exactly what Excel gets right.</p>
+    <p>The one way to get it wrong: selecting a single column before sorting. Then Excel may sort only that column and scramble your rows. Click one cell, don't select the column.</p>`,
+    tip:`If Excel asks "Expand the selection?" — say yes. It's protecting your rows from being separated.`},
+   {h:"Sorting by two things",
+    body:`<p>Sort by Type, and within each type by Amount, largest first: <span class="path">Data ▸ Sort &amp; Filter ▸ Sort</span> opens a dialog. Choose <b>Type</b> in the first row; click <b>Add Level</b>; choose <b>Amount</b>, Largest to Smallest. Make sure <b>My data has headers</b> is ticked so the heading row isn't sorted in.</p>
+    <p>You rarely need more than two levels.</p>`},
+   {h:"Filters: show only what you need",
+    body:`<p>Click one cell in the list, then <span class="path">Data ▸ Sort &amp; Filter ▸ Filter</span>. Small dropdown arrows appear on every heading.</p>
+    <p>Click the arrow on <b>Thank-you sent?</b>, untick <b>Yes</b>, click OK. Only the donors still owed a thank-you remain. The others aren't deleted — they're hidden, and the row numbers on the left turn blue to remind you.</p>
+    <p>To see everything again, click the arrow and choose <b>Clear Filter</b>, or click the Filter button once more to remove the arrows.</p>`,
+    tip:`Filter arrows also let you sort — the sort options sit at the top of the dropdown.`},
+   {h:"Filters on numbers and dates",
+    body:`<p>The dropdown on a number column offers <b>Number Filters</b>: greater than, between, top 10, and so on. On a date column, <b>Date Filters</b> offers this month, last quarter, between two dates.</p>
+    <p>Try: on Expenses, filter Amount to <b>Greater Than 100</b>. That's your list of purchases that might need committee approval.</p>`}
+  ],
+  tryit:`<p>On the <b>Donations</b> sheet:</p><ol><li>Click any donor name, sort A→Z. Confirm each amount stayed with its donor.</li><li>Sort by Date, oldest first, to put it back.</li><li>Turn on Filter. Show only rows where <b>Thank-you sent?</b> is <b>No</b>. Count them (it's five).</li><li>Clear the filter. Now filter Type to show only <b>Check</b>.</li><li>Remove the filter arrows.</li></ol>`,
+  quiz:[
+   {q:"Before sorting, you should…",o:["Select the whole column","Click one cell in the column","Delete the headings","Freeze panes"],a:1,why:"One cell lets Excel sort the whole list and keep rows together. Selecting a column risks scrambling."},
+   {q:"After filtering, the hidden rows are…",o:["Deleted permanently","Moved to another sheet","Still there, just hidden","Printed separately"],a:2,why:"Filtering hides rows; clearing the filter brings them back."},
+   {q:"Row numbers turned blue. That means…",o:["An error","A filter is active","The sheet is locked","Rows are bold"],a:1,why:"Blue row numbers are Excel's reminder that some rows are hidden by a filter."},
+   {q:"You want donations sorted by Type, then by Amount within each type. Use…",o:["A→Z button twice","Data ▸ Sort with two levels","Freeze Panes","Copy and paste"],a:1,why:"The Sort dialog with Add Level handles multi-column sorts."}
+  ]
+},
+/* ===================== 6 ===================== */
+{ title:"Your first formulas", pass:3,
+  screens:[
+   {h:"The equals sign changes everything",
+    body:`<p>Type <b>2+2</b> into a cell and Excel shows the words "2+2". Type <b>=2+2</b> and it shows <b>4</b>.</p>
+    <p>The <b>=</b> sign at the start says: <em>work this out</em>. Everything that follows is a <b>formula</b>. This one idea is the whole difference between a typed-up list and a spreadsheet that does arithmetic for you.</p>
+    <p>Symbols: <b>+</b> add, <b>−</b> subtract, <b>*</b> multiply, <b>/</b> divide.</p>`},
+   {h:"Pointing at cells instead of typing numbers",
+    body:`<p>Instead of <b>=60−30</b>, write <b>=C2−D2</b>. Now the formula reads whatever is in C2 and D2. Change the amount paid and the balance updates on its own.</p>
+    ${grid([["Member","Joined","Dues owed","Amount paid","Date paid","Balance"],["Alvarez, Maria","3/1/2024","$60.00","$60.00","1/15/2026","$0.00"],["Baker, Tom","9/12/2023","$60.00","$30.00","2/2/2026","$30.00"]],{head:true,sel:"F3",fbar:"=C3-D3"})}
+    <p>Look at the formula bar (the long box above the column letters). The cell <em>shows</em> $30.00 but <em>contains</em> =C3−D3. The bar always tells you the truth about what's inside a cell.</p>`,
+    tip:`Don't type cell names — click them. Type <b>=</b>, click C3, type <b>−</b>, click D3, press Enter. Fewer typos.`},
+   {h:"SUM: adding a whole column",
+    body:`<p>To total D2 through D11 you could write =D2+D3+D4… Nobody does. Instead:</p>
+    <p><b>=SUM(D2:D11)</b></p>
+    <p>SUM is a <b>function</b> — a built-in helper. The part in brackets is a <b>range</b>: D2:D11 means "D2 down to D11, everything in between." The colon reads as "through".</p>
+    <p>Type <b>=SUM(</b>, then drag across the cells with the mouse, then press Enter. Excel closes the bracket for you.</p>`,
+    tip:`<span class="path">Home ▸ Editing ▸ AutoSum</span> (the Σ button) writes =SUM for you. Click the empty cell under a column of numbers and press it.`},
+   {h:"AVERAGE, COUNT, MAX, MIN",
+    body:`<p>They all work like SUM: the function name, then a range in brackets.</p>
+    <ul><li><b>=AVERAGE(D2:D11)</b> — the mean amount</li>
+    <li><b>=COUNT(D2:D11)</b> — how many cells contain numbers</li>
+    <li><b>=MAX(D2:D11)</b> — the largest</li>
+    <li><b>=MIN(D2:D11)</b> — the smallest</li></ul>
+    <p>Capital letters aren't required; Excel fixes them for you. Spelling is.</p>`},
+   {h:"When a formula shows an error",
+    body:`<p>Errors are messages, not disasters. The common ones:</p>
+    <ul><li><b>#NAME?</b> — a misspelled function, e.g. =SUMM(…). Fix the spelling.</li>
+    <li><b>#VALUE!</b> — the formula met text where it expected a number. Look for a stray word in the range.</li>
+    <li><b>#DIV/0!</b> — division by zero or an empty cell.</li>
+    <li><b>#####</b> — not an error at all. Widen the column.</li></ul>
+    <p>Click the cell and read the formula bar. Nine times out of ten the problem is visible there.</p>`}
+  ],
+  tryit:`<p>On the <b>Dues</b> sheet (the yellow cells are yours):</p><ol><li>In <span class="cell">F2</span> type <b>=</b>, click C2, type <b>−</b>, click D2, Enter. You should see $0.00.</li><li>Click F2, then drag its fill handle down to F11. Every balance appears.</li><li>Click <span class="cell">C13</span> and use AutoSum (Σ). Check it says =SUM(C2:C12) or C2:C11 — either is fine. Press Enter.</li><li>Do the same in D13 and F13.</li><li>Change Tom Baker's Amount paid to 60 and watch F3 and the totals change. Then undo.</li></ol>`,
+  quiz:[
+   {q:"What must every formula begin with?",o:["A letter","The word SUM","An equals sign =","A dollar sign"],a:2,why:"= tells Excel to calculate instead of displaying what you typed."},
+   {q:"D2:D11 means…",o:["D2 divided by D11","D2 and D11 only","Every cell from D2 down through D11","Column D and column 11"],a:2,why:"The colon means 'through'. It's a range."},
+   {q:"A cell shows $30.00 but the formula bar shows =C3−D3. Which is 'inside' the cell?",o:["$30.00","=C3−D3","Both","Neither"],a:1,why:"The formula is the contents; $30.00 is the result it displays."},
+   {q:"#NAME? usually means…",o:["A misspelled function","The column is narrow","The file is unsaved","A missing font"],a:0,why:"Excel doesn't recognise the function name. Check spelling."}
+  ]
+},
+/* ===================== 7 ===================== */
+{ title:"References that don't break", pass:3,
+  screens:[
+   {h:"What happens when you copy a formula",
+    body:`<p>You wrote <b>=C2−D2</b> in F2 and filled it down. F3 didn't get =C2−D2; it got <b>=C3−D3</b>. Excel shifted the references down one row for each row.</p>
+    <p>That is called a <b>relative reference</b>: the formula remembers "two columns to my left minus one column to my left," not the exact cells. It's why fill-down works, and it's what you want almost always.</p>`},
+   {h:"When shifting is wrong",
+    body:`<p>Suppose cell <span class="cell">H1</span> holds the annual dues, $60, and you want every row to compare against it:</p>
+    ${grid([["Member","Paid","","","Dues"],["Alvarez, Maria","$60.00","=B2-E1","","$60.00"],["Baker, Tom","$30.00","=B3-E2","",""]],{head:false,sel:"C3"})}
+    <p>Fill down and the second row points at <b>E2</b>, which is empty. Wrong answer, no error message. This is the most common silent mistake in Excel.</p>`},
+   {h:"Dollar signs lock a reference",
+    body:`<p>Write it as <b>=B2−$E$1</b>. The dollar signs say: <em>don't shift this one</em>. Fill down and every row still points at E1.</p>
+    <p>That's an <b>absolute reference</b>. The $ has nothing to do with money here — it's just Excel's "pin".</p>
+    <p>You rarely type the dollars. Click on E1 while writing the formula, then press <kbd>F4</kbd>. Excel adds both dollar signs. Press F4 again to cycle through the options; keep pressing until it looks right.</p>`,
+    tip:`Rule of thumb: if a formula refers to a single "settings" cell — a rate, a fee, a total — lock it with F4.`},
+   {h:"Reading a reference",
+    body:`<ul><li><b>E1</b> — shifts both ways when copied (relative)</li>
+    <li><b>$E$1</b> — never shifts (absolute)</li>
+    <li><b>$E1</b> — column locked, row shifts</li>
+    <li><b>E$1</b> — row locked, column shifts</li></ul>
+    <p>The last two are for building tables of rates; you'll know when you need them. For now, plain and fully locked cover 95% of treasurer work.</p>`},
+   {h:"Percentages",
+    body:`<p>To show what share of the total each donation is: <b>=D2/$D$14</b> where D14 is the grand total. Locked, because every row divides by the same total.</p>
+    <p>The result is a fraction like 0.08. Select the column and click the <b>%</b> button in <span class="path">Home ▸ Number</span> — it becomes 8%.</p>
+    <p>Store percentages as fractions and let the format show the % sign. Never type "8%" into a formula.</p>`}
+  ],
+  tryit:`<p>On the <b>Dues</b> sheet:</p><ol><li>In <span class="cell">H5</span> type <b>Annual dues</b>, and in <span class="cell">I5</span> type <b>60</b>.</li><li>In <span class="cell">G2</span> write <b>=I5−D2</b> (click I5, press <kbd>F4</kbd> so it becomes $I$5, then type −, click D2). Enter.</li><li>Fill G2 down to G11. Check G5 — it should say $60.00 for Ruth Dixon, who paid nothing.</li><li>Now delete the dollar signs in G2 (edit with F2), fill down again, and see the answers go wrong. Undo.</li><li>Delete column G's contents when done.</li></ol>`,
+  quiz:[
+   {q:"You fill =C2−D2 down one row. What appears in the next cell?",o:["=C2−D2","=C3−D3","=D2−C2","An error"],a:1,why:"Relative references shift with the copy."},
+   {q:"What does the $ in $E$1 mean?",o:["The cell contains money","Don't shift this reference when copying","Format as currency","Delete this cell"],a:1,why:"It pins the reference. It's unrelated to currency."},
+   {q:"Which key adds the dollar signs while you're writing a formula?",o:["F2","F4","Ctrl + $","Tab"],a:1,why:"F4 cycles through relative and absolute versions of the reference you just clicked."},
+   {q:"Every row should divide by the grand total in D14. Write it as…",o:["=D2/D14","=D2/$D$14","=$D$2/D14","=D14/D2"],a:1,why:"Lock the total so every copied formula still points at D14."}
+  ],
+  badge:{name:"Formula builder", msg:"Formulas, ranges, and locked references — that's the hard conceptual part of Excel, and it's behind you."}
+},
+/* ===================== 8 (TEST) ===================== */
+{ title:"Test 2", kind:"test", pass:6,
+  screens:[{h:"Chapters 5–7, all together",
+   body:`<p>Eight questions on sorting, filtering, formulas and references. Six to pass.</p>
+   <p>If a formula question stumps you, open the practice workbook and try it — that's allowed, and it's the point.</p>`}],
+  quiz:[
+   {q:"You select column B alone and sort. What's the risk?",o:["Nothing","Only column B sorts and rows get scrambled","Excel crashes","Headings disappear"],a:1,why:"Click one cell instead; Excel then keeps whole rows together."},
+   {q:"After filtering to 'Check' donations, the Cash rows are…",o:["Deleted","Hidden","Moved to Summary","Bold"],a:1,why:"Filtering hides, never deletes."},
+   {q:"=SUM(D2:D13) adds…",o:["D2 and D13","Every cell from D2 through D13","Column D and row 13","Nothing without AutoSum"],a:1,why:"The colon makes a range."},
+   {q:"Which shows the formula inside a cell?",o:["The Name Box","The formula bar","The status bar","The sheet tab"],a:1,why:"The formula bar shows the true contents."},
+   {q:"The largest single expense: which function?",o:["=SUM","=MAX","=COUNT","=AVERAGE"],a:1,why:"MAX returns the largest value in the range."},
+   {q:"#VALUE! most often means…",o:["The column is narrow","Text got into a range that expects numbers","A misspelled function","A locked cell"],a:1,why:"Look for a stray word or a number stored as text."},
+   {q:"You copy =B2*$E$1 down. The next cell is…",o:["=B3*$E$2","=B3*$E$1","=B2*$E$1","=B3*E1"],a:1,why:"B2 shifts to B3; $E$1 stays pinned."},
+   {q:"To show 0.08 as 8%…",o:["Type 8% into the formula","Multiply by 100 and type %","Apply the % format","Use bold"],a:2,why:"Keep the fraction, change the costume with the % button."}
+  ],
+  badge:{name:"Halfway there", msg:"Test 2 passed. From here on, chapters are about saving time, not learning new ideas."}
+},
+/* ===================== 9 ===================== */
+{ title:"Handy functions", pass:3,
+  screens:[
+   {h:"IF: a question with two answers",
+    body:`<p><b>=IF(D2&gt;100,"Yes","No")</b></p>
+    <p>Read it as: <em>if D2 is greater than 100, show Yes, otherwise show No</em>. Three parts inside the brackets, separated by commas: the test, what to show if true, what to show if false.</p>
+    <p>Words must be in double quotes. Numbers must not. Comparisons: <b>&gt;</b> greater, <b>&lt;</b> less, <b>=</b> equal, <b>&gt;=</b> at least, <b>&lt;&gt;</b> not equal.</p>
+    <p>Fill it down and you get a column that flags every large expense automatically.</p>`},
+   {h:"COUNTIF: how many match?",
+    body:`<p><b>=COUNTIF(E2:E13,"No")</b></p>
+    <p>Counts the cells in E2:E13 that say No. Two parts: the range to look in, and what to look for. This is "how many thank-yous are still owed?" answered in one cell.</p>
+    <p>It works on numbers too: <b>=COUNTIF(D2:D11,60)</b> counts members who paid exactly 60. <b>=COUNTIF(D2:D11,"&gt;0")</b> counts anyone who paid something — note the comparison goes inside quotes.</p>`},
+   {h:"SUMIF: add only the ones that match",
+    body:`<p><b>=SUMIF(C2:C13,"Check",D2:D13)</b></p>
+    <p>Three parts: the range to check (Type), what to match ("Check"), and the range to add up (Amount). Result: total donated by check.</p>
+    <p>Swap "Check" for "Cash" or "Online" and you have a breakdown. Swap the ranges for the Expenses sheet and "Printing", and you have spend by category. This one function replaces a lot of filtering and adding.</p>`,
+    tip:`Type the criteria into a cell instead of the formula — <b>=SUMIF(C2:C13,G2,D2:D13)</b> where G2 says Check. Then you can change G2 and the answer follows.`},
+   {h:"TODAY and dates arithmetic",
+    body:`<p><b>=TODAY()</b> shows today's date and updates every time the file opens. The empty brackets are required. Good for "Report prepared on".</p>
+    <p>Because dates are numbers underneath, you can subtract them: <b>=TODAY()−B2</b> gives the number of days since the date in B2. Days since a member joined; days a bill has been outstanding.</p>
+    <p>If the result shows as a date instead of a number, set the cell's format to <b>General</b> or <b>Number</b>.</p>`},
+   {h:"Finding the right function",
+    body:`<p>You won't memorise them all, and you don't need to. Two ways to look one up:</p>
+    <ul><li>Click the <b>fx</b> button beside the formula bar. Type what you want in plain words ("count cells that match") and Excel suggests functions, with a description of each.</li>
+    <li>Start typing <b>=</b> and the first letters — Excel shows a list with hints. Press <kbd>Tab</kbd> to accept one.</li></ul>
+    <p>The <b>Summary</b> sheet in the workbook is a finished example. Click each number and read its formula; every one uses something from this chapter.</p>`}
+  ],
+  tryit:`<ol><li><b>Expenses</b> sheet, cell <span class="cell">F2</span>: <b>=IF(D2&gt;100,"Yes","No")</b>. Fill down to F11. Three rows should say Yes.</li><li><b>Donations</b> sheet, <span class="cell">G3</span>: <b>=SUM(D2:D13)</b>.</li><li><span class="cell">G5</span>: <b>=SUMIF(C2:C13,"Check",D2:D13)</b>. Should be $650.</li><li><span class="cell">G7</span>: <b>=COUNTIF(E2:E13,"No")</b>. Should be 5.</li><li>Open the <b>Summary</b> sheet and check your answers against it.</li></ol>`,
+  quiz:[
+   {q:"=IF(D2>100,\"Yes\",\"No\") shows Yes when…",o:["D2 is exactly 100","D2 is greater than 100","D2 says Yes","D2 is empty"],a:1,why:"The first part is the test; > means greater than."},
+   {q:"In a formula, words like Check must be…",o:["In capitals","In double quotes","In brackets","Bold"],a:1,why:"Text goes in quotes; numbers don't."},
+   {q:"Total donations by Online only. Which function?",o:["=SUM","=COUNTIF","=SUMIF","=IF"],a:2,why:"SUMIF adds only the rows whose Type matches."},
+   {q:"=TODAY()−B2 gives…",o:["An error","The number of days since the date in B2","Tomorrow's date","B2 in bold"],a:1,why:"Dates subtract as numbers of days."}
+  ]
+},
+/* ===================== 10 ===================== */
+{ title:"Tables and dropdowns", pass:3,
+  screens:[
+   {h:"Turn a list into a Table",
+    body:`<p>Click one cell in your list, press <kbd>Ctrl</kbd> + <kbd>T</kbd>, check "My table has headers", click OK.</p>
+    <p>Your list is now a <b>Table</b> with a capital T. It gets banded colours, filter arrows on every heading, and a name. More importantly, it becomes <em>smart</em>:</p>
+    <ul><li>Type in the row just below and the Table grows to include it — formatting, formulas and all.</li>
+    <li>Formulas that refer to the Table adjust automatically as it grows. No more fixing =SUM(D2:D11) every time you add a row.</li></ul>
+    <p>A ribbon tab called <b>Table Design</b> appears whenever you're inside one.</p>`},
+   {h:"The Total Row",
+    body:`<p>With a cell in the Table selected: <span class="path">Table Design ▸ Table Style Options ▸ Total Row</span>. A row appears at the bottom. Click any cell in it and a dropdown offers Sum, Average, Count, Max… pick one.</p>
+    <p>Totals in a Total Row stay at the bottom when you sort or add rows, and they respect filters — filter to Cash and the total shows only Cash. That's usually what you actually wanted.</p>`},
+   {h:"Dropdown lists: stop bad data",
+    body:`<p>If "Check", "check", "Cheque" and "Chk" all appear in the Type column, SUMIF will miss some. A dropdown makes everyone pick from the same short list.</p>
+    <p>Select the Type column's data cells, then <span class="path">Data ▸ Data Tools ▸ Data Validation</span>. Under <b>Allow</b> choose <b>List</b>. In <b>Source</b> type <b>Cash,Check,Online</b>. OK.</p>
+    <p>Now each cell shows a small arrow when selected, offering exactly those three. Type anything else and Excel refuses it.</p>`,
+    tip:`For Yes/No columns, Source is simply <b>Yes,No</b>. Three seconds of setup, years of clean data.`},
+   {h:"Removing duplicates",
+    body:`<p>If a list of members has accidental doubles: click in the list, <span class="path">Data ▸ Data Tools ▸ Remove Duplicates</span>, tick the columns that should match (usually just the name), OK. Excel reports how many it removed.</p>
+    <p>Do this on a copy or right after a save — it's a real deletion, though Undo works.</p>`},
+   {h:"Converting back",
+    body:`<p>A Table is almost always better than a plain list, but if you need to undo it: <span class="path">Table Design ▸ Tools ▸ Convert to Range</span>. The data and formatting stay; only the smart behaviour goes.</p>`}
+  ],
+  tryit:`<p>On the <b>Expenses</b> sheet:</p><ol><li>Click in the list, <kbd>Ctrl</kbd> + <kbd>T</kbd>, OK.</li><li>Turn on the Total Row and set the Amount total to Sum.</li><li>In row 12 type a new expense: today's date, <b>Corner Market</b>, <b>Refreshments</b>, <b>22</b>. Watch the Table grow and the total update.</li><li>Select C2 down to the last row of Category and add a dropdown with Source: <b>Printing,Refreshments,Room rental,Postage,Website</b>.</li><li>Try typing "Snacks" in a Category cell. Excel should refuse.</li></ol>`,
+  quiz:[
+   {q:"Ctrl + T does what?",o:["Opens a new tab","Turns a list into a Table","Types today's date","Totals a column"],a:1,why:"Ctrl + T creates a Table from the list you're in."},
+   {q:"You add a row under a Table. What happens?",o:["Nothing until you reformat","The Table grows to include it","It's rejected","The Table is deleted"],a:1,why:"Tables expand automatically; formulas referring to them adjust."},
+   {q:"To make a column accept only Cash, Check or Online, use…",o:["Bold","Data Validation ▸ List","Freeze Panes","Remove Duplicates"],a:1,why:"A validation list creates the dropdown and rejects anything else."},
+   {q:"A Total Row's Sum, when a filter is on, adds…",o:["All rows","Only the visible rows","Only hidden rows","Nothing"],a:1,why:"Total Row totals respect the filter — usually what you meant."}
+  ]
+},
+/* ===================== 11 ===================== */
+{ title:"Printing and sharing", pass:3,
+  screens:[
+   {h:"Look before you print",
+    body:`<p>Press <kbd>Ctrl</kbd> + <kbd>P</kbd>. The right side of the screen shows exactly what will come out of the printer. Page through it with the arrows at the bottom before clicking Print. Most printing disasters — 14 pages for a 40-row list — are visible here.</p>
+    <p>Press <kbd>Esc</kbd> to leave without printing.</p>`},
+   {h:"Fit to one page wide",
+    body:`<p>In the print screen, the last dropdown on the left says <b>No Scaling</b>. Change it to <b>Fit All Columns on One Page</b>. Excel shrinks the sheet just enough that no column is orphaned onto a second page. Rows still continue onto more pages as needed.</p>
+    <p>For a wide sheet, also switch <b>Portrait</b> to <b>Landscape</b> in the same list of options.</p>`,
+    tip:`If it's still cramped, hide columns you don't need printed: right-click the column letter ▸ Hide. Unhide later by selecting the columns either side, right-click ▸ Unhide.`},
+   {h:"Repeat headings on every page",
+    body:`<p>Long list, several pages, page 3 has no column headings. Fix: <span class="path">Page Layout ▸ Page Setup ▸ Print Titles</span>. In <b>Rows to repeat at top</b>, click in the box and then click row 1 on the sheet. OK.</p>
+    <p>Now every printed page starts with the headings.</p>`},
+   {h:"Print only part of a sheet",
+    body:`<p>Select the block you want, then <span class="path">Page Layout ▸ Page Setup ▸ Print Area ▸ Set Print Area</span>. Printing now ignores everything else — notes, scratch calculations, the exercise instructions.</p>
+    <p>To go back to printing everything: <span class="path">Print Area ▸ Clear Print Area</span>.</p>`},
+   {h:"Sharing as a PDF",
+    body:`<p>Sending the Excel file lets people change it, and they may not have Excel at all. A PDF looks the same everywhere and can't be edited by accident.</p>
+    <p><span class="path">File ▸ Export ▸ Create PDF/XPS</span>, or simply <span class="path">File ▸ Save As</span> and choose <b>PDF</b> as the file type. Everything you set up for printing — fit to page, print area, repeated headings — carries over to the PDF.</p>
+    <p>Keep sending the .xlsx to the one person who needs to edit it; send the PDF to everyone else.</p>`}
+  ],
+  tryit:`<p>On the <b>Dues</b> sheet:</p><ol><li>Press <kbd>Ctrl</kbd> + <kbd>P</kbd> and look at the preview. Notice column H's instructions are included. Press Esc.</li><li>Select A1 to F13 and set it as the Print Area. Preview again — cleaner.</li><li>Set Landscape and Fit All Columns on One Page.</li><li>Save the sheet as a PDF on your Desktop and open it to check.</li><li>Clear the Print Area afterwards.</li></ol>`,
+  quiz:[
+   {q:"The safest first step before any print is…",o:["Click Print immediately","Look at the preview (Ctrl + P) and page through it","Change the font","Zoom in"],a:1,why:"The preview shows the exact output; catch the 14-page surprise there."},
+   {q:"Columns are spilling onto a second page. Best fix?",o:["Fit All Columns on One Page","Print twice","Delete columns","Make text bold"],a:0,why:"Scaling shrinks the sheet just enough to keep columns together; landscape helps too."},
+   {q:"To get headings on every printed page, use…",o:["Freeze Panes","Print Titles","Bold","Fill colour"],a:1,why:"Freeze Panes is for the screen; Print Titles is for paper."},
+   {q:"Sending a report to people who shouldn't edit it — send a…",o:[".xlsx","PDF","Screenshot","Word file"],a:1,why:"PDF is fixed, universal, and keeps your print setup."}
+  ]
+},
+/* ===================== 12 ===================== */
+{ title:"Simple charts", pass:3,
+  screens:[
+   {h:"When a chart helps",
+    body:`<p>A chart answers one question at a glance: <em>which category costs most? are donations rising?</em> If the question isn't that simple, a table is better. Treasurer reports usually need at most one chart.</p>
+    <p>A chart needs tidy input: labels in one column, numbers in the next, no blank rows. A short summary block is ideal — for example, category names with a SUMIF beside each.</p>`},
+   {h:"Making a column chart",
+    body:`<p>Select the labels and numbers together (both columns, including their headings). Then <span class="path">Insert ▸ Charts ▸ Recommended Charts</span>. Excel proposes a few; the first is usually a clustered column chart. Click OK.</p>
+    <p>The chart floats on the sheet. Drag its edge to move it, its corner to resize.</p>
+    <p>Two ribbon tabs appear while it's selected: <b>Chart Design</b> and <b>Format</b>. You'll need only the first.</p>`},
+   {h:"Which chart type",
+    body:`<ul><li><b>Column</b> or <b>bar</b> — comparing categories. Expenses by category. Your default.</li>
+    <li><b>Line</b> — something over time. Monthly donations across the year.</li>
+    <li><b>Pie</b> — shares of a whole, only when there are five or fewer slices. Beyond that, nobody can read it.</li></ul>
+    <p>Change type any time: <span class="path">Chart Design ▸ Type ▸ Change Chart Type</span>.</p>`},
+   {h:"Titles and labels",
+    body:`<p>Click the chart title and type a real one — "Expenses by category, Jan–May 2026" — not "Chart Title".</p>
+    <p>Click the <b>+</b> button that appears at the chart's top-right. Tick <b>Data Labels</b> to print each value on its bar. Untick <b>Gridlines</b> if it looks busy.</p>
+    <p>That's enough. Colours and 3-D effects add nothing a committee needs.</p>`},
+   {h:"Charts update themselves",
+    body:`<p>The chart is tied to the cells it was made from. Change a number and the bar changes. If those cells hold SUMIF formulas pointing at your Expenses Table, then adding an expense updates the total, which updates the chart. Nothing to redo.</p>
+    <p>Charts print with the sheet and export into PDFs. Place one near the top of a Summary sheet and your monthly report is nearly automatic.</p>`}
+  ],
+  tryit:`<p>On the <b>Summary</b> sheet:</p><ol><li>In <span class="cell">D10</span> type <b>Printing</b>, <span class="cell">D11</span> <b>Refreshments</b>, <span class="cell">D12</span> <b>Room rental</b>, <span class="cell">D13</span> <b>Postage</b>, <span class="cell">D14</span> <b>Website</b>.</li><li>In <span class="cell">E10</span>: <b>=SUMIF(Expenses!C:C,D10,Expenses!D:D)</b>. Fill down to E14.</li><li>Select D10 to E14. Insert ▸ Recommended Charts ▸ OK.</li><li>Give it a real title. Add Data Labels.</li><li>Go to Expenses, change one Room rental amount, come back and see the chart move. Undo.</li></ol>`,
+  quiz:[
+   {q:"Best chart for comparing spend across five categories?",o:["Line","Column or bar","Scatter","3-D pie"],a:1,why:"Columns compare categories cleanly. Pies get unreadable fast."},
+   {q:"Best chart for donations month by month?",o:["Line","Pie","Bar with 3-D","None"],a:0,why:"Lines show change over time."},
+   {q:"Before inserting a chart, you should select…",o:["One cell","The labels and the numbers together","The whole sheet","The heading only"],a:1,why:"Labels plus values, including headings, gives Excel everything it needs."},
+   {q:"You change a number the chart is based on. The chart…",o:["Must be recreated","Updates by itself","Shows an error","Disappears"],a:1,why:"Charts are linked to their source cells."}
+  ],
+  badge:{name:"Report ready", msg:"Sorting, formulas, tables, printing, a chart. That's a treasurer's report from raw numbers to paper — you can do every step."}
+},
+/* ===================== 13 (FINAL) ===================== */
+{ title:"Final test", kind:"test", pass:7,
+  screens:[{h:"Everything, once more",
+   body:`<p>Ten questions from across the course. Seven to pass.</p>
+   <p>Keep the practice workbook open and check anything you're unsure of. Real Excel work is open-book too.</p>`}],
+  quiz:[
+   {q:"The one key you press when something goes wrong:",o:["Delete","Ctrl + Z","Esc","Enter"],a:1,why:"Undo, always."},
+   {q:"##### in a cell means…",o:["Error in formula","Column too narrow","Negative number","Text in a number column"],a:1,why:"Widen the column."},
+   {q:"To sort a list safely, first…",o:["Select the column","Click one cell in the column","Select the heading row","Turn on Filter"],a:1,why:"One cell keeps rows intact."},
+   {q:"=SUM(D2:D11) totals…",o:["D2 and D11","D2 through D11","Row 2 and row 11","Column D entirely"],a:1,why:"Colon = through."},
+   {q:"Fill =B2*$E$1 down; next cell reads…",o:["=B3*$E$1","=B3*$E$2","=B2*$E$1","=B2*E1"],a:0,why:"B shifts, $E$1 stays."},
+   {q:"How many thank-yous still owed, from a Yes/No column?",o:["=SUM","=COUNTIF(range,\"No\")","=IF","=MAX"],a:1,why:"COUNTIF counts the matches."},
+   {q:"Total of Check donations only:",o:["=SUM","=COUNTIF","=SUMIF(type range,\"Check\",amount range)","=AVERAGE"],a:2,why:"SUMIF adds where the type matches."},
+   {q:"Ctrl + T turns a list into a…",o:["Total row","Table","Template","Tab"],a:1,why:"A Table that grows and keeps formulas current."},
+   {q:"Headings on every printed page come from…",o:["Freeze Panes","Print Titles","Bold","Print Area"],a:1,why:"Print Titles repeats rows on paper."},
+   {q:"A committee member has no Excel. Send them…",o:["The .xlsx anyway","A PDF","A photo of your screen","Nothing"],a:1,why:"PDF opens everywhere and can't be edited by mistake."}
+  ],
+  badge:{name:"Excel capable", msg:"Course complete. You went from opening a file to producing a formatted, formula-driven, charted report. Keep the practice workbook; build your real one the same way."}
+}
+];
+
+
+runCourse({
+  storageKey:'excelTreasurerCourse.v2',
+  title:'Excel for Beginners',
+  homeIntro:`<p>This one's built around the numbers side of running an organization — dues, donations, expenses, and the report that ties them all together by the end. Read a little, try it in the practice workbook, tick the box, take a short quiz.</p>
+  <p>Chapters open in order. Nothing is timed. You can stop and come back any day; the app remembers where you were.</p>
+  <div class="tip"><b>Before you start:</b> open the file <em>Treasurer Practice.xlsx</em> that came with this course, and save a copy of it with <span class="path">File ▸ Save As</span>. Practice in the copy. If it gets messy, you can always open the original again.</div>`,
+  suiteLinks:`<a href="Outlook for Beginners.html">Outlook for Beginners →</a><br><a href="PowerPoint for Beginners.html">PowerPoint for Beginners →</a><br><a href="OneNote for Beginners.html">OneNote for Beginners →</a>`,
+  CH
+});
+</script>
+</body>
+</html>
