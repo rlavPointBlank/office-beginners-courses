@@ -16,14 +16,14 @@ The courses share a running example — a small volunteer organization's dues, d
 | `Outlook for Beginners.html` | Inbox, calendar, and contacts — the daily correspondence |
 | `PowerPoint for Beginners.html` | Building, designing, and presenting a board report |
 | `OneNote for Beginners.html` | A running notebook: meeting notes, action items, search |
-| `Word for Beginners.html` | Coming soon |
+| `Word for Beginners.html` | Styled, reviewable documents — minutes, letters, mail merge |
 
 Start at **`Office for Beginners.html`** — it links out to whichever course you want, in any order, and shows progress across all of them.
 
 ## Files
 
 - `course-engine.js` / `course-engine.css` — the shared lesson/quiz engine every course runs on
-- `Treasurer Practice.xlsx` / `Treasurer Practice.pptx` — practice files the Excel and PowerPoint courses reference by name
+- `Treasurer Practice.xlsx` / `Treasurer Practice.pptx` / `Treasurer Practice.docx` — practice files the Excel, PowerPoint, and Word courses reference by name (Word's mail-merge chapter also reuses the Excel workbook as a data source)
 - Outlook and OneNote have no separate practice file — their exercises work directly against your own mailbox/notebook instead
 
 ## Running it

@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Word for Beginners — a guided course</title>
+<link rel="stylesheet" href="course-engine.css?v=3">
+<style>
+  :root{
+    --accent:#2B579A; --accent-soft:#E1E9F5; --accent-line:#9FB6DC;
+    --sel:#1F4276;
+  }
+</style>
+</head>
+<body>
+<div class="app">
+  <aside id="side">
+    <a class="brand" href="Office for Beginners.html">Word for Beginners<small>← All courses</small></a>
+    <button id="menuBtn" onclick="document.getElementById('side').classList.toggle('open')">☰ Chapters</button>
+    <div id="chapterList"></div>
+  </aside>
+  <main id="main"></main>
+</div>
+
+<script src="course-engine.js?v=4"></script>
+<script>
+const CH=[
+/* ===================== 1 ===================== */
+{ title:"Finding your way around", pass:3,
+  screens:[
+   {h:"A document, one continuous page at a time",
+    body:`<p>Open Word and you're looking at a blank (or existing) <b>document</b> — think of it as one long scroll of pages, not separate slides or sheets. Text flows from the bottom of one page onto the top of the next automatically as you type; you almost never need to force a new page by hand (Chapter 5 covers the one exception: page breaks).</p>`},
+   {h:"Print Layout vs. Read Mode",
+    body:`<p><span class="path">View ▸ Views</span> offers a few ways to look at the same document. <b>Print Layout</b> — the default — shows page edges, margins, and roughly what will come out of a printer; this is where you'll do almost all your editing. <b>Read Mode</b> reflows the text for comfortable on-screen reading, hiding the ribbon and editing tools — good for reviewing, not for typing.</p>`,
+    tip:`The three small icons in the bottom-right corner of the window are shortcuts between Read Mode, Print Layout, and Web Layout — faster than the View tab once you know they're there.`},
+   {h:"The ribbon: Home, Insert, Layout, References",
+    body:`<p><b>Home</b> has text formatting and Styles (Chapter 3). <b>Insert</b> adds tables, pictures, page breaks. <b>Layout</b> controls margins and page setup. <b>References</b> builds a Table of Contents (Chapter 7) and manages citations. Directions here are written like <span class="path">Home ▸ Font ▸ Bold</span> — tab, group, button.</p>`},
+   {h:"The status bar: word count and more",
+    body:`<p>Along the bottom of the window, the status bar shows the current page number and a running word count. Select a chunk of text first, and the word count switches to show just that selection's count — handy for checking a section against a length limit without counting the whole document.</p>`},
+   {h:"Undo, and saving a copy before you experiment",
+    body:`<p>Same as every other Office app: <kbd>Ctrl</kbd> + <kbd>Z</kbd> undoes your last action, repeatable many steps back. And the same Save vs. Save As distinction from Excel applies here too — <span class="path">File ▸ Save As</span> makes a new, separate file and leaves the original untouched, which is exactly what you want while practicing.</p>`}
+  ],
+  tryit:`<ol><li>Open <em>Treasurer Practice.docx</em>. Save a copy with <span class="path">File ▸ Save As</span> named <em>Treasurer Practice – my copy</em>.</li><li>Switch between Print Layout and Read Mode using the icons in the bottom-right corner, then return to Print Layout.</li><li>Select the "Attendance" list and check the status bar's word count for just that selection.</li><li>Scroll down to see the document flow from page 1 onto page 2 (Appendix A) without you doing anything to force it.</li></ol>`,
+  quiz:[
+   {q:"Text flowing from the bottom of one page to the top of the next happens…",o:["Only if you press a page break key","Automatically, as you type","Only in Read Mode","Never — Word requires manual page breaks"],a:1,why:"Word reflows text onto new pages automatically; manual page breaks are for forcing a break early."},
+   {q:"Which view is best for actually editing a document?",o:["Read Mode","Print Layout","Web Layout","None — editing isn't view-dependent"],a:1,why:"Print Layout shows page structure and is where you'll do most editing; Read Mode hides editing tools."},
+   {q:"Selecting a portion of text changes the status bar's word count to show…",o:["Nothing changes","The count for just that selection","Always the whole document's count","The page count instead"],a:1,why:"It switches to a selection-specific count, useful for checking a section's length."},
+   {q:"To try something risky without touching the original file, use…",o:["Save","Save As","Undo","Read Mode"],a:1,why:"Save As creates a separate copy, same as in Excel and PowerPoint."}
+  ]
+},
+/* ===================== 2 ===================== */
+{ title:"Typing and basic formatting", pass:3,
+  screens:[
+   {h:"Selecting text: the different ways",
+    body:`<p>Click and drag to select a range. Double-click a word to select just it. Triple-click a paragraph to select the whole thing. <kbd>Ctrl</kbd>+<kbd>A</kbd> selects the entire document. Formatting always follows the same rule as Excel and PowerPoint: <b>select first, then apply</b>.</p>`},
+   {h:"Bold, italic, underline, and the Font group",
+    body:`<p><kbd>Ctrl</kbd>+<kbd>B</kbd>, <kbd>Ctrl</kbd>+<kbd>I</kbd>, <kbd>Ctrl</kbd>+<kbd>U</kbd> — or the buttons in <span class="path">Home ▸ Font</span>. The same group has font family, size, and text color. All of this applies only to whatever's currently selected.</p>`,
+    tip:`Ctrl+Spacebar clears direct character formatting (bold, color, font changes) from a selection back to plain text — a fast undo for formatting specifically, without undoing your typing.`},
+   {h:"Alignment and basic paragraph spacing",
+    body:`<p><span class="path">Home ▸ Paragraph</span> has the four alignment buttons — Left, Center, Right, Justify — plus line-spacing and paragraph-spacing controls. Justify stretches each line to fill the full width, flush on both edges, the way newspaper columns look; it can create odd gaps in short lines and narrow columns, so use it selectively rather than as a default.</p>`},
+   {h:"The Clipboard: cut, copy, paste, and paste options",
+    body:`<p><kbd>Ctrl</kbd>+<kbd>X</kbd>/<kbd>C</kbd>/<kbd>V</kbd> as usual. Pasting from somewhere else — a webpage, an email — often drags along formatting you didn't want. A small clipboard icon appears right after pasting; click it (or <kbd>Ctrl</kbd> right after pasting) for options including <b>Keep Text Only</b>, which strips all that foreign formatting and matches your document's own style instead.</p>`},
+   {h:"AutoCorrect: helpful, until it isn't",
+    body:`<p>Word silently fixes common typos and capitalizes the first letter of sentences as you type. Occasionally it "fixes" something you meant on purpose (turning a deliberate abbreviation into a different word, say). Hover over a just-autocorrected word and a small underline/box appears — click it for an undo-this-correction option, or just press <kbd>Ctrl</kbd>+<kbd>Z</kbd> immediately after it happens.</p>`}
+  ],
+  tryit:`<p>On the "Old Business" paragraph of your practice copy (it currently says "No old business carried over…"):</p><ol><li>Triple-click it to select the whole paragraph.</li><li>Apply italics, then remove it with Ctrl+Spacebar.</li><li>Copy a sentence from anywhere else in the document and paste it at the end of that paragraph, then undo the paste.</li><li>Select the "Attendance" heading and try Center alignment, then set it back to Left.</li></ol>`,
+  quiz:[
+   {q:"Triple-clicking selects…",o:["A single character","One word","The whole paragraph","The whole document"],a:2,why:"Triple-click grabs the entire paragraph; double-click grabs one word."},
+   {q:"Ctrl+Spacebar does what to a selection?",o:["Deletes it","Clears direct character formatting back to plain text","Centers it","Copies it"],a:1,why:"It's a fast way to strip bold/italic/color/font changes without undoing the text itself."},
+   {q:"Justify alignment…",o:["Centers text only","Stretches each line flush on both edges, like a newspaper column","Only works on headings","Removes all formatting"],a:1,why:"It can create odd gaps in narrow columns or short lines, so use it selectively."},
+   {q:"After pasting text from a webpage, the fastest way to match your document's own formatting is…",o:["Retype it by hand","Use the paste options icon ▸ Keep Text Only","Delete the whole document","Increase the font size"],a:1,why:"Keep Text Only strips foreign formatting picked up from the source."}
+  ]
+},
+/* ===================== 3 ===================== */
+{ title:"Styles: fixing formatting the fast way", pass:3,
+  screens:[
+   {h:"Manual formatting vs. a Style",
+    body:`<p>You could make every heading in a long document bold, 16pt, a certain color, by selecting each one and applying those three things by hand. Or you could apply a <b>Style</b> — a named, saved bundle of formatting — to each heading instead. The practical difference shows up the moment you want to change how all your headings look: with manual formatting, you redo every single one; with a Style, you edit the Style once and every heading using it updates.</p>`},
+   {h:"The Styles gallery",
+    body:`<p><span class="path">Home ▸ Styles</span> shows a row of style previews — Normal, Heading 1, Heading 2, Title, and others. Click into a paragraph (no need to select the whole thing) and click a style to apply it to that paragraph.</p>
+    ${docMock(["<b style='font-size:1.3em'>Heading 1 example</b>","<b>Heading 2 example</b>","Normal body text looks like this — the default paragraph style most of your writing will use."])}`},
+   {h:"Why Heading styles matter beyond looks",
+    body:`<p>Heading 1 and Heading 2 aren't just bigger, bolder text — Word treats them as an actual outline structure. That structure is what powers the Navigation Pane and an auto-building Table of Contents (Chapter 7). Bold, oversized <em>Normal</em>-style text that merely <em>looks</em> like a heading doesn't participate in either — which is exactly the problem with the practice document's "Old Business" line.</p>`,
+    tip:`A quick way to tell if something is a real Heading style or just manually formatted: click into it and look at the Styles gallery — the matching style will be highlighted. If nothing's highlighted, or it says "Normal," it's manual formatting wearing a heading's clothes.`},
+   {h:"Fixing formatting that's drifted",
+    body:`<p>Click into text that's been manually formatted away from its style — the wrong font, oversized, an odd color — and click the correct style in the gallery again. Word replaces the manual formatting with the style's actual definition. This is the direct fix for exactly the kind of drift you'll clean up in this chapter's exercise.</p>`},
+   {h:"Modifying a Style itself",
+    body:`<p>Right-click a style in the gallery ▸ <b>Modify</b> to change its actual definition — font, size, color, spacing before/after. Every paragraph using that style updates immediately, document-wide. This is the "fix it once" payoff mentioned at the top of this chapter.</p>`}
+  ],
+  tryit:`<p>On your practice copy, find the "Old Business" line — it's been manually bold-underlined in a mismatched font and color instead of using a proper heading style:</p><ol><li>Click into it and check the Styles gallery — confirm nothing is highlighted (or it shows Normal), proving it isn't really a heading.</li><li>Click the <b>Heading 2</b> style to apply it, matching "Attendance," "Treasurer's Report," and the rest.</li><li>Right-click Heading 2 in the gallery ▸ Modify, and look at (without necessarily changing) its font/size/color settings.</li><li>Confirm the fixed "Old Business" heading now looks consistent with the document's other Heading 2 lines.</li></ol>`,
+  quiz:[
+   {q:"The main practical advantage of a Style over manual formatting is…",o:["Styles look fancier","Editing the Style once updates every paragraph using it","Manual formatting is always faster","There's no real difference"],a:1,why:"Styles centralize the formatting definition; manual formatting has to be redone everywhere by hand."},
+   {q:"Text that's bold and oversized but still uses the Normal style…",o:["Is functionally identical to a real Heading style","Looks like a heading but doesn't participate in outline features like the Navigation Pane or an auto-Table of Contents","Automatically converts to Heading 1","Can't be edited"],a:1,why:"Only real Heading styles feed Word's outline structure — visual similarity isn't enough."},
+   {q:"To check whether a paragraph is using a real Heading style, look at…",o:["The word count","Which style is highlighted in the Styles gallery when you click into it","The page number","The file size"],a:1,why:"The gallery highlights the paragraph's actual applied style."},
+   {q:"Right-click a style ▸ Modify changes…",o:["Only that one paragraph","The style's definition, updating every paragraph using it document-wide","The whole document's margins","Nothing until you restart Word"],a:1,why:"Modifying a style is the document-wide, fix-it-once mechanism."}
+  ],
+  badge:{name:"Consistent document", msg:"Selection, formatting, and Styles — the difference between a document that looks planned and one that looks like it was fixed by hand, paragraph by paragraph."}
+},
+/* ===================== 4 (TEST) ===================== */
+{ title:"Test 1", kind:"test", pass:6,
+  screens:[{h:"Chapters 1–3, all together",
+   body:`<p>Eight questions on navigation, basic formatting, and Styles. Six to pass, no limit on attempts.</p>`}],
+  quiz:[
+   {q:"Text flows onto a new page…",o:["Automatically, as you type","Only with a manual page break","Only in Read Mode","Never automatically"],a:0,why:"Word reflows content onto new pages on its own."},
+   {q:"Triple-clicking selects…",o:["One character","One word","A whole paragraph","The whole document"],a:2,why:"Triple-click grabs the entire paragraph."},
+   {q:"To keep the original file untouched while experimenting, use…",o:["Save","Save As","Undo","Read Mode"],a:1,why:"Save As creates a separate copy."},
+   {q:"Ctrl+Spacebar on a selection…",o:["Deletes the text","Clears direct character formatting back to plain","Applies bold","Centers the paragraph"],a:1,why:"It strips manual formatting without touching the text itself."},
+   {q:"A Style is best described as…",o:["A single font choice","A named, saved bundle of formatting you can apply and later edit centrally","A type of table","A page layout option"],a:1,why:"Edit the style once; every paragraph using it updates."},
+   {q:"Bold, oversized Normal-style text that merely looks like a heading…",o:["Works identically to a real Heading style","Doesn't feed the Navigation Pane or an auto-Table of Contents","Is automatically converted to Heading 1","Can't be selected"],a:1,why:"Only genuine Heading styles participate in Word's outline structure."},
+   {q:"To check a paragraph's actual applied style…",o:["Check the word count","Click into it and see what's highlighted in the Styles gallery","Check the page number","Open Read Mode"],a:1,why:"The gallery highlights whatever style the current paragraph is actually using."},
+   {q:"Right-click a style ▸ Modify changes…",o:["Just the current paragraph","That style's definition document-wide","The file name","Nothing"],a:1,why:"It's the central, fix-it-once mechanism for a style used throughout the document."}
+  ],
+  badge:{name:"Word foundations", msg:"Test 1 passed. From here it's page structure, lists and tables, and navigating something longer than one page."}
+},
+/* ===================== 5 ===================== */
+{ title:"Paragraphs and page layout", pass:3,
+  screens:[
+   {h:"Margins and page setup",
+    body:`<p><span class="path">Layout ▸ Page Setup ▸ Margins</span> offers presets (Normal, Narrow, Wide) or <b>Custom Margins</b> for exact measurements. <span class="path">Layout ▸ Orientation</span> switches Portrait/Landscape — landscape is occasionally useful for a wide table that won't fit a portrait page.</p>`},
+   {h:"Line and paragraph spacing",
+    body:`<p><span class="path">Home ▸ Paragraph ▸ Line and Paragraph Spacing</span> controls the space between lines within a paragraph (single, 1.5, double) and the space before/after each paragraph. Consistent paragraph spacing — rather than pressing Enter twice between paragraphs — is what keeps a document's vertical rhythm even when text reflows after an edit.</p>`,
+    tip:`Pressing Enter twice for a blank line between paragraphs is a common habit worth breaking — it creates an empty, invisible paragraph that can throw off spacing later. Set "Space After" on the paragraph style instead, once, and every paragraph gets consistent spacing automatically.`},
+   {h:"Page breaks vs. just pressing Enter repeatedly",
+    body:`<p>To deliberately start a new page — not because content overflowed, but because a new section should begin cleanly (an appendix, say) — <span class="path">Insert ▸ Pages ▸ Page Break</span> (or <kbd>Ctrl</kbd>+<kbd>Enter</kbd>). This is a real, single marker. Pressing Enter repeatedly to "push" text onto the next page creates a pile of empty paragraphs that breaks the moment anything above it is edited.</p>`},
+   {h:"Headers, footers, and page numbers",
+    body:`<p><span class="path">Insert ▸ Header & Footer</span> — click Header or Footer to add repeating content at the top/bottom of every page (a document title, a date, a confidentiality note). <span class="path">Insert ▸ Header & Footer ▸ Page Number</span> adds automatically-updating page numbers in a position you choose; it stays correct as the document grows or shrinks.</p>`},
+   {h:"Section breaks: different layout in different parts of one document",
+    body:`<p>A plain page break starts a new page but keeps the same margins, headers, and page-numbering as the rest of the document. A <b>section break</b> (<span class="path">Layout ▸ Breaks ▸ Section Breaks</span>) lets one part of a document have different margins, a landscape page in the middle of a portrait document, or a header that doesn't appear on the title page. You won't need this often, but it's the answer when "why can't I make just this one page different" comes up.</p>`}
+  ],
+  tryit:`<p>On your practice copy:</p><ol><li>Look at the page break between the minutes and "Appendix A" — click on it (View ▸ Show Formatting Marks, or Home ▸ Paragraph ▸ the ¶ button, makes it visible) and confirm it's a real page break, not a stack of empty paragraphs.</li><li>Add a footer with your name in it, applying to every page.</li><li>Add page numbers at the bottom, centered.</li><li>Try switching Appendix A's page to Landscape using a section break — then undo it if you'd rather leave the document as-is.</li></ol>`,
+  quiz:[
+   {q:"The problem with pressing Enter repeatedly to push text onto a new page is…",o:["It's not possible to do","It creates empty paragraphs that break the layout when content above changes","It automatically inserts a page number","It deletes the previous page"],a:1,why:"A real page break is a single stable marker; empty paragraphs are fragile."},
+   {q:"Page numbers inserted via Insert ▸ Page Number…",o:["Must be manually updated every time the document changes length","Update automatically as the document grows or shrinks","Only work on the first page","Require a section break"],a:1,why:"They're a live field, not typed text — always correct automatically."},
+   {q:"A section break, unlike a plain page break, allows…",o:["Nothing different — they're identical","Different margins, orientation, or headers in different parts of one document","Only landscape orientation","Deleting a page"],a:1,why:"Section breaks let formatting genuinely differ between parts of the same document."},
+   {q:"Consistent paragraph spacing is better achieved by…",o:["Pressing Enter twice between paragraphs","Setting Space After on the paragraph style","Using Landscape orientation","Turning off Undo"],a:1,why:"Style-based spacing stays consistent automatically; manual blank lines don't."}
+  ]
+},
+/* ===================== 6 ===================== */
+{ title:"Lists and tables", pass:3,
+  screens:[
+   {h:"Bulleted and numbered lists",
+    body:`<p><span class="path">Home ▸ Paragraph ▸ Bullets</span> or <b>Numbering</b>. Type an item, press Enter, and the next line continues the list automatically. Press <kbd>Tab</kbd> at the start of a line to indent it one level deeper (a sub-list); <kbd>Shift</kbd>+<kbd>Tab</kbd> to pull it back out — same pattern as PowerPoint's bullet levels.</p>`},
+   {h:"Ending a list cleanly",
+    body:`<p>Press <kbd>Enter</kbd> twice at the end of a list (the second Enter on an empty bullet) to stop the list and return to normal paragraph text — otherwise you keep getting a fresh bullet every time you press Enter, even for something that isn't really a list item.</p>`,
+    tip:`AutoCorrect sometimes starts a numbered or bulleted list on its own when you type "1." or "-" at the start of a line. If that's not what you wanted, Ctrl+Z immediately undoes just that auto-formatting.`},
+   {h:"Multilevel lists",
+    body:`<p>For a proper outline — 1, then 1.a, then 1.a.i — <span class="path">Home ▸ Paragraph ▸ Multilevel List</span> gives you a numbering scheme that tracks levels automatically as you Tab/Shift+Tab between them, rather than you typing the numbers yourself.</p>`},
+   {h:"Inserting and formatting a table",
+    body:`<p><span class="path">Insert ▸ Table</span>, choose columns/rows (or drag the grid), click to place it. Click into a cell and type; <kbd>Tab</kbd> moves to the next cell, adding a new row if you Tab past the last one — identical to PowerPoint's table behavior. A <b>Table Design</b> ribbon tab appears while a table is selected, with banded rows and a header-row style to make a dense table easier to scan.</p>`},
+   {h:"Resizing columns and rows",
+    body:`<p>Hover over a column's right border until the cursor becomes a two-headed arrow, then drag to resize — same gesture as resizing an Excel column. <span class="path">Table Design ▸ Layout ▸ AutoFit</span> can resize every column to fit its content automatically in one click, useful right after typing in a table's data.</p>`}
+  ],
+  tryit:`<p>On your practice copy:</p><ol><li>Under "Action Items," add a new numbered item, then press Tab on it to see how it behaves in a multilevel scheme if you switch it to Multilevel List (optional — plain Numbering is fine too).</li><li>Look at the "Treasurer's Report" table — click AutoFit to resize its columns to content.</li><li>Add a new row to that table with a made-up expense category and amount.</li><li>Press Enter twice at the end of the "Attendance" bulleted list and confirm you're back to plain paragraph text, not another bullet.</li></ol>`,
+  quiz:[
+   {q:"To indent a list item one level deeper…",o:["Press Enter twice","Press Tab at the start of the line","Press Ctrl+Z","Use Section Breaks"],a:1,why:"Tab indents; Shift+Tab outdents — same as PowerPoint's bullet levels."},
+   {q:"To stop a list and return to normal paragraph text…",o:["Press Enter twice at the end (the second on an empty bullet)","Delete the whole list","Press Ctrl+B","Switch to Read Mode"],a:0,why:"A second Enter on an empty list item ends the list."},
+   {q:"A multilevel list is best for…",o:["A single flat bulleted list","A proper outline with tracked levels like 1, 1.a, 1.a.i","Tables only","Headers and footers"],a:1,why:"It automatically manages numbering across nested levels."},
+   {q:"Table Design ▸ Layout ▸ AutoFit does what?",o:["Deletes empty rows","Resizes columns to fit their content automatically","Changes the table's color","Adds page numbers"],a:1,why:"It's a one-click resize to content, right after typing in table data."}
+  ]
+},
+/* ===================== 7 ===================== */
+{ title:"Working with a long document", pass:3,
+  screens:[
+   {h:"The Navigation Pane",
+    body:`<p><span class="path">View ▸ Show ▸ Navigation Pane</span> opens a sidebar listing every Heading-styled paragraph in the document, indented by level — an instant outline. Click any entry to jump straight to that spot. This only works because of Chapter 3's real Heading styles; manually-bolded fake headings won't appear here at all.</p>`},
+   {h:"Building a Table of Contents automatically",
+    body:`<p><span class="path">References ▸ Table of Contents</span>, pick a built-in style. Word scans the document's Heading 1/2/3 paragraphs and builds a clickable, page-numbered contents list instantly — no typing page numbers by hand, and no risk of them going stale.</p>
+    <p>Edit the document later, added a page, moved a section? Right-click the Table of Contents ▸ <b>Update Field</b> (or press <kbd>F9</kbd> with it selected) to refresh it, rather than rebuilding it from scratch.</p>`,
+    tip:`A Table of Contents is a field, not typed text — trying to click directly into it to edit the words will jump you to that heading instead. Edit the actual heading text in the document, then Update Field.`},
+   {h:"Find & Replace",
+    body:`<p><kbd>Ctrl</kbd>+<kbd>F</kbd> opens a simple search sidebar highlighting every match. <kbd>Ctrl</kbd>+<kbd>H</kbd> opens <b>Find and Replace</b> — type what to find and what to replace it with, then <b>Replace</b> one at a time or <b>Replace All</b> for the whole document at once. Good for a name that changed, a date that needs updating everywhere, a consistent typo.</p>`},
+   {h:"Bookmarks and cross-references",
+    body:`<p>For a long document you'll return to repeatedly, <span class="path">Insert ▸ Links ▸ Bookmark</span> marks a specific spot with a name you choose, so you (or a hyperlink elsewhere in the document) can jump straight there. <span class="path">Insert ▸ Links ▸ Cross-reference</span> inserts a live, clickable reference to a heading, figure, or bookmark elsewhere in the document — "see Appendix A" that actually jumps there and stays correct if the appendix moves.</p>`},
+   {h:"Go To and jumping by page",
+    body:`<p><kbd>Ctrl</kbd>+<kbd>G</kbd> (or <kbd>F5</kbd>) opens <b>Go To</b> — type a page number and jump straight there. Faster than scrolling in a document with dozens of pages.</p>`}
+  ],
+  tryit:`<ol><li>Open the Navigation Pane on your practice copy and confirm you can see and click between "Attendance," "Treasurer's Report," "Action Items," "Next Meeting," and "Appendix A: Committee Contacts."</li><li>Insert a Table of Contents at the very top of the document (before "Riverside Neighbors Association"), using a built-in style.</li><li>Rename the "Next Meeting" heading to "Next Meeting Details," then right-click the Table of Contents ▸ Update Field and confirm it picks up the new heading text.</li><li>Use Ctrl+H to Find and Replace "Riverside Neighbors Association" with any other made-up organization name, Replace All, then undo it (Ctrl+Z) so the document's back to normal.</li></ol>`,
+  quiz:[
+   {q:"The Navigation Pane lists…",o:["Every word in the document","Every Heading-styled paragraph, as a clickable outline","Only page numbers","Only tables"],a:1,why:"It relies on real Heading styles — manually-bolded fake headings won't show up."},
+   {q:"After editing a document, an inserted Table of Contents…",o:["Updates itself instantly with no action needed","Needs Update Field (or F9) to refresh","Must be deleted and reinserted","Can't ever be changed"],a:1,why:"It's a field that needs a manual refresh after changes, not typed text."},
+   {q:"Ctrl+H opens…",o:["Find only","Find and Replace","A Table of Contents","The Navigation Pane"],a:1,why:"Ctrl+F is Find; Ctrl+H adds Replace."},
+   {q:"A cross-reference, unlike typed text like \"see Appendix A,\"…",o:["Is identical to typed text","Is a live, clickable link that stays correct if the target moves","Only works in tables","Can't be clicked"],a:1,why:"It's a field tied to the actual heading/bookmark, not a static guess at where it is."}
+  ],
+  badge:{name:"Document navigator", msg:"Headings that actually do something, an auto-building table of contents, and the tools to move around a long document fast."}
+},
+/* ===================== 8 (TEST) ===================== */
+{ title:"Test 2", kind:"test", pass:6,
+  screens:[{h:"Chapters 5–7, all together",
+   body:`<p>Eight questions on page layout, lists/tables, and navigating a long document. Six to pass.</p>`}],
+  quiz:[
+   {q:"To deliberately start a new page for a new section, use…",o:["Pressing Enter repeatedly","Insert ▸ Page Break (Ctrl+Enter)","Table Design","Read Mode"],a:1,why:"A real page break is a single stable marker, unlike stacked empty paragraphs."},
+   {q:"Page numbers inserted via Insert ▸ Page Number…",o:["Must be retyped as the document grows","Update automatically","Only appear on page 1","Require a Table of Contents first"],a:1,why:"They're a live, self-updating field."},
+   {q:"A section break allows…",o:["Nothing different from a page break","Different margins/orientation/headers within one document","Only bullet lists","Deleting content"],a:1,why:"It's how one part of a document can look different from the rest."},
+   {q:"To stop a list and return to plain text…",o:["Enter twice at the end","Delete the document","Ctrl+B","Landscape orientation"],a:0,why:"A second Enter on an empty list item exits the list."},
+   {q:"Table Design ▸ Layout ▸ AutoFit does what?",o:["Deletes the table","Resizes columns to fit content in one click","Adds a header row only","Changes page orientation"],a:1,why:"A fast one-click resize after typing table data."},
+   {q:"The Navigation Pane relies on…",o:["Manually bolded text","Real Heading styles","Page numbers","Tables"],a:1,why:"Only genuine Heading-styled paragraphs appear in it."},
+   {q:"After document edits, a Table of Contents needs…",o:["Nothing, it's always current","Update Field (or F9) to refresh","To be retyped","A section break"],a:1,why:"It's a field requiring a manual refresh, not live-updating text."},
+   {q:"Ctrl+H opens…",o:["Find and Replace","Just Find","The Navigation Pane","Page Setup"],a:0,why:"Ctrl+H adds Replace on top of Find."}
+  ],
+  badge:{name:"Long-document ready", msg:"Test 2 passed. What's left is collaboration and getting a finished document out the door."}
+},
+/* ===================== 9 ===================== */
+{ title:"Track Changes and comments", pass:3,
+  screens:[
+   {h:"Why Track Changes matters for board documents",
+    body:`<p>Meeting minutes usually need review before they're official — a secretary drafts them, the treasurer checks the financial section, the board approves. Emailing a document back and forth with edits buried invisibly in the text loses exactly the information everyone needs: <em>what changed, and who changed it</em>. Track Changes keeps that visible.</p>`},
+   {h:"Turning it on",
+    body:`<p><span class="path">Review ▸ Tracking ▸ Track Changes</span> (or <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>E</kbd>). While it's on, deletions show as struck-through text, insertions show underlined in a different color, and a vertical line in the margin marks any changed line — all without actually removing anything yet.</p>`,
+    tip:`Different reviewers' changes show in different colors automatically, so it's clear at a glance who suggested what, even with several people editing the same document.`},
+   {h:"Reviewing: accept or reject, one at a time or all at once",
+    body:`<p><span class="path">Review ▸ Changes</span> — <b>Accept</b> makes a change permanent, <b>Reject</b> discards it and restores the original text. Step through one at a time with the Next/Previous buttons, or use the dropdown arrows for <b>Accept All</b> / <b>Reject All</b> once you've reviewed everything and are ready to finalize.</p>`},
+   {h:"Comments: a conversation attached to the text, without editing it",
+    body:`<p><span class="path">Review ▸ Comments ▸ New Comment</span> attaches a note to selected text without changing the text itself — "confirm this number with the bank statement" instead of editing the number directly. Reply to a comment to keep a threaded conversation, and mark it <b>Resolved</b> once it's settled (still visible, just grayed out, rather than deleted).</p>`},
+   {h:"Simple Markup vs. All Markup",
+    body:`<p>The dropdown near <span class="path">Review ▸ Tracking</span> switches how tracked changes display: <b>All Markup</b> shows every strikethrough and underline inline (useful while actively reviewing); <b>Simple Markup</b> shows a clean-looking document with just margin marks where changes exist (useful for reading the content without visual clutter); <b>No Markup</b> previews what it'll look like if everything is accepted, without actually accepting anything yet.</p>`}
+  ],
+  tryit:`<p>On your practice copy:</p><ol><li>Turn on Track Changes.</li><li>Edit one sentence in the "Treasurer's Report" paragraph — change a word or two.</li><li>Add a comment on the dues table asking a question, e.g. "Confirm this matches the bank statement."</li><li>Switch between All Markup and Simple Markup to see the difference.</li><li>Accept your text edit, then mark your comment Resolved.</li><li>Turn Track Changes back off.</li></ol>`,
+  quiz:[
+   {q:"With Track Changes on, a deletion appears as…",o:["Immediately gone, no trace","Struck-through text, not actually removed yet","A comment","A new page"],a:1,why:"Nothing is actually removed until the change is accepted."},
+   {q:"A comment, unlike a tracked change,…",o:["Edits the text directly","Attaches a note to text without changing the text itself","Can't be replied to","Is always invisible"],a:1,why:"Comments are a side conversation about the text, not an edit to it."},
+   {q:"To make a tracked edit permanent…",o:["Reject it","Accept it","Resolve it","Switch to Read Mode"],a:1,why:"Accept finalizes the change; Reject discards it and restores the original."},
+   {q:"Simple Markup view is useful for…",o:["Seeing every strikethrough and underline inline while reviewing","Reading the document without visual clutter, with just margin marks","Deleting all comments at once","Changing page orientation"],a:1,why:"It hides inline markup while still flagging that changes exist, via the margin."}
+  ]
+},
+/* ===================== 10 ===================== */
+{ title:"Templates and mail merge", pass:3,
+  screens:[
+   {h:"Starting from a template instead of blank",
+    body:`<p><span class="path">File ▸ New</span> offers a search box and a gallery of built-in templates — meeting minutes, letters, newsletters, reports — each with placeholder text and pre-set styles ready to replace with your own content. Starting from a relevant template beats reformatting a blank page from scratch, especially for something you'll produce repeatedly.</p>`},
+   {h:"Saving your own template",
+    body:`<p>Once you've built a document whose structure you'll reuse — this practice document's minutes layout, say — <span class="path">File ▸ Save As</span>, and under file type choose <b>Word Template (.dotx)</b> instead of the normal .docx. Opening a .dotx creates a new, untitled document based on it, leaving your template file itself untouched — exactly the safety net Save As always provides, just built into the file type this time.</p>`},
+   {h:"What mail merge is for",
+    body:`<p>Mail merge produces one personalized copy of a document per row in a data source — a dues reminder letter addressed individually to each of forty members, without typing forty separate letters. One letter template plus one data list becomes forty finished, personalized documents (or forty emails) in a few clicks.</p>`},
+   {h:"Setting up a merge",
+    body:`<p><span class="path">Mailings ▸ Start Mail Merge ▸ Letters</span>, then <span class="path">Mailings ▸ Select Recipients ▸ Use an Existing List</span> and point it at a data source — an Excel workbook with column headers like Member, Balance work perfectly as merge fields. Click <span class="path">Insert Merge Field</span> anywhere in your letter to drop in a placeholder like «Member» or «Balance» that gets replaced with that row's actual value for each generated copy.</p>`,
+    tip:`Column headers in the spreadsheet become the exact field names offered in Insert Merge Field — matching, sensible header names in your data source (Member, not Column1) make writing the merge letter far easier.`},
+   {h:"Previewing and finishing the merge",
+    body:`<p><span class="path">Mailings ▸ Preview Results</span> shows the letter filled in with real data, one recipient at a time — check a few before committing. <span class="path">Mailings ▸ Finish & Merge</span> either creates one big document with every personalized letter (<b>Edit Individual Documents</b>) or sends them directly as emails if your data source includes an email column (<b>Send Email Messages</b>).</p>`}
+  ],
+  tryit:`<ol><li>Browse <span class="path">File ▸ New</span> and look at a couple of built-in templates without necessarily opening one (Meeting Minutes or a Letter template are good ones to compare against this practice document's own layout).</li><li>Start a new blank document, type one short paragraph (e.g., "Dear «Member», your current balance is «Balance».") and use <span class="path">Mailings ▸ Start Mail Merge ▸ Letters</span>, then <span class="path">Select Recipients ▸ Use an Existing List</span> pointed at <em>Treasurer Practice.xlsx</em>'s Dues sheet.</li><li>Insert Merge Fields for Member and Balance into your sentence.</li><li>Preview Results and click through a few recipients to see the letter fill in with real names and balances.</li><li>Close without finishing the merge, or try Finish & Merge ▸ Edit Individual Documents to see the full output — your call.</li></ol>`,
+  quiz:[
+   {q:"Saving a reusable document structure as a Word Template means the file type is…",o:[".docx","A .dotx","A .pdf","A .csv"],a:1,why:"Opening a .dotx creates a new document based on it, leaving the template itself untouched."},
+   {q:"Mail merge is best used for…",o:["A single one-off letter","Many personalized copies of a document, one per row in a data source","Formatting a table","Adding page numbers"],a:1,why:"It's for producing bulk, individually personalized output from one template."},
+   {q:"Column headers in an Excel data source used for mail merge become…",o:["Ignored entirely","The exact field names offered in Insert Merge Field","Page numbers","Comments"],a:1,why:"Sensible header names (Member, Balance) make the merge fields easy to work with."},
+   {q:"Before finishing a merge, Preview Results is used to…",o:["Delete the data source","Check the letter fills in correctly with real data, one recipient at a time","Change the page orientation","Start Track Changes"],a:1,why:"It's a chance to catch problems before generating every personalized copy."}
+  ],
+  badge:{name:"Production ready", msg:"Templates and mail merge — the tools that turn one well-built document into many, without retyping anything."}
+},
+/* ===================== 11 ===================== */
+{ title:"Sharing and finishing", pass:3,
+  screens:[
+   {h:"Exporting to PDF",
+    body:`<p><span class="path">File ▸ Export ▸ Create PDF/XPS</span>, or <span class="path">File ▸ Save As</span> and choose PDF as the file type. Same reasoning as Excel and PowerPoint: a PDF looks identical everywhere, can't be accidentally edited, and is what you send to anyone who just needs to read the finished document rather than work on it.</p>`},
+   {h:"Comparing two versions of a document",
+    body:`<p><span class="path">Review ▸ Compare ▸ Compare</span> takes two versions of a document — say, a draft before and after a co-treasurer's edits made outside of Track Changes — and generates a new document showing the differences as tracked changes, exactly as if Track Changes had been on the whole time. Useful for reconciling versions that got edited separately instead of collaboratively.</p>`},
+   {h:"Protecting a finished document",
+    body:`<p><span class="path">File ▸ Info ▸ Protect Document ▸ Mark as Final</span> flags the document as done and makes it read-only by default — a nudge against accidental edits to approved minutes, not a hard security lock (it can be turned back off by anyone who opens it). For genuine access control, the same <b>Protect Document</b> menu offers <b>Restrict Editing</b> (limit what kinds of changes are allowed) and password protection for opening the file at all.</p>`,
+    tip:`Mark as Final is a "please don't edit this, it's approved" signal, not encryption — don't rely on it for anything genuinely sensitive.`},
+   {h:"Sharing via OneDrive, the same pattern as OneNote",
+    body:`<p>A document saved to OneDrive can be shared the same way as a OneNote notebook (from the OneNote course): <span class="path">File ▸ Share</span>, add an email address, choose Can Edit or Can View. Multiple people can then edit the same live document — with Track Changes on, each person's edits still show attributed to them, rather than several people quietly overwriting each other's changes locally.</p>`},
+   {h:"A simple approval workflow for board minutes",
+    body:`<p>A pattern that holds up: draft with Track Changes on, share for review (Can Edit) with comments for open questions, the board reviews and comments/edits, you accept the agreed changes and resolve comments, then Mark as Final and export to PDF as the official record. Consistent process, not a special trick — same as the meeting-notes structure suggested in the OneNote course.</p>`}
+  ],
+  tryit:`<ol><li>Export your practice copy to PDF and confirm it opens correctly and looks right.</li><li>Look at <span class="path">File ▸ Info ▸ Protect Document</span> and read through the options without necessarily applying Mark as Final (or do — it's easy to turn back off from the same menu).</li><li>If your account supports it, check <span class="path">File ▸ Share</span> and see the same Can Edit / Can View choice from the Excel and OneNote courses.</li></ol>`,
+  quiz:[
+   {q:"Sending a finished document to someone who should read but not edit it — send a…",o:[".docx","PDF","Template file","Comment"],a:1,why:"A PDF looks the same everywhere and resists accidental editing."},
+   {q:"Mark as Final is best described as…",o:["A hard security lock nobody can undo","A read-only nudge that can be turned back off by anyone who opens it","Encryption","A type of mail merge"],a:1,why:"It's a signal that a document is approved, not genuine access control."},
+   {q:"Review ▸ Compare is used to…",o:["Delete tracked changes","Show the differences between two versions of a document as tracked changes","Insert a mail merge field","Export to PDF"],a:1,why:"It reconciles versions edited separately, as if Track Changes had been on throughout."},
+   {q:"For real access control — limiting what edits are allowed, or requiring a password to open — use…",o:["Mark as Final only","Restrict Editing / password protection, under Protect Document","Read Mode","Find and Replace"],a:1,why:"Restrict Editing and password protection are the genuine access-control options, beyond Mark as Final's soft nudge."}
+  ],
+  badge:{name:"Finished and shareable", msg:"Draft, review, finalize, share — the whole lifecycle of an official document, not just the typing."}
+},
+/* ===================== 12 (FINAL) ===================== */
+{ title:"Final test", kind:"test", pass:7,
+  screens:[{h:"Everything, once more",
+   body:`<p>Ten questions from across the course. Seven to pass. Keep the practice document open and check anything you're unsure of.</p>`}],
+  quiz:[
+   {q:"Text flows onto a new page…",o:["Automatically as you type","Only with a manual page break","Never","Only in Read Mode"],a:0,why:"Word reflows content onto new pages on its own."},
+   {q:"A Style's main advantage over manual formatting is…",o:["It looks fancier","Editing it once updates every paragraph using it","It's always faster to apply","There's no real difference"],a:1,why:"Centralized, fix-it-once formatting."},
+   {q:"The Navigation Pane and auto-Table of Contents both rely on…",o:["Manually bolded text","Real Heading styles","Page numbers","Section breaks"],a:1,why:"Only genuine Heading-styled paragraphs feed Word's outline structure."},
+   {q:"To deliberately force a new page…",o:["Press Enter repeatedly","Insert ▸ Page Break (Ctrl+Enter)","Use a comment","Use Find and Replace"],a:1,why:"A real page break is one stable marker; repeated Enters create fragile empty paragraphs."},
+   {q:"Page numbers via Insert ▸ Page Number…",o:["Must be retyped as the document changes","Update automatically","Only show on page 1","Require a template"],a:1,why:"They're a self-updating field."},
+   {q:"With Track Changes on, a deletion shows as…",o:["Immediately gone","Struck-through, not yet actually removed","A comment only","A new section break"],a:1,why:"Nothing is removed until the change is accepted."},
+   {q:"A comment, unlike a tracked change,…",o:["Edits the text directly","Attaches a note without changing the text itself","Can't be resolved","Is invisible to others"],a:1,why:"Comments are a side conversation, not an edit."},
+   {q:"Mail merge is for…",o:["A single one-off letter","Many personalized copies from one template and a data source","Formatting a table","Exporting to PDF"],a:1,why:"Bulk, individually personalized output from one letter and one list."},
+   {q:"Mark as Final is…",o:["Genuine encryption","A read-only nudge, reversible by anyone who opens the file","A type of mail merge","A page layout setting"],a:1,why:"It signals approval; it isn't real access control."},
+   {q:"For a document meant to be read but not edited by the recipient, send a…",o:[".docx","PDF","Template","Comment thread"],a:1,why:"PDF resists accidental editing and displays consistently."}
+  ],
+  badge:{name:"Word capable", msg:"Course complete. From a blank page to a styled, navigable, collaboratively-reviewed, mail-merged, finished document. Keep the practice file — build your real one the same way."}
+}
+];
+
+runCourse({
+  storageKey:'wordBeginnerCourse.v1',
+  title:'Word for Beginners',
+  homeIntro:`<p>This one's about producing documents that hold up over time — meeting minutes, letters, anything that needs to look consistent, get reviewed, and eventually become an official record. Read a little, try it in the practice document, tick the box, take a short quiz.</p>
+  <p>Chapters open in order. Nothing is timed. You can stop and come back any day; the app remembers where you were.</p>
+  <div class="tip"><b>Before you start:</b> open the file <em>Treasurer Practice.docx</em> that came with this course, and save a copy of it with <span class="path">File ▸ Save As</span>. Practice in the copy. One chapter's exercise also uses <em>Treasurer Practice.xlsx</em> from the Excel course as a mail-merge data source — if you haven't kept that file around, it's worth grabbing again before Chapter 10.</div>`,
+  suiteLinks:`<a href="Excel for Beginners.html">Excel for Beginners</a><br><a href="Outlook for Beginners.html">Outlook for Beginners</a><br><a href="PowerPoint for Beginners.html">PowerPoint for Beginners</a><br><a href="OneNote for Beginners.html">OneNote for Beginners</a>`,
+  practiceLabel:'Try it in the practice document',
+  CH
+});
+</script>
+</body>
+</html>
