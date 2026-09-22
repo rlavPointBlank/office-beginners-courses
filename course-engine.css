@@ -107,9 +107,12 @@ table.grid td.y{background:#FFF7B0}
 .q{max-width:40em}
 .opt{display:block;width:100%;text-align:left;padding:.8rem 1rem;margin:.5rem 0;border:2px solid var(--line);border-radius:8px;background:#fff;font-size:1rem;color:var(--ink)}
 .opt:hover{border-color:var(--accent)}
-.opt.right{border-color:var(--accent);background:var(--accent-soft)}
-.opt.wrong{border-color:var(--red);background:var(--red-soft)}
+.opt.right{border-color:var(--accent);background:var(--accent-soft);position:relative}
+.opt.wrong{border-color:var(--red);background:var(--red-soft);position:relative}
 .opt:disabled{cursor:default}
+.opt .mark{position:absolute;right:1rem;top:50%;transform:translateY(-50%);font-weight:700}
+.opt.right .mark{color:var(--accent)}
+.opt.wrong .mark{color:var(--red)}
 .feedback{margin-top:1rem;padding:.9rem 1.1rem;border-radius:8px;max-width:40em}
 .feedback.ok{background:var(--accent-soft)}
 .feedback.no{background:var(--red-soft)}

@@ -143,7 +143,7 @@ function runCourse(cfg){
     if(Q.answered) return; Q.answered=true;
     const q=CH[S.cur.ch].quiz[Q.i];
     const ok=k===q.a; if(ok) Q.right++;
-    document.querySelectorAll('.opt').forEach((b,i)=>{ b.disabled=true; if(i===q.a) b.classList.add('right'); else if(i===k) b.classList.add('wrong'); });
+    document.querySelectorAll('.opt').forEach((b,i)=>{ b.disabled=true; if(i===q.a){ b.classList.add('right'); b.innerHTML+='<span class="mark">✓</span>'; } else if(i===k){ b.classList.add('wrong'); b.innerHTML+='<span class="mark">✗</span>'; } });
     $('#fb').innerHTML=`<div class="feedback ${ok?'ok':'no'}"><b>${ok?'Correct.':'Not quite.'}</b> ${q.why}</div>`;
     $('#qnav').style.display='flex';
   }
